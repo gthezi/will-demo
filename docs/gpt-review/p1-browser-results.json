@@ -1,0 +1,734 @@
+{
+  "frozenNow": "2026-11-05T06:00:00.000Z",
+  "timezone": "Asia/Shanghai",
+  "fixture": "synthetic acceptance data only",
+  "checks": [
+    "P1-1: same states across homepage/calendar/projects, neutral future task, completion/restore updates tags and overdue membership",
+    "P1-3: adjacent controls/results, all seven arrangements with no filter, keyboard autofocus/return, event status reset/disabled hint, archived project, zero results, clear/close/navigation reset",
+    "P1-1 browser clock: equality stays today; one second later focus refresh updates summary, deadline membership and list status; month rollover remains overdue",
+    "P1-2: live today count and jump, retained all-task progress, empty/events/completed/future/overdue-only and expand beyond four"
+  ],
+  "matrix": [
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "首页",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "首页",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "首页",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "日历",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "日历",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "日历",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "项目",
+      "position": 0,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "项目",
+      "position": 0.5,
+      "overflow": false,
+      "blocked": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "项目",
+      "position": 1,
+      "overflow": false,
+      "blocked": false
+    }
+  ],
+  "errors": []
+}
