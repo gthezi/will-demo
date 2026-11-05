@@ -1,12 +1,14 @@
-import { FolderOutlined, RightOutlined, SearchOutlined, ClearOutlined } from '@ant-design/icons'
+import { ArrowLeftOutlined, RightOutlined, SearchOutlined, ClearOutlined } from '@ant-design/icons'
 import { Button, Empty, Input, Progress, Segmented, Select, Tooltip } from 'antd'
+import type { InputRef } from 'antd'
 import dayjs from 'dayjs'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MonthCalendar } from '../components/MonthCalendar'
 import { ScheduleList } from '../components/ScheduleList'
 import { dashboardView, deadlineView, defaultDashboardFilters, type DashboardFilters } from '../domain/dashboard'
 import type { UpcomingDays } from '../domain/dashboardPreferences'
 import { projectName } from '../domain/projects'
+import { itemStatus } from '../domain/itemStatus'
 import { scheduleItems, type ScheduleData } from '../domain/schedule'
 import { useLocalNow } from '../hooks/useLocalNow'
 import type { PageKey } from '../components/WillShell'
@@ -31,6 +33,9 @@ export function HomePage({
   const [showAllDeadlines, setShowAllDeadlines] = useState(false)
   const [showOverdue, setShowOverdue] = useState(false)
   const overdueSection = useRef<HTMLDivElement>(null)
+  const deadlineHeading = useRef<HTMLHeadingElement>(null)
+  const searchInput = useRef<InputRef>(null)
+  const searchToggle = useRef<HTMLButtonElement>(null)
   const [filters, setFilters] = useState<DashboardFilters>(defaultDashboardFilters)
   const items = scheduleItems(data)
   const tasks = items.filter(item => item.kind === 'task')
@@ -40,8 +45,17 @@ export function HomePage({
   const today = dayjs(now).format('YYYY-MM-DD')
   const view = dashboardView(data, filters, now)
   const { overdue, upcoming } = deadlineView(data, now, upcomingDays)
+  const dueToday = upcoming.filter(item => itemStatus(item, now) === 'today')
   const activeProjects = data.projects.filter(project => !project.archived)
   const listProps = { projects: data.projects, onToggleTask, onEdit }
+  useEffect(() => {
+    if (searchOpen) searchInput.current?.focus({ preventScroll: true })
+  }, [searchOpen])
+  const closeSearch = () => {
+    setSearchOpen(false)
+    setFilters(defaultDashboardFilters)
+    searchToggle.current?.focus({ preventScroll: true })
+  }
   const revealOverdue = () => {
     setShowOverdue(true)
     requestAnimationFrame(() => {
@@ -52,32 +66,24 @@ export function HomePage({
 
   return (
     <div className="will-dashboard">
-      {searchOpen && (
-        <div className="will-dashboard-filters" role="search" aria-label="搜索和筛选安排">
-          <Input aria-label="搜索安排标题" placeholder="搜索标题" prefix={<SearchOutlined />} allowClear
-            value={filters.query} onChange={event => setFilters({ ...filters, query: event.target.value })} />
-          <Select aria-label="筛选项目" placeholder="全部项目" allowClear value={filters.projectId ?? undefined}
-            onChange={value => setFilters({ ...filters, projectId: value ?? null })}
-            options={data.projects.map(project => ({ value: project.id, label: `${project.name}${project.archived ? '（已归档）' : ''}` }))} />
-          <Segmented className="will-dashboard-kind" aria-label="筛选类型" value={filters.kind}
-            options={[{ value: 'all', label: '全部' }, { value: 'event', label: '日程' }, { value: 'task', label: '待办' }]}
-            onChange={kind => setFilters({ ...filters, kind: kind as DashboardFilters['kind'] })} />
-          <Select aria-label="筛选完成状态" value={filters.status} onChange={status => setFilters({ ...filters, status })}
-            options={[{ value: 'all', label: '全部状态' }, { value: 'pending', label: '未完成待办' }, { value: 'completed', label: '已完成待办' }]} />
-          <Tooltip title="清除筛选"><Button icon={<ClearOutlined />} aria-label="清除筛选"
-            onClick={() => setFilters(defaultDashboardFilters)} disabled={!view.hasFilters} /></Tooltip>
-        </div>
-      )}
       <div className="will-home-grid">
         <div className="will-home-column">
           <section className="will-summary" aria-label="任务概览">
             <div className="will-summary-copy">
-              <span className="will-summary-label"><FolderOutlined /> 个人工作台</span>
-              <h2>任务进度</h2>
-              <p className="will-summary-remaining">{tasks.length ? pending.length ? `剩余 ${pending.length} 项` : '待办已全部完成' : '还没有待办'}</p>
+              <h2>今天待处理</h2>
+              {dueToday.length ? (
+                <Button type="text" className="will-today-focus" aria-label={`${dueToday.length} 项今天截止`}
+                  onClick={() => {
+                    deadlineHeading.current?.scrollIntoView({ block: 'nearest' })
+                    deadlineHeading.current?.focus({ preventScroll: true })
+                  }}>
+                  <strong>{dueToday.length}</strong>项今天截止<RightOutlined />
+                </Button>
+              ) : <p className="will-today-empty">今天没有待截止任务</p>}
+              <p className="will-summary-remaining">{tasks.length ? pending.length ? <>全部待办 · <span>未完成 {pending.length} 项</span></> : '待办已全部完成' : '还没有待办'}</p>
             </div>
             <div className="will-task-progress">
-              <Progress type="circle" percent={percent} size={136} strokeWidth={4}
+              <Progress type="circle" percent={percent} size={100} strokeWidth={4}
                 styles={{ body: { width: '100%', height: '100%' } }}
                 aria-label={`全部待办已完成 ${done} / ${tasks.length}，${percent}%`}
                 format={() => <span className="will-progress-count"><strong>{done}<span> / {tasks.length}</span></strong><small>全部待办 · 已完成</small></span>} />
@@ -98,7 +104,7 @@ export function HomePage({
           <section className="will-panel" aria-labelledby="deadlines-heading">
             <div className="will-panel-heading">
               <div className="will-deadline-heading">
-                <h2 id="deadlines-heading">近期截止</h2>
+                <h2 id="deadlines-heading" ref={deadlineHeading} tabIndex={-1}>近期截止</h2>
                 <span>未来 {upcomingDays} 天（含今天）</span>
               </div>
               <Button type="link" size="small" onClick={() => onNavigate('calendar')}>查看日历<RightOutlined /></Button>
@@ -108,7 +114,7 @@ export function HomePage({
               const days = deadline.startOf('day').diff(dayjs(today), 'day')
               const relative = days === 0 ? '今天截止' : days === 1 ? '明天截止' : `还有 ${days} 天`
               return (
-                <div className={`will-deadline-row${days === 0 ? ' is-due-today' : ''}`} key={item.id}>
+                <div className={`will-deadline-row${itemStatus(item, now) === 'today' ? ' is-due-today' : ''}`} key={item.id}>
                   <button className="will-deadline-title" onClick={() => onEdit(item.id)}>
                     <strong>{item.title}</strong><span>{projectName(data.projects, item.projectId)}</span>
                   </button>
@@ -135,25 +141,47 @@ export function HomePage({
                   onClick={() => setShowOverdue(current => !current)}>
                   {showOverdue ? '收起逾期待办' : '查看逾期待办'} · {overdue.length} 项
                 </Button>
-                {showOverdue && <ScheduleList items={overdue} {...listProps}
-                  overdueIds={new Set(overdue.map(item => item.id))} />}
+                {showOverdue && <ScheduleList items={overdue} {...listProps} />}
               </div>
             )}
           </section>
           <section className="will-panel" aria-labelledby="tasks-heading">
             <div className="will-panel-heading">
-              <h2 id="tasks-heading">{view.hasFilters ? '筛选结果' : '待办清单'}</h2>
+              <h2 id="tasks-heading">{searchOpen ? '搜索全部安排' : '待办清单'}</h2>
               <div className="will-inline-actions">
-                <Tooltip title="搜索与筛选"><Button type={searchOpen ? 'primary' : 'text'} size="small"
-                  icon={<SearchOutlined />} aria-label="搜索与筛选" aria-expanded={searchOpen}
-                  onClick={() => { setSearchOpen(!searchOpen); if (searchOpen) setFilters(defaultDashboardFilters) }} /></Tooltip>
-                <Button type="link" size="small" onClick={() => onNavigate('projects')}>管理项目<RightOutlined /></Button>
+                <Button type="text" size="small" ref={searchToggle} title={searchOpen ? '返回待办清单' : '搜索与筛选'}
+                  icon={searchOpen ? <ArrowLeftOutlined /> : <SearchOutlined />}
+                  aria-label={searchOpen ? '返回待办清单' : '搜索与筛选'} aria-expanded={searchOpen} aria-controls="arrangement-results"
+                  onClick={() => searchOpen ? closeSearch() : setSearchOpen(true)} />
+                {!searchOpen && <Button type="link" size="small" onClick={() => onNavigate('projects')}>管理项目<RightOutlined /></Button>}
               </div>
             </div>
-            {view.hasFilters && <p className="will-result-count">全部日期 · {view.results.length} 项安排</p>}
-            <ScheduleList items={view.hasFilters ? view.results : tasks.slice(0, 6)} {...listProps}
-              emptyText={view.hasFilters ? '没有符合筛选条件的安排' : '尚无待办'} />
-            {!view.hasFilters && tasks.length > 6 && <Button type="link" onClick={() => onNavigate('projects')}>查看全部 {tasks.length} 项待办<RightOutlined /></Button>}
+            {searchOpen && (
+              <div className="will-dashboard-filters" role="search" aria-label="搜索和筛选安排">
+                <Input ref={searchInput} aria-label="搜索安排标题" placeholder="搜索标题" prefix={<SearchOutlined />} allowClear
+                  value={filters.query} onChange={event => setFilters({ ...filters, query: event.target.value })} />
+                <Select className="will-filter-project" aria-label="筛选项目" placeholder="全部项目" allowClear value={filters.projectId ?? undefined}
+                  onChange={value => setFilters({ ...filters, projectId: value ?? null })}
+                  options={data.projects.map(project => ({ value: project.id, label: `${project.name}${project.archived ? '（已归档）' : ''}` }))} />
+                <Segmented className="will-dashboard-kind" aria-label="筛选类型" value={filters.kind}
+                  options={[{ value: 'all', label: '全部' }, { value: 'event', label: '日程' }, { value: 'task', label: '待办' }]}
+                  onChange={kind => setFilters({ ...filters, kind: kind as DashboardFilters['kind'], status: kind === 'event' ? 'all' : filters.status })} />
+                <Select className="will-filter-status" aria-label="筛选完成状态" value={filters.status}
+                  disabled={filters.kind === 'event'} aria-describedby={filters.kind === 'event' ? 'event-status-hint' : undefined}
+                  onChange={status => setFilters({ ...filters, status })}
+                  options={[{ value: 'all', label: '全部状态' }, { value: 'pending', label: '未完成待办' }, { value: 'completed', label: '已完成待办' }]} />
+                <Tooltip title="清除筛选"><Button className="will-filter-clear" icon={<ClearOutlined />} aria-label="清除筛选"
+                  onClick={() => { setFilters(defaultDashboardFilters); searchInput.current?.focus({ preventScroll: true }) }}
+                  disabled={!view.hasFilters} /></Tooltip>
+                {filters.kind === 'event' && <p className="will-filter-hint" id="event-status-hint">日程不区分完成状态</p>}
+              </div>
+            )}
+            <div id="arrangement-results">
+              {searchOpen && <p className="will-result-count" role="status">全部日期 · 日程与待办 · {view.results.length} 项安排</p>}
+              <ScheduleList items={searchOpen ? view.results : tasks.slice(0, 6)} {...listProps}
+                emptyText={searchOpen ? '没有符合筛选条件的安排' : '尚无待办'} />
+              {!searchOpen && tasks.length > 6 && <Button type="link" onClick={() => onNavigate('projects')}>查看全部 {tasks.length} 项待办<RightOutlined /></Button>}
+            </div>
           </section>
         </div>
         <aside className="will-home-column">

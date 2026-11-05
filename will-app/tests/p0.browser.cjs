@@ -5,8 +5,8 @@ const { chromium } = require(process.env.WILL_PLAYWRIGHT_MODULE || 'playwright')
 
 const url = process.env.WILL_P0_URL || 'http://127.0.0.1:5175/'
 const baselineUrl = process.env.WILL_P0_BASELINE_URL
-const output = path.resolve(__dirname, '../../docs/gpt-review/p0-images')
-const resultsPath = path.resolve(__dirname, '../../docs/gpt-review/p0-browser-results.json')
+const output = process.env.WILL_P0_OUTPUT || path.resolve(__dirname, '../../docs/gpt-review/p0-images')
+const resultsPath = process.env.WILL_P0_RESULTS || path.resolve(__dirname, '../../docs/gpt-review/p0-browser-results.json')
 const key = 'will-prototype-schedule-v01'
 const rangeKey = 'will-react-upcoming-range-v01'
 const frozenNow = new Date('2026-11-05T14:00:00+08:00')

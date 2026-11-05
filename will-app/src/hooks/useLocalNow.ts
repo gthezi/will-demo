@@ -6,7 +6,7 @@ export function useLocalNow() {
     let timer: number
     const schedule = () => {
       window.clearTimeout(timer)
-      timer = window.setTimeout(update, 60_000 - Date.now() % 60_000)
+      timer = window.setTimeout(update, 1_000 - Date.now() % 1_000)
     }
     const update = () => {
       setNow(new Date())

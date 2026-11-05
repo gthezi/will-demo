@@ -53,7 +53,10 @@ export function ShellPages({
       <div className="will-calendar-layout">
         <div className="will-calendar-picker">
           <MonthCalendar selectedDate={selectedDate} onSelect={onDateChange} items={items} expanded />
-          <div className="will-calendar-legend"><span><i />日程</span><span><i className="task" />待办</span></div>
+          <div className="will-calendar-legend">
+            <span><i />日程</span><span><i className="task" />待办</span>
+            <span><i className="today" />今天截止</span><span><i className="overdue" />逾期</span><span><i className="done" />已完成</span>
+          </div>
         </div>
         <section className="will-agenda" aria-labelledby="agenda-heading">
           <div className="will-agenda-heading">
