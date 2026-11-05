@@ -30,11 +30,13 @@ const data = () => {
 }
 const ids = items => items.map(item => item.id)
 
-test('overdue means unfinished tasks before the current local minute, including earlier today', () => {
+test('overdue means unfinished tasks strictly before the current instant, including the same minute', () => {
   const view = dashboardView(data(), defaultDashboardFilters, now)
   assert.deepEqual(ids(view.groups.overdue), ['old', 'elapsed'])
   const minute = scheduleItems(data()).find(item => item.id === 'minute')
-  assert.equal(isOverdue(minute, new Date(2026, 10, 4, 10, 0, 59)), false)
+  assert.equal(isOverdue(minute, new Date(2026, 10, 4, 10, 0)), false)
+  assert.equal(isOverdue(minute, new Date(2026, 10, 4, 10, 0, 1)), true)
+  assert.equal(isOverdue(minute, new Date(2026, 10, 4, 10, 0, 59)), true)
   assert.equal(isOverdue(minute, new Date(2026, 10, 4, 10, 1)), true)
 })
 

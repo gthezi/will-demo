@@ -2,6 +2,8 @@ import { CalendarOutlined } from '@ant-design/icons'
 import { Checkbox, Empty, Tag, Tooltip } from 'antd'
 import type { DisplayItem } from '../domain/schedule'
 import { projectName, type Project } from '../domain/projects'
+import { itemStatus, itemStatusLabels } from '../domain/itemStatus'
+import { useLocalNow } from '../hooks/useLocalNow'
 
 type ScheduleListProps = {
   items: DisplayItem[]
@@ -9,10 +11,10 @@ type ScheduleListProps = {
   onEdit: (id: string) => void
   emptyText?: string
   projects: Project[]
-  overdueIds?: ReadonlySet<string>
 }
 
-export function ScheduleList({ items, onToggleTask, onEdit, projects, emptyText = '还没有安排', overdueIds }: ScheduleListProps) {
+export function ScheduleList({ items, onToggleTask, onEdit, projects, emptyText = '还没有安排' }: ScheduleListProps) {
+  const now = useLocalNow()
   if (!items.length) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={emptyText} />
   return (
     <ul className="will-schedule-list">
@@ -28,8 +30,8 @@ export function ScheduleList({ items, onToggleTask, onEdit, projects, emptyText 
                 <span>{item.title}</span>
               </button>
             </Tooltip>
-            <Tag color={item.kind === 'event' ? 'blue' : item.done ? 'success' : overdueIds?.has(item.id) ? 'error' : 'gold'}>
-              {item.kind === 'event' ? '日程' : item.done ? '已完成' : overdueIds?.has(item.id) ? '逾期' : '待办'}
+            <Tag className="will-item-status" data-status={itemStatus(item, now)}>
+              {itemStatusLabels[itemStatus(item, now)]}
             </Tag>
           </div>
           <div className="will-schedule-meta">

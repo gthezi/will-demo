@@ -34,6 +34,11 @@
 .will-item-edit .anticon { margin-top: 4px; color: var(--will-primary); }
 .will-item-edit:hover { color: var(--will-primary); }
 .will-schedule-title > .ant-tag { flex-shrink: 0; margin-left: auto; margin-right: 0; font-size: 10px; }
+.will-item-status { --will-status-color: var(--will-muted); color: var(--will-status-color); background: color-mix(in srgb, var(--will-status-color) 10%, var(--will-surface)); border-color: color-mix(in srgb, var(--will-status-color) 25%, var(--will-surface)); }
+.will-item-status[data-status="event"] { --will-status-color: var(--will-primary); }
+.will-item-status[data-status="today"] { --will-status-color: var(--will-warning); }
+.will-item-status[data-status="overdue"] { --will-status-color: var(--will-error); }
+.will-item-status[data-status="done"] { --will-status-color: var(--will-success); }
 .is-done .will-item-edit { text-decoration: line-through; color: var(--will-muted); }
 .will-schedule-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; color: var(--will-muted); font-size: 11px; line-height: 1.7; }
 .will-schedule-meta > span { min-width: 0; overflow-wrap: anywhere; }
@@ -47,7 +52,11 @@
 .will-calendar-legend { display: flex; gap: 16px; font-size: 11px; color: var(--will-muted); margin-top: 16px; }
 .will-calendar-legend > span { display: flex; align-items: center; gap: 6px; }
 .will-calendar-legend i { width: 6px; height: 6px; border-radius: 50%; background: var(--will-primary); }
-.will-calendar-legend .task { background: var(--will-error); }
+.will-calendar-legend .task { background: var(--will-muted); border-radius: 1px; }
+.will-calendar-legend { flex-wrap: wrap; gap: 8px 16px; }
+.will-calendar-legend .today { background: var(--will-warning); }
+.will-calendar-legend .overdue { background: var(--will-error); }
+.will-calendar-legend .done { background: var(--will-success); }
 .will-project-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
 .will-project-heading h2 { margin: 0; font-size: 15px; }
 .will-project-heading > span { color: var(--will-muted); font-size: 11px; }

@@ -3,6 +3,7 @@ import { Button } from 'antd'
 import dayjs, { type Dayjs } from 'dayjs'
 import { useState } from 'react'
 import type { DisplayItem } from '../domain/schedule'
+import { itemStatus, itemStatusLabels } from '../domain/itemStatus'
 import { useLocalNow } from '../hooks/useLocalNow'
 import './MonthCalendar.css'
 
@@ -40,20 +41,29 @@ export function MonthCalendar({ selectedDate, onSelect, items, expanded = false 
           const date = start.add(index, 'day')
           const key = date.format('YYYY-MM-DD')
           const dayItems = items.filter(item => item.date === key)
+          const statusSummary = Object.entries(itemStatusLabels).map(([status, label]) => {
+            const count = dayItems.filter(item => itemStatus(item, now) === status).length
+            return count ? `${count} 项${label}` : ''
+          }).filter(Boolean).join('，')
           return (
-            <button key={key} type="button" aria-label={`${key}，${dayItems.length} 项安排`}
+            <button key={key} type="button" aria-label={`${key}，${dayItems.length} 项安排${statusSummary ? `，${statusSummary}` : ''}`}
               aria-pressed={key === selectedDate}
               className={`will-calendar-day${date.month() !== month.month() ? ' is-other-month' : ''}${key === selectedDate ? ' is-selected' : ''}${key === today ? ' is-today' : ''}`}
               onClick={() => { setMonth(date.startOf('month')); onSelect(key) }}>
               <span className="will-date-number">{date.date()}</span>
               {expanded ? (
                 <span className="will-calendar-entries">
-                  {dayItems.slice(0, 2).map(item => <span key={item.id} title={item.title}
-                    className={`will-calendar-entry ${item.kind}${item.done ? ' is-done' : ''}`}>{item.title}</span>)}
+                  {dayItems.slice(0, 2).map(item => {
+                    const status = itemStatus(item, now)
+                    return <span key={item.id} title={`${itemStatusLabels[status]} · ${item.time} · ${item.title}`}
+                      data-status={status} className={`will-calendar-entry will-item-status is-${status}`}>
+                      {itemStatusLabels[status]} · {item.title}
+                    </span>
+                  })}
                   {dayItems.length > 2 && <span className="will-calendar-more">+{dayItems.length - 2}</span>}
                 </span>
               ) : (
-                <span className="will-calendar-dots">
+                <span className="will-calendar-dots" title={statusSummary} aria-hidden="true">
                   {dayItems.some(item => item.kind === 'event') && <i />}
                   {dayItems.some(item => item.kind === 'task') && <i className="task" />}
                 </span>
