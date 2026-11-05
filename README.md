@@ -10,6 +10,7 @@
 - **[Windows 11 月 7 日展示验收](docs/demo-acceptance/2026-11-07/README.md)**：实际测试结果、截图、限制与展示包信息。
 - **[现场演示及备份指南](docs/demo-acceptance/2026-11-07/DEMO_GUIDE.md)**：首次启动、演示步骤、数据备份恢复。
 - **[React / Electron 工程](will-app/README.md)**：功能与源码组织、开发测试和构建。
+- **[产品组 2026-11-05 计划与 Figma 设计审阅](docs/product/PRODUCT_PLAN_AND_FIGMA_REVIEW_2026-11-06.md)**：两份新材料的产品范围、14 页设计目录、现状对照及待决定问题；[原件保全状态](docs/product/SOURCE_MATERIALS.md)。
 - **[原型与设计评审档案](docs/gpt-review/README.md)**：原始 HTML、P0 / P1 设计及前后截图；为历史对照材料。
 - **[11 月 5 日视觉打磨记录](docs/visual-refinement-2026-11-05.md)**：历史视觉阶段说明。
 
