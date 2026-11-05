@@ -1,5 +1,6 @@
 import { DeleteOutlined, ReloadOutlined, SaveOutlined } from '@ant-design/icons'
-import { App, Button, Form, Input } from 'antd'
+import { App, Button, Form, Input, Segmented } from 'antd'
+import { UPCOMING_RANGE_OPTIONS, type UpcomingDays } from '../domain/dashboardPreferences'
 import type { ThemeMode } from '../theme'
 import { ThemeSwitcher } from '../components/ThemeSwitcher'
 
@@ -8,11 +9,15 @@ type SettingsPageProps = {
   onSaveName: (name: string) => boolean
   themeMode: ThemeMode
   onThemeChange: (mode: ThemeMode) => void
+  upcomingDays: UpcomingDays
+  onUpcomingDaysChange: (days: UpcomingDays) => void
   onLoadDemo: () => void
   onClear: () => void
 }
 
-export function SettingsPage({ username, onSaveName, themeMode, onThemeChange, onLoadDemo, onClear }: SettingsPageProps) {
+export function SettingsPage({
+  username, onSaveName, themeMode, onThemeChange, upcomingDays, onUpcomingDaysChange, onLoadDemo, onClear,
+}: SettingsPageProps) {
   const { message } = App.useApp()
   return (
     <div className="will-settings">
@@ -32,6 +37,17 @@ export function SettingsPage({ username, onSaveName, themeMode, onThemeChange, o
       <section className="will-settings-section">
         <h2>显示主题</h2>
         <ThemeSwitcher value={themeMode} onChange={onThemeChange} />
+      </section>
+      <section className="will-settings-section">
+        <h2>近期截止范围</h2>
+        <p>包含今天；逾期事项单独统计。修改后首页会立即更新。</p>
+        <Segmented
+          block
+          aria-label="近期截止范围"
+          value={upcomingDays}
+          options={UPCOMING_RANGE_OPTIONS.map(days => ({ value: days, label: `${days} 天` }))}
+          onChange={value => onUpcomingDaysChange(value as UpcomingDays)}
+        />
       </section>
       <section className="will-settings-section">
         <h2>本地数据</h2>

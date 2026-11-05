@@ -8,6 +8,7 @@ import { WillShell } from './components/WillShell'
 import type { PageKey } from './components/WillShell'
 import { useThemeMode } from './hooks/useThemeMode'
 import { useSchedule } from './hooks/useSchedule'
+import { useUpcomingDays } from './hooks/useUpcomingDays'
 import { ShellPages } from './pages/ShellPages'
 import { getThemeConfig } from './theme'
 import { getArrangementDraft, type ArrangementDraft, type ProjectId } from './domain/schedule'
@@ -30,6 +31,7 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
   const [assistantOpen, setAssistantOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState(() => dayjs().format('YYYY-MM-DD'))
   const [editor, setEditor] = useState<{ mode: EditorMode; draft: ArrangementDraft } | null>(null)
+  const { upcomingDays, setUpcomingDays, rangeStorageWarning } = useUpcomingDays()
   const {
     data, storageWarning, confirmDrafts, toggleTask, updateItem, deleteItem,
     createProject, updateProjectName, archiveProject, replaceSchedule,
@@ -94,8 +96,10 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
           hasDemo={[...data.tasks, ...data.events].some(item => item.id.startsWith('demo-'))}
         >
           {storageWarning && <Alert className="will-storage-warning" type="warning" showIcon title={storageWarning} role="alert" />}
+          {rangeStorageWarning && <Alert className="will-storage-warning" type="warning" showIcon title={rangeStorageWarning} role="alert" />}
           <ShellPages
             page={activePage} themeMode={themeMode} onThemeChange={setThemeMode}
+            upcomingDays={upcomingDays} onUpcomingDaysChange={setUpcomingDays}
             data={data} selectedDate={selectedDate} onDateChange={setSelectedDate}
             onToggleTask={toggleTask}
             onManualAdd={manualAdd}

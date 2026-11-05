@@ -22,6 +22,9 @@
 .will-metrics > span { display: flex; align-items: baseline; gap: 7px; color: var(--will-muted); font-size: 11px; }
 .will-metrics strong { color: var(--will-text); font-size: 18px; font-variant-numeric: tabular-nums; font-weight: 600; }
 .will-metrics .has-overdue strong { color: var(--will-error); }
+.will-metric-button.ant-btn { height: auto; padding: 0; color: var(--will-muted); font-size: 11px; }
+.will-metric-button.ant-btn strong { color: var(--will-text); }
+.will-metric-button.has-overdue.ant-btn, .will-metric-button.has-overdue.ant-btn strong { color: var(--will-error); }
 .will-load-demo { grid-column: 1 / -1; justify-self: start; }
 .will-panel, .will-calendar-tool {
   min-width: 0; border: 1px solid var(--will-border); padding: 22px;
@@ -31,6 +34,8 @@
 .will-panel-heading h2, .will-panel-heading h3 { margin: 0; font-size: 16px; font-weight: 650; }
 .will-panel-heading h3 { font-size: 13px; }
 .will-panel-heading .ant-btn-link { padding-inline: 0; font-size: 12px; }
+.will-deadline-heading { display: flex; align-items: baseline; gap: 9px; min-width: 0; }
+.will-deadline-heading > span { color: var(--will-muted); font-size: 11px; white-space: nowrap; }
 .will-deadline-row {
   display: grid; grid-template-columns: minmax(0, 1fr) auto 86px; gap: 18px; align-items: center;
   padding: 16px 0; border-top: 1px solid var(--will-divider);
@@ -51,6 +56,11 @@
 .will-home-agenda .will-schedule-meta { font-size: 11px; gap: 4px 8px; }
 .will-home-agenda .will-schedule-title { font-size: 12px; }
 .will-home-agenda .will-schedule-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.will-deadline-more { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--will-muted); font-size: 11px; }
+.will-deadline-more { border-top: 1px solid var(--will-divider); padding-top: 10px; margin-top: 4px; }
+.will-overdue-section { border-top: 1px solid var(--will-divider); margin-top: 14px; padding-top: 14px; }
+.will-overdue-toggle.ant-btn { padding-inline: 0; color: var(--will-error); font-size: 12px; }
+.will-overdue-section .will-schedule-row:first-child { border-top: 0; }
 .will-project-overview { display: flex; flex-direction: column; }
 .will-project-summary {
   border: 0; border-top: 1px solid var(--will-divider); padding: 15px 0; text-align: left; cursor: pointer;
@@ -97,6 +107,7 @@
   .will-deadline-relative { grid-column: 2; grid-row: 1; justify-self: end; font-size: 10px; }
   .will-deadline-row time { grid-column: 2; grid-row: 2; flex-direction: row; gap: 5px; }
   .will-deadline-weekday { display: none; }
+  .will-deadline-heading { align-items: flex-start; flex-direction: column; gap: 2px; }
   .will-dashboard-filters { grid-template-columns: minmax(0, 1fr) 32px; }
   .will-dashboard-filters > :first-child { grid-column: 1; }
   .will-dashboard-filters > :last-child { grid-column: 2; }
