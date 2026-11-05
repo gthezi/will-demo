@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "electronVersion": "45.2.3",
+  "platform": "win32",
+  "arch": "x64",
+  "directory": "D:\\Hezi\\WXJ\\vibe coding项目\\Will\\will-app\\out\\windows\\0.1.0-2026-11-05T13-50-49-700Z\\WillPC-win32-x64",
+  "executable": "D:\\Hezi\\WXJ\\vibe coding项目\\Will\\will-app\\out\\windows\\0.1.0-2026-11-05T13-50-49-700Z\\WillPC-win32-x64\\WillPC.exe",
+  "zip": "D:\\Hezi\\WXJ\\vibe coding项目\\Will\\will-app\\out\\windows\\0.1.0-2026-11-05T13-50-49-700Z\\WillPC-0.1.0-windows-x64.zip",
+  "bytes": 158451932,
+  "sha256": "8b1ddc26768c63e31f73ae56ab6e932904e54ada66c22bf3966c521440cda47d"
+}

@@ -39,6 +39,7 @@ export function WillShell({
   themeMode, onThemeChange, activePage, onNavigate, onOpenAssistant,
   onManualAdd, onLoadDemo, manualDisabled, username, hasDemo, children,
 }: WillShellProps) {
+  const storageLocation = navigator.userAgent.includes('Electron/') ? '当前客户端' : '当前浏览器'
   return (
     <div className="will-shell">
       <aside className="will-rail">
@@ -92,7 +93,7 @@ export function WillShell({
           </div>
         </header>
         <main className="will-content" id="main-content" key={activePage}>{children}</main>
-        <footer className="will-statusbar"><span>Will · 个人安排助手</span><span>本地模拟 · 数据仅保存在当前浏览器</span></footer>
+        <footer className="will-statusbar"><span>Will · 个人安排助手</span><span>本地模拟 · 数据仅保存在{storageLocation}</span></footer>
       </div>
     </div>
   )
