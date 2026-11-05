@@ -19,6 +19,7 @@ export function SettingsPage({
   username, onSaveName, themeMode, onThemeChange, upcomingDays, onUpcomingDaysChange, onLoadDemo, onClear,
 }: SettingsPageProps) {
   const { message } = App.useApp()
+  const storageLocation = navigator.userAgent.includes('Electron/') ? '当前客户端' : '当前浏览器'
   return (
     <div className="will-settings">
       <section className="will-settings-section">
@@ -51,7 +52,7 @@ export function SettingsPage({
       </section>
       <section className="will-settings-section">
         <h2>本地数据</h2>
-        <p>安排保存在当前浏览器，不会同步到其他设备。示例数据会替换当前安排与项目。</p>
+        <p>安排保存在{storageLocation}，不会同步到其他设备。示例数据会替换当前安排与项目。</p>
         <div className="will-settings-actions">
           <Button icon={<ReloadOutlined />} aria-label="载入示例数据" onClick={onLoadDemo}>载入示例数据</Button>
           <Button danger icon={<DeleteOutlined />} aria-label="清空安排" onClick={onClear}>清空安排</Button>

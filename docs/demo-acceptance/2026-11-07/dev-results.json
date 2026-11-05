@@ -1,0 +1,11 @@
+{
+  "testedAt": "2026-11-05T14:00:08.733Z",
+  "status": "passed",
+  "devUrl": "http://127.0.0.1:5177/",
+  "checks": [
+    "Vite 和 Electron 一条命令启动",
+    "桌面实际显示首页与本地模拟 AI 面板",
+    "关闭窗口后 Electron 与 Vite 均退出，端口释放"
+  ],
+  "log": "Will PC development: http://127.0.0.1:5177/\n\r\n\r\nDevTools listening on ws://127.0.0.1:59172/devtools/browser/2594dc81-eea9-4072-8854-21f325027fe1\r\n"
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-05",
+  "environment": {
+    "platform": "Windows 11 x64 10.0.26100",
+    "node": "25.8.2",
+    "npm": "11.11.1",
+    "electron": "45.2.3",
+    "packager": "20.3.0"
+  },
+  "commands": {
+    "npm run build": "passed",
+    "npm run desktop:build": "passed",
+    "npm run lint": "passed",
+    "npm test": { "passed": 57, "failed": 0 },
+    "node scripts/package-desktop.mjs": "passed, ZIP extracted and executable tested",
+    "node tests/desktop-dev.browser.cjs": "passed",
+    "node tests/desktop.browser.cjs": "passed against extracted packaged executable",
+    "npm audit --omit=dev --json": { "vulnerabilities": 0, "record": "production-audit.json" },
+    "node tests/p0.browser.cjs": { "passed": true, "viewportCombinations": 120, "errors": [] },
+    "node tests/p1.browser.cjs": { "passed": true, "viewportCombinations": 90, "errors": [] }
+  },
+  "notes": [
+    "Build warns about the existing approximately 1.07 MB main JS chunk.",
+    "Full npm audit reports 5 moderate development-tool dependency findings; no force fix applied.",
+    "Desktop screenshots show the real Electron renderer, not the Windows title bar.",
+    "Desktop scenario time fixed to 2026-11-07 14:00 Asia/Shanghai; actual execution was 2026-11-05.",
+    "All browser and desktop acceptance data is synthetic and isolated from user data."
+  ]
+}

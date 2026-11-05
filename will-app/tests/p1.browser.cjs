@@ -5,7 +5,7 @@ const { chromium } = require(process.env.WILL_PLAYWRIGHT_MODULE || 'playwright')
 
 const url = process.env.WILL_P1_URL || 'http://127.0.0.1:5175/'
 const baselineUrl = process.env.WILL_P1_BASELINE_URL || 'http://127.0.0.1:5176/'
-const output = path.resolve(__dirname, '../../docs/gpt-review/p1-images')
+const output = process.env.WILL_P1_OUTPUT || path.resolve(__dirname, '../../docs/gpt-review/p1-images')
 const key = 'will-prototype-schedule-v01'
 const now = new Date('2026-11-05T14:00:00+08:00')
 const checks = []
@@ -242,7 +242,7 @@ async function main() {
       await edge.context.close()
     }
     assert.deepEqual(errors, [])
-    fs.writeFileSync(path.resolve(output, '../p1-browser-results.json'), JSON.stringify({ frozenNow: now.toISOString(), timezone: 'Asia/Shanghai', fixture: 'synthetic acceptance data only', checks, matrix, errors }, null, 2) + '\n')
+    fs.writeFileSync(process.env.WILL_P1_RESULTS || path.resolve(output, '../p1-browser-results.json'), JSON.stringify({ frozenNow: now.toISOString(), timezone: 'Asia/Shanghai', fixture: 'synthetic acceptance data only', checks, matrix, errors }, null, 2) + '\n')
     console.log(JSON.stringify({ checks, matrix: matrix.length, errors }))
   } finally {
     await browser.close()
