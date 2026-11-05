@@ -70,6 +70,16 @@ export function WillShell({
             <Button className="will-profile-button" icon={<UserOutlined />} onClick={() => onNavigate('settings')}>
               {username}
             </Button>
+            <Dropdown trigger={['click']} placement="bottomRight"
+              menu={{
+                items: [
+                  { key: 'assistant', icon: <ThunderboltOutlined />, label: 'AI 输入 / 文本解析' },
+                  { key: 'manual', icon: <EditOutlined />, label: '手动添加日程或待办', disabled: manualDisabled },
+                ],
+                onClick: ({ key }) => key === 'manual' ? onManualAdd() : onOpenAssistant(),
+              }}>
+              <Button className="will-quick-add" type="primary" icon={<PlusOutlined />} aria-label="快速添加" title="快速添加">快速添加</Button>
+            </Dropdown>
             <Tooltip title={`当前${themeLabels[themeMode]}，切换为${themeLabels[nextTheme[themeMode]]}`}>
               <Button className="will-theme-button" icon={themeIcons[themeMode]}
                 aria-label={`切换主题，当前${themeLabels[themeMode]}`}
@@ -84,16 +94,6 @@ export function WillShell({
         <main className="will-content" id="main-content" key={activePage}>{children}</main>
         <footer className="will-statusbar"><span>Will · 个人安排助手</span><span>本地模拟 · 数据仅保存在当前浏览器</span></footer>
       </div>
-      <Dropdown trigger={['click']} placement="topRight"
-        menu={{
-          items: [
-            { key: 'assistant', icon: <ThunderboltOutlined />, label: 'AI 输入 / 文本解析' },
-            { key: 'manual', icon: <EditOutlined />, label: '手动添加日程或待办', disabled: manualDisabled },
-          ],
-          onClick: ({ key }) => key === 'manual' ? onManualAdd() : onOpenAssistant(),
-        }}>
-        <Button className="will-quick-add" type="primary" icon={<PlusOutlined />} aria-label="快速添加" title="快速添加">快速添加</Button>
-      </Dropdown>
     </div>
   )
 }
