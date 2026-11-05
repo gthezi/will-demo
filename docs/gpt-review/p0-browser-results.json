@@ -1,0 +1,1004 @@
+{
+  "status": "passed",
+  "baselineCommit": "a338ebe6e0776db884001d93e02f1351f805c132",
+  "frozenTime": "2026-11-05T06:00:00.000Z",
+  "timezone": "Asia/Shanghai",
+  "fixture": "synthetic acceptance data",
+  "checks": [
+    "P0-1: three inclusive dates, count/list agree, seven-day change, reload, completion across calendar/projects, overdue complete/restore",
+    "P0-1: more than four matches show accurate total, expand/collapse, explicit overdue entry",
+    "P0-1: empty/events-only/completed/overdue-only, invalid preference fallback, read/write failures retain session preference with warning",
+    "P0-2: visible Edit text, keyboard Enter, retained edits after collapse/reopen, batch confirm/calendar linkage, hidden validation and cancel, removal preserves sibling",
+    "P0-3: keyboard quick-add menu, manual save, independent AI entry retained",
+    "P0-3: 5 widths x 2 themes x 4 pages x 3 scroll positions, hit-test no obstruction, edge edit/toggle, menu fits viewport, 320px draft controls separated",
+    "P0-3: long profile name with demo tag, long task/project titles at 768px and 320px"
+  ],
+  "viewportChecks": [
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 1024,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "night",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "首页",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "日历",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "项目",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "top",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "middle",
+      "overflow": false,
+      "obstructed": false
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "page": "设置",
+      "scroll": "bottom",
+      "overflow": false,
+      "obstructed": false
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "after-assistant-1440-light.png",
+    "after-assistant-1440-night.png",
+    "after-assistant-320-light.png",
+    "after-assistant-320-night.png",
+    "after-assistant-390-light.png",
+    "after-assistant-390-night.png",
+    "after-home-1440-light.png",
+    "after-home-1440-night.png",
+    "after-home-390-light.png",
+    "after-home-390-night.png",
+    "after-more-and-overdue.png",
+    "after-settings-1440-light.png",
+    "after-settings-1440-night.png",
+    "after-settings-320-light.png",
+    "after-settings-320-night.png",
+    "before-assistant-1440-light.png",
+    "before-assistant-1440-night.png",
+    "before-assistant-390-light.png",
+    "before-assistant-390-night.png",
+    "before-home-1440-light.png",
+    "before-home-1440-night.png",
+    "before-home-390-light.png",
+    "before-home-390-night.png"
+  ]
+}

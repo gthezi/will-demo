@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "url": "http://127.0.0.1:5175/",
+  "errors": [],
+  "checks": [
+    "no repeated page introductions",
+    "no home header manual-add button",
+    "explicit demo loading and cancel",
+    "completion and reload persistence",
+    "name and theme persistence",
+    "manual add/edit/delete/cancel",
+    "project create/rename/archive/restore",
+    "AI compact summary, expand, edit and collapsed confirmation",
+    "invalid hidden fields open on confirmation without saving",
+    "removing draft preserves sibling identity and edits",
+    "mobile summary and editor",
+    "calendar month controls and date context",
+    "search across all dates",
+    "four-page layouts at 1920/1024/768/390/320",
+    "mobile icons visible",
+    "legacy data copied without overwriting original",
+    "damaged storage preserved"
+  ]
+}
