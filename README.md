@@ -7,6 +7,7 @@
 ## 从哪里开始
 
 - **[项目记忆与当前状态](docs/PROJECT_MEMORY.md)**：目标、已经完成的成果、技术决策、分支关系与下一步；新对话 / Agent 优先阅读。
+- **[下一阶段前端规划｜新对话交接](docs/handoff/FRONTEND_NEXT_CONVERSATION_2026-11-06.md)**：本轮最新共识，围绕 AI 工作台信息架构、页面/交互、现有白天主题复用和 Mock/接口边界；**尚未进入开发**。
 - **[Windows 11 月 7 日展示验收](docs/demo-acceptance/2026-11-07/README.md)**：实际测试结果、截图、限制与展示包信息。
 - **[现场演示及备份指南](docs/demo-acceptance/2026-11-07/DEMO_GUIDE.md)**：首次启动、演示步骤、数据备份恢复。
 - **[React / Electron 工程](will-app/README.md)**：功能与源码组织、开发测试和构建。
