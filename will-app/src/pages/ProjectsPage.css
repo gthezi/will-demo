@@ -1,0 +1,51 @@
+.will-project-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.will-project-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.will-project-heading h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.will-project-heading h2 .anticon {
+  flex-shrink: 0;
+  color: var(--will-muted);
+  font-size: 16px;
+}
+
+.will-project-heading h2 > span:last-child {
+  min-width: 0;
+}
+
+.will-schedule-meta > span {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.will-projects .ant-empty {
+  margin-block: 32px;
+}
+
+.will-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.will-projects > .ant-empty { grid-column: 1 / -1; }
+.will-project-section { min-width: 0; background: var(--will-surface); border: 1px solid var(--will-border); padding: 22px; border-radius: var(--will-panel-radius); box-shadow: var(--will-panel-shadow); }
+.will-project-progress .ant-progress { margin-bottom: 0; }
+.will-project-progress { display: flex; flex-direction: column; gap: 5px; }
+.will-project-heading { gap: 8px; }
+.will-project-heading h2 { flex: 1; }
+.will-project-add { margin-top: 18px; }
+.will-project-section .will-schedule-row:last-child { border-bottom: 0; }
+@media (max-width: 850px) { .will-projects { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 600px) { .will-project-section { padding: 16px; } .ant-tabs-extra-content .ant-btn { padding-inline: 8px; font-size: 12px; } }

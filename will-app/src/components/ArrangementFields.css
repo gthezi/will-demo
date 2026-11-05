@@ -1,0 +1,25 @@
+.arrangement-fields .ant-form-item {
+  margin-bottom: 16px;
+}
+
+.arrangement-fields .ant-picker,
+.arrangement-fields .ant-input-number {
+  width: 100%;
+}
+
+.arrangement-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.arrangement-field-grid > * {
+  min-width: 0;
+}
+
+@media (max-width: 400px) {
+  .arrangement-field-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

@@ -1,0 +1,37 @@
+.arrangement-editor .ant-modal-body {
+  max-height: calc(100dvh - 240px);
+  overflow-y: auto;
+  padding-top: 12px;
+  padding-right: 4px;
+}
+
+.arrangement-editor-error {
+  margin-bottom: 16px;
+}
+
+.arrangement-editor-actions,
+.arrangement-editor-save {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrangement-editor-actions {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.arrangement-editor-save {
+  margin-left: auto;
+}
+
+@media (max-width: 400px) {
+  .arrangement-editor {
+    top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .arrangement-editor .ant-modal-body {
+    max-height: calc(100dvh - 210px);
+  }
+}

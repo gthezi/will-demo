@@ -1,0 +1,93 @@
+#root, .will-shell { min-height: 100vh; }
+.will-shell { display: grid; grid-template-columns: 88px minmax(0, 1fr); }
+.will-rail {
+  position: sticky; top: 0; height: 100dvh; display: flex; flex-direction: column; align-items: center;
+  padding: 28px 10px 20px; gap: 12px; background: var(--will-sidebar); border-right: 1px solid var(--will-border); z-index: 5;
+}
+.will-brand-mark { width: 48px; height: 48px; flex-shrink: 0; background: var(--will-primary); color: var(--will-bg); border: 0; border-radius: 16px; font-size: 22px; font-weight: 800; cursor: pointer; }
+.will-rail-separator { height: 1px; width: 45px; background: var(--will-border); margin: 16px 0; }
+.will-rail nav { display: flex; flex-direction: column; gap: 12px; }
+.will-nav-button { width: 66px; min-height: 61px; border: 0; padding: 8px 4px; border-radius: 13px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: transparent; color: var(--will-muted); font: inherit; font-size: 11px; cursor: pointer; }
+.will-nav-button > .anticon { font-size: 21px; }
+.will-nav-button:hover, .will-nav-button.is-active { color: var(--will-primary); background: var(--will-soft); }
+.will-rail-bottom { margin-top: auto; }
+.will-workspace { min-width: 0; max-width: 1800px; width: 100%; margin-inline: auto; padding: 0 clamp(22px, 3vw, 52px) 20px; }
+.will-header { height: 91px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--will-border); margin-bottom: 28px; }
+.will-header-title { min-width: 0; flex-shrink: 0; }
+.will-wordmark { font-size: 11px; font-weight: 750; color: var(--will-primary); }
+.will-header h1 { font-size: 18px; line-height: 1.4; font-weight: 700; margin: 4px 0 0; }
+.will-header-actions, .will-inline-actions { display: flex; align-items: center; gap: 10px; }
+.will-header-actions { min-width: 0; }
+.will-profile-button { max-width: 160px; }
+.will-profile-button > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.will-content { min-width: 0; }
+.will-statusbar { display: flex; flex-wrap: wrap; gap: 12px 20px; border-top: 1px solid var(--will-border); margin-top: 32px; padding-block: 16px 64px; color: var(--will-muted); font-size: 11px; }
+.will-quick-add.ant-btn { position: fixed; right: 34px; bottom: 28px; height: 48px; padding-inline: 20px; border-radius: 24px; box-shadow: 0 8px 24px #0003; z-index: 8; }
+.will-storage-warning { margin-bottom: 20px; }
+.will-schedule-list { list-style: none; margin: 0; padding: 0; }
+.will-schedule-row { padding: 14px 0; border-bottom: 1px solid var(--will-divider); }
+.will-schedule-row:last-child { border-bottom: 0; }
+.will-schedule-title { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; overflow-wrap: anywhere; }
+.will-schedule-title > .ant-checkbox-wrapper { flex-shrink: 0; margin-top: 1px; }
+.will-item-edit { display: inline-flex; align-items: flex-start; gap: 8px; min-width: 0; border: 0; padding: 0; color: var(--will-text); background: transparent; font: inherit; text-align: left; line-height: 1.65; cursor: pointer; }
+.will-item-edit > span { min-width: 0; overflow-wrap: anywhere; }
+.will-item-edit .anticon { margin-top: 4px; color: var(--will-primary); }
+.will-item-edit:hover { color: var(--will-primary); }
+.will-schedule-title > .ant-tag { flex-shrink: 0; margin-left: auto; margin-right: 0; font-size: 10px; }
+.is-done .will-item-edit { text-decoration: line-through; color: var(--will-muted); }
+.will-schedule-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; color: var(--will-muted); font-size: 11px; line-height: 1.7; }
+.will-schedule-meta > span { min-width: 0; overflow-wrap: anywhere; }
+.will-calendar-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, .65fr); gap: 20px; align-items: start; }
+.will-calendar-picker, .will-agenda {
+  min-width: 0; border: 1px solid var(--will-border); padding: 22px; background: var(--will-surface);
+  border-radius: var(--will-panel-radius); box-shadow: var(--will-panel-shadow);
+}
+.will-agenda-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.will-agenda-heading h2 { font-size: 15px; margin: 0; }
+.will-calendar-legend { display: flex; gap: 16px; font-size: 11px; color: var(--will-muted); margin-top: 16px; }
+.will-calendar-legend > span { display: flex; align-items: center; gap: 6px; }
+.will-calendar-legend i { width: 6px; height: 6px; border-radius: 50%; background: var(--will-primary); }
+.will-calendar-legend .task { background: var(--will-error); }
+.will-project-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
+.will-project-heading h2 { margin: 0; font-size: 15px; }
+.will-project-heading > span { color: var(--will-muted); font-size: 11px; }
+.will-project-progress { margin-bottom: 8px; }
+.will-project-progress > span { color: var(--will-muted); font-size: 11px; }
+.will-settings { max-width: 620px; padding: 24px; background: var(--will-surface); border: 1px solid var(--will-border); border-radius: var(--will-panel-radius); box-shadow: var(--will-panel-shadow); }
+.will-settings-section { padding: 22px 0; border-bottom: 1px solid var(--will-border); }
+.will-settings-section:first-child { padding-top: 0; }
+.will-settings-section:last-child { border-bottom: 0; padding-bottom: 0; }
+.will-settings-section h2 { font-size: 15px; margin: 0 0 18px; }
+.will-settings-section .ant-form { max-width: 400px; }
+.will-settings-section p { margin: 0 0 16px; font-size: 12px; color: var(--will-muted); line-height: 1.8; }
+.will-settings-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.theme-option { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; }
+@media (max-width: 1250px) { .will-workspace { padding-inline: 24px; } }
+@media (max-width: 1050px) { .will-calendar-layout { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 730px) {
+  .will-shell { grid-template-columns: 60px minmax(0, 1fr); }
+  .will-rail { padding: 18px 4px; }
+  .will-brand-mark { width: 38px; height: 38px; font-size: 20px; }
+  .will-rail-separator { width: 34px; margin-block: 10px; }
+  .will-nav-button { width: 50px; min-height: 55px; font-size: 10px; }
+  .will-nav-button > .anticon { font-size: 19px; }
+  .will-workspace { padding-inline: 14px; }
+  .will-header { height: 77px; gap: 8px; margin-bottom: 22px; }
+  .will-header h1 { font-size: 15px; }
+  .will-profile-button, .will-demo-tag { display: none; }
+  .will-header-actions { gap: 6px; }
+  .will-theme-button.ant-btn, .will-assistant-button.ant-btn { padding-inline: 8px; width: 34px; height: 34px; flex-shrink: 0; }
+  .will-theme-button > span:not(.ant-btn-icon):not(.anticon), .will-assistant-button > span:not(.ant-btn-icon):not(.anticon) { display: none; }
+  .will-quick-add.ant-btn { right: 16px; bottom: 16px; width: 48px; height: 48px; padding: 0; border-radius: 50%; }
+  .will-quick-add > span:not(.ant-btn-icon):not(.anticon) { display: none; }
+  .will-statusbar { padding-bottom: 72px; }
+  .will-calendar-layout { gap: 20px; }
+  .will-calendar-picker, .will-agenda, .will-settings { padding: 18px 16px; }
+}
+@media (max-width: 400px) {
+  .will-settings .ant-segmented { width: 100%; }
+  .will-settings .ant-segmented-item { flex: 1; min-width: 0; }
+  .will-settings .ant-segmented-item-label { padding-inline: 4px; font-size: 11px; }
+  .will-settings .theme-option { flex-direction: column; justify-content: center; gap: 5px; padding-block: 8px; line-height: 1.4; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

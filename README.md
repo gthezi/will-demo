@@ -1,25 +1,11 @@
-# Will Demo
+# Will 个人安排助手
 
-Interactive frontend demo of the Will personal planning assistant.
+本仓库分支用于讨论当前页面与交互设计，包含可运行的 React 源码、HTML 原型与示例截图。
 
-Website: https://gthezi.github.io/will-demo/
+**请从 [页面与交互讨论入口](docs/gpt-review/README.md) 开始阅读。**
 
-This repository contains the built website for GitHub Pages. The React source
-and product review documents are maintained separately.
+- [当前 React 试用版](https://gthezi.github.io/will-demo/prototype/)
+- [HTML 交互原型](Will_PC_交互原型_V0_1.html)
+- [React 工程与运行方法](will-app/README.md)
 
-- AI draft generation is simulated locally.
-- Tasks, projects, and preferences are stored in each visitor's browser.
-- Data is not shared between visitors or devices.
-
-Source revision: `845b977`
-
-To prepare an updated release, run this command in the source project's
-`will-app` directory:
-
-```powershell
-npm.cmd run build -- --base=./ --outDir=../release/github-pages
-```
-
-Replace the previous build assets in this repository with the new output,
-preserving `README.md` and `.nojekyll`, then commit and push to `main`.
-GitHub Pages publishes from `main` at `/ (root)`.
+讨论材料整理于 2026 年 11 月 5 日。此分支是源码快照，`main` 分支保留上线文件；线上试用地址后续可能更新。
