@@ -48,13 +48,13 @@ function DraftFields({ index, value, expanded, onToggle, onRemove, projects }: {
         <Tag color={isEvent ? 'blue' : 'default'}>{isEvent ? '日程' : '待办'}</Tag>
         {missing && <span className="assistant-draft-incomplete">待补全</span>}
         <div className="assistant-draft-tools">
-          <Tooltip title={expanded ? '收起编辑' : '编辑草案'}>
-            <Button type="text" icon={expanded ? <UpOutlined /> : <EditOutlined />}
-              aria-label={`${expanded ? '收起' : '编辑'}安排 ${index + 1}`}
-              aria-expanded={expanded} aria-controls={panelId} onClick={onToggle} />
-          </Tooltip>
+          <Button className="assistant-draft-edit" type="text" icon={expanded ? <UpOutlined /> : <EditOutlined />}
+            aria-label={`${expanded ? '收起' : '编辑'}安排 ${index + 1}`}
+            aria-expanded={expanded} aria-controls={panelId} onClick={onToggle}>
+            {expanded ? '收起' : '编辑'}
+          </Button>
           <Tooltip title="移除此项">
-            <Button type="text" danger icon={<DeleteOutlined />}
+            <Button className="assistant-draft-remove" type="text" danger icon={<DeleteOutlined />}
               aria-label={`移除安排 ${index + 1}`} onClick={onRemove} />
           </Tooltip>
         </div>
