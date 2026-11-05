@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { ScheduleList } from '../components/ScheduleList'
 import { MonthCalendar } from '../components/MonthCalendar'
 import type { PageKey } from '../components/WillShell'
+import type { UpcomingDays } from '../domain/dashboardPreferences'
 import { scheduleItems, type ProjectId, type ScheduleData } from '../domain/schedule'
 import type { ThemeMode } from '../theme'
 import { ProjectsPage } from './ProjectsPage'
@@ -14,6 +15,8 @@ type ShellPagesProps = {
   page: PageKey
   themeMode: ThemeMode
   onThemeChange: (mode: ThemeMode) => void
+  upcomingDays: UpcomingDays
+  onUpcomingDaysChange: (days: UpcomingDays) => void
   data: ScheduleData
   selectedDate: string
   onDateChange: (date: string) => void
@@ -31,7 +34,7 @@ type ShellPagesProps = {
 }
 
 export function ShellPages({
-  page, themeMode, onThemeChange, data, selectedDate, onDateChange, onToggleTask,
+  page, themeMode, onThemeChange, upcomingDays, onUpcomingDaysChange, data, selectedDate, onDateChange, onToggleTask,
   onManualAdd, onEdit,
   onCreateProject, onRenameProject, onArchiveProject, onNavigate, onLoadDemo, onClear, username, onSaveName,
 }: ShellPagesProps) {
@@ -40,7 +43,8 @@ export function ShellPages({
   if (page === 'settings') {
     return (
       <SettingsPage username={username} onSaveName={onSaveName} themeMode={themeMode}
-        onThemeChange={onThemeChange} onLoadDemo={onLoadDemo} onClear={onClear} />
+        onThemeChange={onThemeChange} upcomingDays={upcomingDays} onUpcomingDaysChange={onUpcomingDaysChange}
+        onLoadDemo={onLoadDemo} onClear={onClear} />
     )
   }
 
@@ -73,6 +77,6 @@ export function ShellPages({
 
   return (
     <HomePage data={data} selectedDate={selectedDate} onDateChange={onDateChange} onNavigate={onNavigate}
-      onLoadDemo={onLoadDemo} onEdit={onEdit} onToggleTask={onToggleTask} />
+      onLoadDemo={onLoadDemo} onEdit={onEdit} onToggleTask={onToggleTask} upcomingDays={upcomingDays} />
   )
 }
