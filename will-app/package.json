@@ -13,6 +13,7 @@
     "test:w1:desktop": "node tests/w1.desktop.cjs",
     "test:w2:browser": "node tests/w2.browser.cjs",
     "test:w2:desktop": "node tests/w2.desktop.cjs",
+    "test:visual:v1": "node tests/visual.v1.cjs",
     "preview": "vite preview",
     "desktop:dev": "node scripts/desktop-dev.mjs",
     "desktop:build": "tsc -b && vite build --mode desktop",

@@ -1,5 +1,5 @@
 import { CalendarOutlined, CheckSquareOutlined, FileTextOutlined, PartitionOutlined, SendOutlined, StopOutlined, SaveOutlined, ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons'
-import { Alert, Button, Empty, Input, Select, Spin, Tag } from 'antd'
+import { Alert, Button, Input, Select, Spin } from 'antd'
 import { useEffect, useRef } from 'react'
 import type { AIWorkspace } from '../hooks/useAIWorkspace'
 import type { ScheduleData } from '../domain/schedule'
@@ -33,7 +33,7 @@ export function AIConversation({ ai, data, compact = false, onViewProject, onVie
   return <div className={`ai-conversation${compact ? ' is-compact' : ''}${pending.length ? ' has-review' : ''}`}>
     <div className="ai-conversation-main">
       <div className="ai-context">
-        <Tag color="gold">本地规则模拟</Tag>
+        <span className="ai-mock-label">本地规则模拟</span>
         <Select aria-label="会话参考范围" value={c?.contextProjectId ?? ''} disabled={processing}
           options={[{ value: '', label: '全局 · 未关联项目' }, ...data.projects.map(p => ({ value: p.id, label: `参考：${p.name}${p.archived ? '（已归档）' : ''}`, disabled: p.archived }))]}
           onChange={id => {
@@ -54,13 +54,12 @@ export function AIConversation({ ai, data, compact = false, onViewProject, onVie
         {!c?.messages.length && <div className="ai-empty">
           <h2>从一条通知，或一个目标开始</h2>
           <p>本地规则整理与固定步骤建议，确认后才会写入项目。</p>
-          {!compact && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={false} />}
         </div>}
         {c?.messages.map(m => <article className={`ai-message is-${m.role}`} key={m.id}>
           <div className="ai-message-role">{m.role === 'user' ? '你' : 'Will · 本地模拟'}</div><p>{m.text}</p>
         </article>)}
         {c?.batches.filter(b => b.status === 'confirmed').map(b => <section className="ai-confirmed" key={b.id} data-batch-id={b.id}>
-          <h3>已添加 {b.proposals.length} 项安排</h3><Tag color="green">已确认</Tag><p>同一批次不会重复添加。原始输入保留在会话中。</p>
+          <h3>已添加 {b.proposals.length} 项安排</h3><p>已确认 · 原始输入保留在会话中</p>
           <div className="ai-confirmed-links">
             {[...new Set(b.proposals.map(p => p.projectId))].map(id => <Button key={id} icon={<CheckSquareOutlined />} aria-label={`查看项目：${data.projects.find(p => p.id === id)?.name || id}`} onClick={() => onViewProject(id)}>查看项目：{data.projects.find(p => p.id === id)?.name || id}</Button>)}
             {b.proposals.find(p => p.date) && <Button icon={<CalendarOutlined />} aria-label="查看日历" onClick={() => onViewCalendar(b.proposals.find(p => p.date)!.date)}>查看日历</Button>}

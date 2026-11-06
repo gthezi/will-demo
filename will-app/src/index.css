@@ -1,11 +1,24 @@
 :root {
-  --will-panel-radius: 16px;
-  font-family: Inter, "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  --will-space-1: 4px;
+  --will-space-2: 8px;
+  --will-space-3: 12px;
+  --will-space-4: 16px;
+  --will-space-5: 24px;
+  --will-space-6: 32px;
+  --will-radius-control: 4px;
+  --will-panel-radius: 8px;
+  --will-font-sans: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  --will-font-heading: var(--will-font-sans);
+  --will-text-caption: 12px;
+  --will-text-body: 14px;
+  --will-text-heading: 18px;
+  font-family: var(--will-font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   color: var(--will-text);
   background: var(--will-bg);
+  font-variant-numeric: tabular-nums;
 }
 
 * {
@@ -24,8 +37,9 @@ body {
   min-height: 100vh;
 }
 
-a:focus-visible,
-button:focus-visible {
+:focus-visible {
   outline: 2px solid var(--will-primary);
   outline-offset: 3px;
 }
+
+::selection { background: var(--will-soft); color: var(--will-text); }

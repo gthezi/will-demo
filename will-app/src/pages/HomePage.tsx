@@ -85,10 +85,10 @@ export function HomePage({
               <p className="will-summary-remaining">{tasks.length ? pending.length ? <>全部待办 · <span>未完成 {pending.length} 项</span></> : '待办已全部完成' : '还没有待办'}</p>
             </div>
             <div className="will-task-progress">
-              <Progress type="circle" percent={percent} size={100} strokeWidth={4}
-                styles={{ body: { width: '100%', height: '100%' } }}
-                aria-label={`全部待办已完成 ${done} / ${tasks.length}，${percent}%`}
-                format={() => <span className="will-progress-count"><strong>{done}<span> / {tasks.length}</span></strong><small>全部待办 · 已完成</small></span>} />
+              <span className="will-completion-label">全部待办完成</span>
+              <strong>{done}<span> / {tasks.length}</span></strong>
+              <Progress percent={percent} showInfo={false} size="small"
+                aria-label={`全部待办已完成 ${done} / ${tasks.length}，${percent}%`} />
             </div>
             <div className="will-metrics">
               <Tooltip title={`今天至 ${dayjs(now).add(upcomingDays - 1, 'day').format('M月D日')} 截止的未完成待办`}>
@@ -126,7 +126,8 @@ export function HomePage({
                   </time>
                 </div>
               )
-            }) : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={`未来 ${upcomingDays} 天没有未完成待办`} />}
+            }) : <div className="will-home-empty"><p>未来 {upcomingDays} 天没有未完成待办</p>
+              <Button type="link" onClick={() => onNavigate('projects')}>查看项目待办<RightOutlined /></Button></div>}
             {upcoming.length > 4 && (
               <div className="will-deadline-more">
                 <span>显示 {showAllDeadlines ? upcoming.length : 4} 项 / 共 {upcoming.length} 项</span>
@@ -148,7 +149,9 @@ export function HomePage({
           </section>
           <section className="will-panel" aria-labelledby="tasks-heading">
             <div className="will-panel-heading">
-              <h2 id="tasks-heading">{searchOpen ? '搜索全部安排' : '待办清单'}</h2>
+              <div className="will-task-list-heading"><h2 id="tasks-heading">{searchOpen ? '搜索全部安排' : '待办清单'}</h2>
+                {!searchOpen && <span>{pending.filter(item => !item.date).length} 项未设截止</span>}
+              </div>
               <div className="will-inline-actions">
                 <Button type="text" size="small" ref={searchToggle} title={searchOpen ? '返回待办清单' : '搜索与筛选'}
                   icon={searchOpen ? <ArrowLeftOutlined /> : <SearchOutlined />}

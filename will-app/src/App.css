@@ -5,14 +5,15 @@
   position: sticky; top: 0; height: 100dvh; display: flex; flex-direction: column; align-items: center;
   padding: 28px 10px 20px; gap: 12px; background: var(--will-sidebar); border-right: 1px solid var(--will-border); z-index: 5;
 }
-.will-brand-mark { width: 48px; height: 48px; flex-shrink: 0; background: var(--will-primary); color: var(--will-bg); border: 0; border-radius: 16px; font-size: 22px; font-weight: 800; cursor: pointer; }
+.will-brand-mark { width: 44px; height: 44px; flex-shrink: 0; background: var(--will-primary); color: var(--will-bg); border: 0; border-radius: var(--will-radius-control); font-size: 22px; font-weight: 700; cursor: pointer; }
 .will-rail-separator { height: 1px; width: 45px; background: var(--will-border); margin: 16px 0; }
-.will-rail nav { display: flex; flex-direction: column; gap: 12px; }
+.will-rail nav { display: flex; flex-direction: column; gap: 8px; }
 .will-rail-toggle { display: grid; place-items: center; width: 38px; height: 38px; border: 0; border-radius: 6px; color: var(--will-muted); background: transparent; cursor: pointer; }
 .will-rail-toggle:hover { color: var(--will-primary); background: var(--will-soft); }
-.will-nav-button { width: 66px; min-height: 61px; border: 0; padding: 8px 4px; border-radius: 13px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: transparent; color: var(--will-muted); font: inherit; font-size: 11px; cursor: pointer; }
+.will-nav-button { width: 66px; min-height: 61px; border: 0; padding: 8px 4px; border-radius: var(--will-radius-control); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: transparent; color: var(--will-muted); font: inherit; font-size: 12px; cursor: pointer; }
 .will-nav-button > .anticon { font-size: 21px; }
 .will-nav-button:hover, .will-nav-button.is-active { color: var(--will-primary); background: var(--will-soft); }
+.will-nav-button.is-active { box-shadow: inset 2px 0 0 var(--will-primary); font-weight: 600; }
 .is-expanded .will-rail { align-items: stretch; padding-inline: 14px; }
 .is-expanded .will-brand-mark { align-self: flex-start; }
 .is-expanded .will-rail-toggle { align-self: flex-end; }
@@ -22,15 +23,15 @@
 .will-workspace { min-width: 0; max-width: 1800px; width: 100%; margin-inline: auto; padding: 0 clamp(22px, 3vw, 52px) 20px; }
 .will-header { height: 91px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--will-border); margin-bottom: 28px; }
 .will-header-title { min-width: 0; flex-shrink: 0; }
-.will-wordmark { font-size: 11px; font-weight: 750; color: var(--will-primary); }
-.will-header h1 { font-size: 18px; line-height: 1.4; font-weight: 700; margin: 4px 0 0; }
+.will-wordmark { font-size: 12px; font-weight: 650; color: var(--will-primary); }
+.will-header h1 { font: 600 20px/1.4 var(--will-font-heading); margin: 4px 0 0; }
 .will-header-actions, .will-inline-actions { display: flex; align-items: center; gap: 10px; }
 .will-header-actions { min-width: 0; }
 .will-profile-button { max-width: 160px; }
 .will-profile-button > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .will-content { min-width: 0; }
 .will-statusbar { display: flex; flex-wrap: wrap; gap: 12px 20px; border-top: 1px solid var(--will-border); margin-top: 32px; padding-block: 16px 64px; color: var(--will-muted); font-size: 11px; }
-.will-quick-add.ant-btn { height: 34px; padding-inline: 12px; border-radius: 8px; box-shadow: none; flex-shrink: 0; }
+.will-quick-add.ant-btn { height: 36px; padding-inline: 12px; border-radius: var(--will-radius-control); box-shadow: none; flex-shrink: 0; }
 .will-storage-warning { margin-bottom: 20px; }
 .will-feedback { min-width: 0; }
 .will-feedback:has(.ant-message-notice) { margin-bottom: 16px; }
@@ -39,13 +40,13 @@
 .will-schedule-list { list-style: none; margin: 0; padding: 0; }
 .will-schedule-row { padding: 14px 0; border-bottom: 1px solid var(--will-divider); }
 .will-schedule-row:last-child { border-bottom: 0; }
-.will-schedule-title { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; overflow-wrap: anywhere; }
+.will-schedule-title { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; overflow-wrap: anywhere; }
 .will-schedule-title > .ant-checkbox-wrapper { flex-shrink: 0; margin-top: 1px; }
 .will-item-edit { display: inline-flex; align-items: flex-start; gap: 8px; min-width: 0; border: 0; padding: 0; color: var(--will-text); background: transparent; font: inherit; text-align: left; line-height: 1.65; cursor: pointer; }
 .will-item-edit > span { min-width: 0; overflow-wrap: anywhere; }
 .will-item-edit .anticon { margin-top: 4px; color: var(--will-primary); }
 .will-item-edit:hover { color: var(--will-primary); }
-.will-schedule-title > .ant-tag { flex-shrink: 0; margin-left: auto; margin-right: 0; font-size: 10px; }
+.will-schedule-title > .ant-tag { flex-shrink: 0; margin-left: auto; margin-right: 0; font-size: 11px; }
 .will-item-status { --will-status-color: var(--will-muted); color: var(--will-status-color); background: color-mix(in srgb, var(--will-status-color) 10%, var(--will-surface)); border-color: color-mix(in srgb, var(--will-status-color) 25%, var(--will-surface)); }
 .will-item-status[data-status="event"] { --will-status-color: var(--will-primary); }
 .will-item-status[data-status="today"] { --will-status-color: var(--will-warning); }
@@ -53,7 +54,7 @@
 .will-item-status[data-status="done"] { --will-status-color: var(--will-success); }
 .will-item-status[data-status="in_progress"] { --will-status-color: var(--will-primary); }
 .is-done .will-item-edit { text-decoration: line-through; color: var(--will-muted); }
-.will-schedule-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; color: var(--will-muted); font-size: 11px; line-height: 1.7; }
+.will-schedule-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; color: var(--will-muted); font-size: 12px; line-height: 1.7; }
 .will-schedule-meta > span { min-width: 0; overflow-wrap: anywhere; }
 .will-calendar-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, .65fr); gap: 20px; align-items: start; }
 .will-calendar-picker, .will-agenda {
@@ -97,6 +98,7 @@
   .will-rail-separator { width: 34px; margin-block: 10px; }
   .will-nav-button { width: 50px; min-height: 55px; font-size: 10px; }
   .will-nav-button > .anticon { font-size: 19px; }
+  .will-rail-toggle { display: none; }
   .is-expanded .will-rail { align-items: center; padding-inline: 4px; }
   .is-expanded .will-nav-button { width: 50px; min-height: 55px; flex-direction: column; justify-content: center; padding-inline: 4px; gap: 6px; font-size: 10px; }
   .is-expanded .will-brand-mark, .is-expanded .will-rail-toggle { align-self: center; }
@@ -107,7 +109,7 @@
   .will-header-actions { gap: 6px; }
   .will-theme-button.ant-btn, .will-assistant-button.ant-btn { padding-inline: 8px; width: 34px; height: 34px; flex-shrink: 0; }
   .will-theme-button > span:not(.ant-btn-icon):not(.anticon), .will-assistant-button > span:not(.ant-btn-icon):not(.anticon) { display: none; }
-  .will-quick-add.ant-btn { width: 34px; height: 34px; padding: 0; border-radius: 9px; }
+  .will-quick-add.ant-btn { width: 34px; height: 34px; padding: 0; border-radius: var(--will-radius-control); }
   .will-quick-add > span:not(.ant-btn-icon):not(.anticon) { display: none; }
   .will-statusbar { padding-bottom: 64px; }
   .will-calendar-layout { gap: 20px; }
