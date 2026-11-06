@@ -1,5 +1,26 @@
 # Will React 应用
 
+## W1 工作台（2026-11-06）
+
+本分支从 Windows 展示候选 PR #3 继续开发，当前增加首页任务聚焦、项目详情工作区、任务看板和项目模板配置。运行方式：在 `will-app/` 执行 `npm ci` 与 `npm run dev`；桌面版执行 `npm run desktop:dev`。当前实现仍是本地前端，AI 为规则模拟，资料库 / 论文 / 流程 / 协作内容尚未接入。
+
+新版路由使用 URL hash（例如 `#/projects/<project-id>/tasks`），与 Electron 的 `will://app/` 本地协议兼容，支持刷新、浏览器返回和项目标签深链。
+
+### 本地数据升级
+
+- 业务数据统一存于 `will-workbench-schedule-v03`，模型版本为 3。
+- 读取顺序为新版 key、`will-prototype-schedule-v01`、旧 React key `will-react-schedule-v01`；支持版本 1 / 2 的旧数据解码。
+- 首次读取旧数据只在内存升级；用户下一次明确修改后写入新版 key。旧 key 不删除、不覆盖，可作为回退快照。
+- 旧 `done: true/false` 映射到 `status: done/todo`，旧任务 ID、项目关系、截止日期和时间保留。新任务可没有截止日期，也可仅有日期；无日期任务不进入日历日期投影。
+- 项目新增可选模板、目标和已启用专用视图字段；旧项目默认显示基础视图。隐藏专用视图只改显示配置，不清理该项目的业务数据。
+- 读取坏数据或写入失败保留原存储并给出警告；数据只在本地浏览器或 Electron 用户目录，不会同步。
+
+W1 浏览器验收与截图见 [`docs/w1-acceptance/README.md`](../docs/w1-acceptance/README.md)。
+
+## 工程历史说明
+
+以下内容记录 2026-11-05 之前的原型阶段背景与验收，不覆盖上面的 W1 当前实现说明。
+
 Will 个人安排助手的 React + TypeScript + Vite + Ant Design 工程。
 当前版本基于 HTML 原型恢复窄导航栏、紧凑顶栏、双栏首页、月历、项目与设置页面，
 保留 AI 助手“输入 → 编辑草案 → 确认添加”、手动增删改和项目管理。

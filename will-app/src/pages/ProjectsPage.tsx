@@ -1,15 +1,15 @@
 import { EditOutlined, FolderOutlined, InboxOutlined, MoreOutlined, PlusOutlined, UndoOutlined } from '@ant-design/icons'
-import { Alert, App, Button, Dropdown, Empty, Form, Input, Modal, Progress, Tabs, Tooltip } from 'antd'
-import dayjs from 'dayjs'
+import { Alert, App, Button, Dropdown, Empty, Form, Input, Modal, Progress, Tabs, Tooltip, Select } from 'antd'
 import { useRef, useState } from 'react'
 import { ScheduleList } from '../components/ScheduleList'
-import { validateProjectName, type Project, type ProjectId } from '../domain/projects'
-import { scheduleItems, type ScheduleData } from '../domain/schedule'
+import { validateProjectName, type Project, type ProjectId, type ProjectTemplate } from '../domain/projects'
+import { scheduleItems, taskStatus, type ScheduleData } from '../domain/schedule'
 import './ProjectsPage.css'
 
 type ProjectsPageProps = {
   data: ScheduleData
-  onCreate: (id: ProjectId, name: string) => boolean
+  onCreate: (id: ProjectId, name: string, template?: ProjectTemplate, description?: string) => boolean
+  onOpenProject: (id: string) => void
   onRename: (id: ProjectId, name: string) => boolean
   onArchive: (id: ProjectId, archived: boolean) => boolean
   onManualAdd: (date: string, projectId: ProjectId) => void
@@ -23,9 +23,9 @@ function ProjectNameEditor({ session, projects, onClose, onSave }: {
   session: ProjectSession
   projects: Project[]
   onClose: () => void
-  onSave: (name: string) => boolean
+  onSave: (name: string, template?: ProjectTemplate, description?: string) => boolean
 }) {
-  const [form] = Form.useForm<{ name: string }>()
+  const [form] = Form.useForm<{ name: string; template: ProjectTemplate; description: string }>()
   const [error, setError] = useState('')
   const finishedRef = useRef(false)
   const { message } = App.useApp()
@@ -40,11 +40,11 @@ function ProjectNameEditor({ session, projects, onClose, onSave }: {
     >
       {error && <Alert type="error" showIcon title={error} role="alert" />}
       <Form
-        form={form} layout="vertical" name="project-name" initialValues={{ name: session.name }} autoComplete="off"
-        onFinish={({ name }) => {
+        form={form} layout="vertical" name="project-name" initialValues={{ name: session.name, template: 'standard' }} autoComplete="off"
+        onFinish={({ name, template, description }) => {
           if (finishedRef.current) return
           try {
-            const persisted = onSave(name)
+            const persisted = onSave(name, template, description)
             finishedRef.current = true
             if (persisted) void message.success(session.isNew ? '已创建项目' : '已修改项目名称')
             else void message.warning('项目修改仅在本次页面中保留，请勿刷新。')
@@ -69,13 +69,17 @@ function ProjectNameEditor({ session, projects, onClose, onSave }: {
         >
           <Input autoFocus maxLength={40} showCount />
         </Form.Item>
+        {session.isNew && <>
+          <Form.Item name="template" label="项目模板"><Select options={[{ value: 'standard', label: '普通项目' }, { value: 'paper', label: '课程论文' }, { value: 'workflow', label: '流程申请' }, { value: 'collaboration', label: '小组协作' }]} /></Form.Item>
+          <Form.Item name="description" label="项目目标（可选）"><Input.TextArea maxLength={2000} rows={3} /></Form.Item>
+        </>}
       </Form>
     </Modal>
   )
 }
 
 export function ProjectsPage({
-  data, onCreate, onRename, onArchive, onManualAdd, onEdit, onToggleTask,
+  data, onCreate, onRename, onArchive, onManualAdd, onEdit, onToggleTask, onOpenProject,
 }: ProjectsPageProps) {
   const [view, setView] = useState('active')
   const [session, setSession] = useState<ProjectSession | null>(null)
@@ -124,12 +128,12 @@ export function ProjectsPage({
       {projects.map(project => {
         const projectItems = items.filter(item => item.projectId === project.id)
         const tasks = data.tasks.filter(task => task.projectId === project.id)
-        const done = tasks.filter(task => task.done).length
+        const done = tasks.filter(task => taskStatus(task) === 'done').length
         return (
           <section className="will-project-section" key={project.id} aria-label={project.name}>
             <div className="will-project-heading">
-              <h2><FolderOutlined /><span>{project.name}</span></h2>
-              <span>{projectItems.length} 项安排</span>
+              <h2><FolderOutlined /><button className="will-inline-link" onClick={() => onOpenProject(project.id)}>{project.name}</button></h2>
+              <span>{projectItems.length + tasks.filter(task => !task.due).length} 项安排</span>
               <div className="will-project-actions">
                 {isArchived && (
                   <Tooltip title="恢复项目">
@@ -157,10 +161,12 @@ export function ProjectsPage({
                 <Progress percent={tasks.length ? Math.round(done / tasks.length * 100) : 0} size="small" />
                 <span>{done} / {tasks.length} 项待办已完成</span>
               </div>
-            <ScheduleList items={projectItems} projects={data.projects} onToggleTask={onToggleTask} onEdit={onEdit} />
+            {project.description && <p className="will-project-goal">{project.description}</p>}
+            <ScheduleList items={[...projectItems, ...tasks.filter(task => !task.due).map(task => ({ ...task, date: '', time: '', done: taskStatus(task) === 'done', kind: 'task' as const }))].slice(0, 3)} projects={data.projects} onToggleTask={onToggleTask} onEdit={onEdit} />
+            <Button type="link" onClick={() => onOpenProject(project.id)}>打开项目 · {tasks.length} 项任务</Button>
             {!isArchived && <Button className="will-project-add" icon={<PlusOutlined />}
               aria-label={`向${project.name}添加待办`}
-              onClick={() => onManualAdd(dayjs().format('YYYY-MM-DD'), project.id)}>添加待办</Button>}
+              onClick={() => onManualAdd('', project.id)}>添加待办</Button>}
           </section>
         )
       })}
@@ -180,9 +186,10 @@ export function ProjectsPage({
       {session && (
         <ProjectNameEditor
           key={session.id} session={session} projects={data.projects} onClose={() => setSession(null)}
-          onSave={name => {
-            const persisted = session.isNew ? onCreate(session.id, name) : onRename(session.id, name)
+          onSave={(name, template, description) => {
+            const persisted = session.isNew ? onCreate(session.id, name, template, description) : onRename(session.id, name)
             if (session.isNew) setView('active')
+            if (session.isNew) onOpenProject(session.id)
             return persisted
           }}
         />

@@ -1,5 +1,6 @@
 .will-home-grid { display: grid; grid-template-columns: minmax(0, 1.44fr) minmax(328px, .9fr); gap: 20px; align-items: start; }
 .will-home-column { min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.will-home-column > [aria-labelledby="projects-heading"] { order: -1; }
 .will-summary {
   display: grid; grid-template-columns: minmax(0, 1fr) 100px; gap: 12px 20px; align-items: center;
   padding: 20px 22px; min-height: 180px; background: var(--will-soft); border: 1px solid var(--will-summary-border);

@@ -1,22 +1,13 @@
 import { useRef, useState } from 'react'
 import {
-  addDrafts, decodeSchedule, deleteArrangement, emptySchedule, SCHEDULE_STORAGE_KEY, updateArrangement,
-  type ArrangementDraft, type ScheduleData,
+  addDrafts, decodeSchedule, deleteArrangement, updateArrangement, setTaskStatus,
+  type ArrangementDraft, type ScheduleData, type TaskStatus,
 } from '../domain/schedule'
-import { addProject, renameProject, setProjectArchived, type ProjectId } from '../domain/projects'
+import { addProjectFromTemplate, renameProject, setProjectArchived, setProjectViews, type ProjectId, type ProjectTemplate, type ProjectView } from '../domain/projects'
+import { loadSchedule, persistSchedule } from '../domain/scheduleStorage'
 
-function loadSchedule(storageKey: string) {
-  try {
-    const saved = localStorage.getItem(storageKey)
-      ?? (storageKey !== SCHEDULE_STORAGE_KEY ? localStorage.getItem(SCHEDULE_STORAGE_KEY) : null)
-    return { data: saved ? decodeSchedule(saved) : emptySchedule(), readFailed: false }
-  } catch {
-    return { data: emptySchedule(), readFailed: true }
-  }
-}
-
-export function useSchedule(storageKey = SCHEDULE_STORAGE_KEY) {
-  const [initial] = useState(() => loadSchedule(storageKey))
+export function useSchedule() {
+  const [initial] = useState(() => loadSchedule(localStorage))
   const [data, setData] = useState(initial.data)
   const dataRef = useRef(data)
   const [storageWarning, setStorageWarning] = useState(initial.readFailed
@@ -27,7 +18,7 @@ export function useSchedule(storageKey = SCHEDULE_STORAGE_KEY) {
     let persisted = false
     if (!initial.readFailed) {
       try {
-        localStorage.setItem(storageKey, JSON.stringify(next))
+        persistSchedule(localStorage, next)
         persisted = true
       } catch {
         setStorageWarning('浏览器无法保存安排，修改仅在本次页面中保留，请勿刷新。')
@@ -45,15 +36,19 @@ export function useSchedule(storageKey = SCHEDULE_STORAGE_KEY) {
   }
 
   const toggleTask = (id: string, done: boolean) => {
+    save(setTaskStatus(dataRef.current, id, done ? 'done' : 'todo'))
+  }
+  const updateTaskStatus = (id: string, status: TaskStatus) => save(setTaskStatus(dataRef.current, id, status))
+  const updateProjectViews = (id: ProjectId, views: ProjectView[]) => {
     const current = dataRef.current
-    save({ ...current, tasks: current.tasks.map(task => task.id === id ? { ...task, done } : task) })
+    return save({ ...current, projects: setProjectViews(current.projects, id, views) })
   }
 
   const updateItem = (draft: ArrangementDraft) => save(updateArrangement(dataRef.current, draft))
   const deleteItem = (id: string) => save(deleteArrangement(dataRef.current, id))
-  const createProject = (id: ProjectId, name: string) => {
+  const createProject = (id: ProjectId, name: string, template: ProjectTemplate = 'standard', description = '') => {
     const current = dataRef.current
-    return save({ ...current, projects: addProject(current.projects, id, name) })
+    return save({ ...current, projects: addProjectFromTemplate(current.projects, id, name, template, description) })
   }
   const updateProjectName = (id: ProjectId, name: string) => {
     const current = dataRef.current
@@ -66,7 +61,7 @@ export function useSchedule(storageKey = SCHEDULE_STORAGE_KEY) {
   const replaceSchedule = (next: ScheduleData) => save(decodeSchedule(JSON.stringify(next)))
 
   return {
-    data, storageWarning, confirmDrafts, toggleTask, updateItem, deleteItem,
+    data, storageWarning, confirmDrafts, toggleTask, updateTaskStatus, updateProjectViews, updateItem, deleteItem,
     createProject, updateProjectName, archiveProject, replaceSchedule,
   }
 }

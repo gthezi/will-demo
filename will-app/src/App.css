@@ -1,5 +1,6 @@
 #root, .will-shell { min-height: 100vh; }
 .will-shell { display: grid; grid-template-columns: 88px minmax(0, 1fr); }
+.will-shell.is-expanded { grid-template-columns: 196px minmax(0, 1fr); }
 .will-rail {
   position: sticky; top: 0; height: 100dvh; display: flex; flex-direction: column; align-items: center;
   padding: 28px 10px 20px; gap: 12px; background: var(--will-sidebar); border-right: 1px solid var(--will-border); z-index: 5;
@@ -7,9 +8,16 @@
 .will-brand-mark { width: 48px; height: 48px; flex-shrink: 0; background: var(--will-primary); color: var(--will-bg); border: 0; border-radius: 16px; font-size: 22px; font-weight: 800; cursor: pointer; }
 .will-rail-separator { height: 1px; width: 45px; background: var(--will-border); margin: 16px 0; }
 .will-rail nav { display: flex; flex-direction: column; gap: 12px; }
+.will-rail-toggle { display: grid; place-items: center; width: 38px; height: 38px; border: 0; border-radius: 6px; color: var(--will-muted); background: transparent; cursor: pointer; }
+.will-rail-toggle:hover { color: var(--will-primary); background: var(--will-soft); }
 .will-nav-button { width: 66px; min-height: 61px; border: 0; padding: 8px 4px; border-radius: 13px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: transparent; color: var(--will-muted); font: inherit; font-size: 11px; cursor: pointer; }
 .will-nav-button > .anticon { font-size: 21px; }
 .will-nav-button:hover, .will-nav-button.is-active { color: var(--will-primary); background: var(--will-soft); }
+.is-expanded .will-rail { align-items: stretch; padding-inline: 14px; }
+.is-expanded .will-brand-mark { align-self: flex-start; }
+.is-expanded .will-rail-toggle { align-self: flex-end; }
+.is-expanded .will-rail nav { gap: 6px; }
+.is-expanded .will-nav-button { width: 100%; min-height: 44px; flex-direction: row; justify-content: flex-start; gap: 12px; padding-inline: 12px; font-size: 13px; }
 .will-rail-bottom { margin-top: auto; }
 .will-workspace { min-width: 0; max-width: 1800px; width: 100%; margin-inline: auto; padding: 0 clamp(22px, 3vw, 52px) 20px; }
 .will-header { height: 91px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--will-border); margin-bottom: 28px; }
@@ -39,6 +47,7 @@
 .will-item-status[data-status="today"] { --will-status-color: var(--will-warning); }
 .will-item-status[data-status="overdue"] { --will-status-color: var(--will-error); }
 .will-item-status[data-status="done"] { --will-status-color: var(--will-success); }
+.will-item-status[data-status="in_progress"] { --will-status-color: var(--will-primary); }
 .is-done .will-item-edit { text-decoration: line-through; color: var(--will-muted); }
 .will-schedule-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; color: var(--will-muted); font-size: 11px; line-height: 1.7; }
 .will-schedule-meta > span { min-width: 0; overflow-wrap: anywhere; }
@@ -70,12 +79,15 @@
 .will-settings-section .ant-form { max-width: 400px; }
 .will-settings-section p { margin: 0 0 16px; font-size: 12px; color: var(--will-muted); line-height: 1.8; }
 .will-settings-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.will-inline-link { border: 0; padding: 0; color: var(--will-primary); background: none; font: inherit; text-align: left; cursor: pointer; }
+.will-inline-link:hover { text-decoration: underline; }
+.will-project-goal { color: var(--will-muted); line-height: 1.7; }
 .theme-option { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; }
 @media (max-width: 1250px) { .will-workspace { padding-inline: 24px; } }
 @media (max-width: 1050px) { .will-calendar-layout { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 900px) { .will-profile-button { max-width: 100px; } }
 @media (max-width: 730px) {
-  .will-shell { grid-template-columns: 60px minmax(0, 1fr); }
+  .will-shell, .will-shell.is-expanded { grid-template-columns: 60px minmax(0, 1fr); }
   .will-rail { padding: 18px 4px; }
   .will-brand-mark { width: 38px; height: 38px; font-size: 20px; }
   .will-rail-separator { width: 34px; margin-block: 10px; }

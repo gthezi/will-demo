@@ -11,9 +11,10 @@ type ScheduleListProps = {
   onEdit: (id: string) => void
   emptyText?: string
   projects: Project[]
+  onOpenProject?: (id: string) => void
 }
 
-export function ScheduleList({ items, onToggleTask, onEdit, projects, emptyText = '还没有安排' }: ScheduleListProps) {
+export function ScheduleList({ items, onToggleTask, onEdit, projects, onOpenProject, emptyText = '还没有安排' }: ScheduleListProps) {
   const now = useLocalNow()
   if (!items.length) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={emptyText} />
   return (
@@ -35,8 +36,8 @@ export function ScheduleList({ items, onToggleTask, onEdit, projects, emptyText 
             </Tag>
           </div>
           <div className="will-schedule-meta">
-            <time dateTime={`${item.date}T${item.time}`}>{item.date} {item.time}</time>
-            <span>{projectName(projects, item.projectId)}</span>
+            <time dateTime={item.time ? `${item.date}T${item.time}` : item.date || undefined}>{item.date ? `${item.date} ${item.time || '日期截止'}` : '无截止日期'}</time>
+            {onOpenProject ? <button className="will-inline-link" onClick={() => onOpenProject(item.projectId)}>{projectName(projects, item.projectId)}</button> : <span>{projectName(projects, item.projectId)}</span>}
             {item.kind === 'event' && <span>{item.duration} 分钟</span>}
             {!!item.remind && <span>提前 {item.remind} 分钟提醒（仅偏好）</span>}
           </div>

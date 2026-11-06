@@ -15,11 +15,12 @@ export function toArrangementForm(draft: ArrangementDraft): ArrangementFormValue
 }
 
 export function fromArrangementForm(value: ArrangementFormValue): ArrangementDraft {
-  if (!value.date?.isValid() || !value.time?.isValid()) {
+  if ((value.kind === 'event' && (!value.date?.isValid() || !value.time?.isValid()))
+    || (value.date && !value.date.isValid()) || (value.time && !value.time.isValid()) || (!value.date && value.time)) {
     throw new Error('请选择有效的日期和时间。')
   }
   return {
-    ...value, date: value.date.format('YYYY-MM-DD'), time: value.time.format('HH:mm'),
+    ...value, date: value.date?.format('YYYY-MM-DD') ?? '', time: value.time?.format('HH:mm') ?? '',
     duration: value.duration ?? 60, remind: value.remind ?? 0,
   }
 }

@@ -1,9 +1,10 @@
 import {
   CalendarOutlined, CheckSquareOutlined, EditOutlined, HomeOutlined,
   MoonOutlined, PlusOutlined, ReloadOutlined, SettingOutlined,
-  SunOutlined, DesktopOutlined, ThunderboltOutlined, UserOutlined,
+  SunOutlined, DesktopOutlined, ThunderboltOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined,
 } from '@ant-design/icons'
 import { Button, Dropdown, Tag, Tooltip } from 'antd'
+import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { themeLabels, type ThemeMode } from '../theme'
 
@@ -27,7 +28,7 @@ type WillShellProps = {
 }
 
 const navigation = [
-  { key: 'home', icon: <HomeOutlined />, label: '首页' },
+  { key: 'home', icon: <HomeOutlined />, label: '今天' },
   { key: 'calendar', icon: <CalendarOutlined />, label: '日历' },
   { key: 'projects', icon: <CheckSquareOutlined />, label: '项目' },
   { key: 'settings', icon: <SettingOutlined />, label: '设置' },
@@ -39,12 +40,18 @@ export function WillShell({
   themeMode, onThemeChange, activePage, onNavigate, onOpenAssistant,
   onManualAdd, onLoadDemo, manualDisabled, username, hasDemo, children,
 }: WillShellProps) {
+  const [expanded, setExpanded] = useState(false)
   const storageLocation = navigator.userAgent.includes('Electron/') ? '当前客户端' : '当前浏览器'
   return (
-    <div className="will-shell">
+    <div className={`will-shell${expanded ? ' is-expanded' : ''}`}>
       <aside className="will-rail">
         <button className="will-brand-mark" aria-label="Will 首页" onClick={() => onNavigate('home')}>W.</button>
         <div className="will-rail-separator" />
+        <Tooltip title={expanded ? '收起导航' : '展开导航'} placement="right">
+          <button className="will-rail-toggle" aria-label={expanded ? '收起导航' : '展开导航'} onClick={() => setExpanded(value => !value)}>
+            {expanded ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+          </button>
+        </Tooltip>
         <nav aria-label="主导航">
           {navigation.map(item => (
             <button key={item.key} type="button" className={`will-nav-button${activePage === item.key ? ' is-active' : ''}`}

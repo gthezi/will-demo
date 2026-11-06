@@ -60,12 +60,13 @@ test('explicit year, 24-hour colon time and half-hour time work', () => {
   assert.equal(extract('明天下午三点半上课').drafts[0].projectId, 'course')
 })
 
-test('unknown date and ambiguous bare hour remain empty for user confirmation', () => {
+test('tasks may omit a deadline, while an orphan time still requires a date', () => {
   const { drafts, notes } = extract('三点整理资料')
   assert.equal(drafts[0].date, '')
   assert.equal(drafts[0].time, '')
   assert.match(notes.join(), /补全/)
-  assert.throws(() => addDrafts(emptySchedule(), drafts), /检查草案/)
+  assert.equal(addDrafts(emptySchedule(), drafts).tasks[0].due, undefined)
+  assert.throws(() => addDrafts(emptySchedule(), [{ ...drafts[0], date: '', time: '15:00' }]), /检查草案/)
 })
 
 test('unknown text is preserved as an editable task rather than lost', () => {

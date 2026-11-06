@@ -20,7 +20,7 @@ test('original version 1 data upgrades without changing IDs, preferences, or com
   }
   const text = JSON.stringify(original)
   const upgraded = decodeSchedule(text)
-  assert.deepEqual(upgraded, { ...original, version: 2, projects: defaultProjects() })
+  assert.deepEqual(upgraded, { ...original, version: 3, projects: defaultProjects(), tasks: [{ ...original.tasks[0], status: 'done' }] })
   assert.deepEqual(decodeSchedule(JSON.stringify(upgraded)), upgraded)
   assert.equal(JSON.stringify(original), text)
   assert.throws(() => decodeSchedule(JSON.stringify({

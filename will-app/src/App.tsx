@@ -13,7 +13,9 @@ import { ShellPages } from './pages/ShellPages'
 import { getThemeConfig } from './theme'
 import { getArrangementDraft, type ArrangementDraft, type ProjectId } from './domain/schedule'
 import { defaultProjectId } from './domain/projects'
-import { createDemoSchedule, PROTOTYPE_STORAGE_KEY } from './domain/demo'
+import { createDemoSchedule } from './domain/demo'
+import { useWorkbenchRoute } from './hooks/useWorkbenchRoute'
+import { validDate } from './domain/schedule'
 import './App.css'
 
 const PROFILE_KEY = 'will-prototype-name-v01'
@@ -27,15 +29,21 @@ function loadName() {
 function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeMode>) {
   const { modal, message } = AntApp.useApp()
   const [username, setUsername] = useState(loadName)
-  const [activePage, setActivePage] = useState<PageKey>('home')
+  const { route, navigate, recentProjectId } = useWorkbenchRoute()
+  const activePage = route.page
+  const setActivePage = (page: PageKey) => navigate({ page })
+  const openProject = (projectId: string, tab = 'overview') => navigate({ page: 'projects', projectId, tab })
   const [assistantOpen, setAssistantOpen] = useState(false)
+  const [assistantProjectId, setAssistantProjectId] = useState<string | undefined>()
   const [selectedDate, setSelectedDate] = useState(() => dayjs().format('YYYY-MM-DD'))
   const [editor, setEditor] = useState<{ mode: EditorMode; draft: ArrangementDraft } | null>(null)
   const { upcomingDays, setUpcomingDays, rangeStorageWarning } = useUpcomingDays()
   const {
     data, storageWarning, confirmDrafts, toggleTask, updateItem, deleteItem,
-    createProject, updateProjectName, archiveProject, replaceSchedule,
-  } = useSchedule(PROTOTYPE_STORAGE_KEY)
+    createProject, updateProjectName, archiveProject, replaceSchedule, updateTaskStatus, updateProjectViews,
+  } = useSchedule()
+  const openAssistant = () => { setAssistantProjectId(route.projectId); setAssistantOpen(true) }
+  const showCalendar = (date: string) => { setSelectedDate(date); navigate({ page: 'calendar', date }) }
 
   const saveName = (name: string) => {
     setUsername(name)
@@ -70,13 +78,13 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
   const manualAdd = (date: string, projectId: ProjectId = defaultProjectId(data.projects)) => {
     setEditor({
       mode: 'create',
-      draft: { id: crypto.randomUUID(), kind: 'task', title: '', date, time: '', projectId, duration: 60, remind: 0 },
+      draft: { id: crypto.randomUUID(), kind: 'task', title: '', date, time: '', projectId, duration: 60, remind: 0, status: 'todo' },
     })
   }
 
   const saveItem = (draft: ArrangementDraft, mode: EditorMode) => {
     const persisted = mode === 'create' ? confirmDrafts([draft]) : updateItem(draft)
-    setSelectedDate(draft.date)
+    if (draft.date) setSelectedDate(draft.date)
     setEditor(null)
     return persisted
   }
@@ -88,8 +96,8 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
           onThemeChange={setThemeMode}
           activePage={activePage}
           onNavigate={page => { setActivePage(page); window.scrollTo(0, 0) }}
-          onOpenAssistant={() => setAssistantOpen(true)}
-          onManualAdd={() => manualAdd(activePage === 'calendar' ? selectedDate : dayjs().format('YYYY-MM-DD'))}
+          onOpenAssistant={openAssistant}
+          onManualAdd={() => manualAdd(activePage === 'calendar' ? selectedDate : '', route.projectId)}
           onLoadDemo={loadDemo}
           manualDisabled={!data.projects.some(project => !project.archived)}
           username={username}
@@ -100,25 +108,31 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
           <ShellPages
             page={activePage} themeMode={themeMode} onThemeChange={setThemeMode}
             upcomingDays={upcomingDays} onUpcomingDaysChange={setUpcomingDays}
-            data={data} selectedDate={selectedDate} onDateChange={setSelectedDate}
+            data={data} selectedDate={validDate(route.date) ? route.date : selectedDate} onDateChange={showCalendar}
+            projectId={route.projectId} projectTab={route.tab ?? 'overview'}
+            recentProjectId={recentProjectId}
+            onOpenProject={openProject} onProjectTab={tab => route.projectId && openProject(route.projectId, tab)}
+            onTaskStatus={updateTaskStatus} onProjectViews={updateProjectViews} onOpenAssistant={openAssistant}
+            onCalendar={showCalendar}
             onToggleTask={toggleTask}
             onManualAdd={manualAdd}
             onEdit={id => setEditor({ mode: 'edit', draft: getArrangementDraft(data, id) })}
-            onCreateProject={createProject} onRenameProject={updateProjectName} onArchiveProject={archiveProject}
+            onCreateProject={(id, name, template, description) => createProject(id, name, template, description)} onRenameProject={updateProjectName} onArchiveProject={archiveProject}
             onNavigate={setActivePage} onLoadDemo={loadDemo} onClear={clearSchedule}
             username={username} onSaveName={saveName}
           />
         </WillShell>
         <AssistantDrawer
           open={assistantOpen} onClose={() => setAssistantOpen(false)} onConfirm={confirmDrafts}
-          projects={data.projects}
+          projects={data.projects} contextProjectId={assistantProjectId}
           onViewCalendar={date => {
             setSelectedDate(date)
             setActivePage('calendar')
             setAssistantOpen(false)
           }}
           onViewProjects={() => {
-            setActivePage('projects')
+            if (assistantProjectId) openProject(assistantProjectId, 'tasks')
+            else setActivePage('projects')
             setAssistantOpen(false)
           }}
         />
