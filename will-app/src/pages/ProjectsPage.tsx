@@ -3,7 +3,7 @@ import { Alert, App, Button, Dropdown, Empty, Form, Input, Modal, Progress, Tabs
 import { useRef, useState } from 'react'
 import { ScheduleList } from '../components/ScheduleList'
 import { validateProjectName, type Project, type ProjectId, type ProjectTemplate } from '../domain/projects'
-import { scheduleItems, taskStatus, type ScheduleData } from '../domain/schedule'
+import { allScheduleItems, taskStatus, type ScheduleData } from '../domain/schedule'
 import './ProjectsPage.css'
 
 type ProjectsPageProps = {
@@ -84,7 +84,7 @@ export function ProjectsPage({
   const [view, setView] = useState('active')
   const [session, setSession] = useState<ProjectSession | null>(null)
   const { modal, message } = App.useApp()
-  const items = scheduleItems(data)
+  const items = allScheduleItems(data)
   const active = data.projects.filter(project => !project.archived)
   const archived = data.projects.filter(project => project.archived)
   const create = () => setSession({ id: crypto.randomUUID(), name: '', isNew: true })
@@ -133,7 +133,7 @@ export function ProjectsPage({
           <section className="will-project-section" key={project.id} aria-label={project.name}>
             <div className="will-project-heading">
               <h2><FolderOutlined /><button className="will-inline-link" onClick={() => onOpenProject(project.id)}>{project.name}</button></h2>
-              <span>{projectItems.length + tasks.filter(task => !task.due).length} 项安排</span>
+              <span>{projectItems.length} 项安排</span>
               <div className="will-project-actions">
                 {isArchived && (
                   <Tooltip title="恢复项目">
@@ -162,7 +162,7 @@ export function ProjectsPage({
                 <span>{done} / {tasks.length} 项待办已完成</span>
               </div>
             {project.description && <p className="will-project-goal">{project.description}</p>}
-            <ScheduleList items={[...projectItems, ...tasks.filter(task => !task.due).map(task => ({ ...task, date: '', time: '', done: taskStatus(task) === 'done', kind: 'task' as const }))].slice(0, 3)} projects={data.projects} onToggleTask={onToggleTask} onEdit={onEdit} />
+            <ScheduleList items={projectItems.slice(0, 3)} projects={data.projects} onToggleTask={onToggleTask} onEdit={onEdit} />
             <Button type="link" onClick={() => onOpenProject(project.id)}>打开项目 · {tasks.length} 项任务</Button>
             {!isArchived && <Button className="will-project-add" icon={<PlusOutlined />}
               aria-label={`向${project.name}添加待办`}

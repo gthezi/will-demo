@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { itemStatus, isOverdue } from '../src/domain/itemStatus.ts'
+import { deadlineUrgency, itemStatus, isOverdue, itemStatusTags } from '../src/domain/itemStatus.ts'
 import { dashboardView, deadlineView, defaultDashboardFilters } from '../src/domain/dashboard.ts'
 import { emptySchedule, scheduleItems } from '../src/domain/schedule.ts'
 
@@ -14,6 +14,22 @@ test('status respects kind, completion and exact deadline precedence', () => {
   assert.equal(itemStatus({ ...task, done: true }, at(15)), 'done')
   assert.equal(itemStatus({ ...task, kind: 'event' }, at(15)), 'event')
   assert.equal(itemStatus({ ...task, date: '2026-11-06' }, at(15)), 'task')
+})
+
+test('deadline urgency stays independent from progress status and date-only cutoffs are all-day', () => {
+  const inProgress = { ...task, taskStatus: 'in_progress' }
+  assert.equal(itemStatus(inProgress, at(9)), 'in_progress')
+  assert.equal(deadlineUrgency(inProgress, at(9)), 'today')
+  assert.deepEqual(itemStatusTags(inProgress, at(9)), ['in_progress', 'today'])
+  assert.deepEqual(itemStatusTags(inProgress, at(15)), ['overdue', 'in_progress'])
+  assert.deepEqual(itemStatusTags({ ...inProgress, done: true }, at(9)), ['done'])
+  assert.equal(itemStatus(task, at(9)), 'today')
+  assert.equal(deadlineUrgency({ ...task, done: true, taskStatus: 'done' }, at(9)), 'none')
+
+  const dateOnly = { ...task, time: '' }
+  assert.equal(isOverdue(dateOnly, at(23, 59, 59)), false)
+  assert.equal(deadlineUrgency(dateOnly, at(23, 59, 59)), 'today')
+  assert.equal(isOverdue(dateOnly, new Date(2026, 10, 6, 0, 0)), true)
 })
 
 test('all lists and cutoff collections agree at equality, one second later, completion and restore', () => {

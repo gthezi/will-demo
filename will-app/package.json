@@ -9,6 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "test": "node --test tests/*.test.mjs",
+    "test:w1:browser": "node tests/w1.browser.cjs",
+    "test:w1:desktop": "node tests/w1.desktop.cjs",
     "preview": "vite preview",
     "desktop:dev": "node scripts/desktop-dev.mjs",
     "desktop:build": "tsc -b && vite build --mode desktop",

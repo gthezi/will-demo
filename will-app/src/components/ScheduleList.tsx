@@ -2,7 +2,7 @@ import { CalendarOutlined } from '@ant-design/icons'
 import { Checkbox, Empty, Tag, Tooltip } from 'antd'
 import type { DisplayItem } from '../domain/schedule'
 import { projectName, type Project } from '../domain/projects'
-import { itemStatus, itemStatusLabels } from '../domain/itemStatus'
+import { itemStatusTags, itemStatusLabels } from '../domain/itemStatus'
 import { useLocalNow } from '../hooks/useLocalNow'
 
 type ScheduleListProps = {
@@ -31,9 +31,9 @@ export function ScheduleList({ items, onToggleTask, onEdit, projects, onOpenProj
                 <span>{item.title}</span>
               </button>
             </Tooltip>
-            <Tag className="will-item-status" data-status={itemStatus(item, now)}>
-              {itemStatusLabels[itemStatus(item, now)]}
-            </Tag>
+            {itemStatusTags(item, now).map(status => <Tag key={status} className="will-item-status" data-status={status}>
+              {itemStatusLabels[status]}
+            </Tag>)}
           </div>
           <div className="will-schedule-meta">
             <time dateTime={item.time ? `${item.date}T${item.time}` : item.date || undefined}>{item.date ? `${item.date} ${item.time || '日期截止'}` : '无截止日期'}</time>

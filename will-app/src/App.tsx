@@ -1,4 +1,4 @@
-import { Alert, App as AntApp, ConfigProvider } from 'antd'
+import { Alert, App as AntApp, Button, ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import dayjs from 'dayjs'
 import { useState } from 'react'
@@ -39,7 +39,7 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
   const [editor, setEditor] = useState<{ mode: EditorMode; draft: ArrangementDraft } | null>(null)
   const { upcomingDays, setUpcomingDays, rangeStorageWarning } = useUpcomingDays()
   const {
-    data, storageWarning, confirmDrafts, toggleTask, updateItem, deleteItem,
+    data, storageWarning, recoveryAvailable, recoverCorruptData, confirmDrafts, toggleTask, updateItem, deleteItem,
     createProject, updateProjectName, archiveProject, replaceSchedule, updateTaskStatus, updateProjectViews,
   } = useSchedule()
   const openAssistant = () => { setAssistantProjectId(route.projectId); setAssistantOpen(true) }
@@ -103,7 +103,21 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
           username={username}
           hasDemo={[...data.tasks, ...data.events].some(item => item.id.startsWith('demo-'))}
         >
-          {storageWarning && <Alert className="will-storage-warning" type="warning" showIcon title={storageWarning} role="alert" />}
+          {storageWarning && <Alert className="will-storage-warning" type="warning" showIcon title={storageWarning} role="alert"
+            action={recoveryAvailable ? <Button size="small" onClick={() => modal.confirm({
+              title: '从旧版恢复安排？',
+              content: '旧版快照可能不含最近修改，并会替换本次页面中未保存的安排。恢复前会单独备份损坏内容，旧版原始数据仍会保留。',
+              okText: '备份并恢复', cancelText: '取消', focusable: { autoFocusButton: 'cancel' },
+              onOk: () => {
+                try {
+                  const recovered = recoverCorruptData()
+                  void message.success(`已从旧数据恢复；损坏内容备份为 ${recovered.backupKey}`)
+                } catch (cause) {
+                  void message.error(cause instanceof Error ? cause.message : '恢复失败，原始数据未更改。')
+                  throw cause
+                }
+              },
+            })}>从旧数据恢复</Button> : undefined} />}
           {rangeStorageWarning && <Alert className="will-storage-warning" type="warning" showIcon title={rangeStorageWarning} role="alert" />}
           <ShellPages
             page={activePage} themeMode={themeMode} onThemeChange={setThemeMode}

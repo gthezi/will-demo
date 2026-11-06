@@ -3,7 +3,7 @@ import { Alert, App, Button, Checkbox, Empty, Modal, Progress, Segmented, Select
 import { useState } from 'react'
 import { ScheduleList } from '../components/ScheduleList'
 import { projectViewLabels, type Project, type ProjectView } from '../domain/projects'
-import { scheduleItems, taskStatus, type ScheduleData, type Task, type TaskStatus } from '../domain/schedule'
+import { allScheduleItems, taskStatus, type ScheduleData, type Task, type TaskStatus } from '../domain/schedule'
 import './ProjectsPage.css'
 const states = [{ value: 'todo', label: '待处理' }, { value: 'in_progress', label: '进行中' }, { value: 'done', label: '已完成' }] as const
 type Props = {
@@ -20,7 +20,10 @@ export function ProjectDetailPage({ data, project, tab, onTab, onBack, onManualA
   const done = tasks.filter(task => taskStatus(task) === 'done').length
   const activeViews = project.enabledViews ?? []
   const validTab = ['overview', 'tasks', 'materials', ...activeViews].includes(tab) ? tab : 'overview'
-  const items = scheduleItems(data).filter(item => item.projectId === project.id)
+  const focusItems = allScheduleItems(data)
+    .filter(item => item.projectId === project.id && item.kind === 'task' && !item.done)
+    .sort((a, b) => Number(b.taskStatus === 'in_progress') - Number(a.taskStatus === 'in_progress')
+      || (a.date || '9999-12-31').localeCompare(b.date || '9999-12-31'))
   const saveStatus = (id: string, status: TaskStatus) => { if (!onStatus(id, status)) void message.warning('状态仅在本次页面中保留，请勿刷新。') }
   const renderTask = (task: Task) => <article className="will-task-card" key={task.id}>
     <button className="will-task-title" onClick={() => onEdit(task.id)}>{task.title}</button>
@@ -39,7 +42,7 @@ export function ProjectDetailPage({ data, project, tab, onTab, onBack, onManualA
     <Tabs activeKey={validTab} onChange={onTab} items={[
       { key: 'overview', label: '概览', children: <div className="will-project-overview-grid">
         <section><h3>项目进度</h3><Progress percent={tasks.length ? Math.round(done / tasks.length * 100) : 0} /><p>{done} / {tasks.length} 项已完成 · {tasks.filter(task => taskStatus(task) === 'in_progress').length} 项进行中</p><Button onClick={() => onTab('tasks')}>继续处理任务</Button></section>
-        <section><h3>近期重点</h3><ScheduleList items={items.filter(item => item.kind === 'task' && !item.done).slice(0, 4)} projects={data.projects} onEdit={onEdit} onToggleTask={onToggleTask} emptyText={tasks.length && done === tasks.length ? '任务已全部完成' : '尚无待处理任务'} /></section>
+        <section><h3>近期重点</h3><ScheduleList items={focusItems.slice(0, 4)} projects={data.projects} onEdit={onEdit} onToggleTask={onToggleTask} emptyText={tasks.length && done === tasks.length ? '任务已全部完成' : '尚无待处理任务'} /></section>
       </div> },
       { key: 'tasks', label: `任务 (${tasks.length})`, children: <>
         <div className="will-task-toolbar"><span>{done} / {tasks.length} 项已完成</span><Segmented aria-label="任务显示方式" value={layout} onChange={setLayout} options={[{ value: 'board', label: '看板' }, { value: 'list', label: '列表' }]} /></div>

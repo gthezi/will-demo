@@ -4,19 +4,25 @@ import {
   type ArrangementDraft, type ScheduleData, type TaskStatus,
 } from '../domain/schedule'
 import { addProjectFromTemplate, renameProject, setProjectArchived, setProjectViews, type ProjectId, type ProjectTemplate, type ProjectView } from '../domain/projects'
-import { loadSchedule, persistSchedule } from '../domain/scheduleStorage'
+import { loadSchedule, persistSchedule, recoverSchedule } from '../domain/scheduleStorage'
 
 export function useSchedule() {
-  const [initial] = useState(() => loadSchedule(localStorage))
+  const [initial] = useState(() => loadSchedule({ getItem: key => localStorage.getItem(key) }))
   const [data, setData] = useState(initial.data)
   const dataRef = useRef(data)
+  const [storageBlocked, setStorageBlocked] = useState(initial.readFailed)
+  const [recoveryAvailable, setRecoveryAvailable] = useState(initial.recoveryAvailable)
   const [storageWarning, setStorageWarning] = useState(initial.readFailed
-    ? '无法读取本地安排；修改仅在本次页面中保留，请勿刷新。'
+    ? initial.corruptKey
+      ? initial.recoveryAvailable
+        ? '本地安排无法读取；原始内容已保留。修改仅在本次页面有效，可尝试从有效旧数据恢复。'
+        : '本地安排无法读取，且没有可用的旧版副本；原始内容已保留，修改仅在本次页面有效。'
+      : '无法读取本地安排；修改仅在本次页面中保留，请勿刷新。'
     : '')
 
   const save = (next: ScheduleData) => {
     let persisted = false
-    if (!initial.readFailed) {
+    if (!storageBlocked) {
       try {
         persistSchedule(localStorage, next)
         persisted = true
@@ -60,8 +66,18 @@ export function useSchedule() {
   }
   const replaceSchedule = (next: ScheduleData) => save(decodeSchedule(JSON.stringify(next)))
 
+  const recoverCorruptData = () => {
+    const recovered = recoverSchedule(localStorage)
+    dataRef.current = recovered.data
+    setData(recovered.data)
+    setStorageBlocked(false)
+    setRecoveryAvailable(false)
+    setStorageWarning('')
+    return recovered
+  }
+
   return {
-    data, storageWarning, confirmDrafts, toggleTask, updateTaskStatus, updateProjectViews, updateItem, deleteItem,
+    data, storageWarning, recoveryAvailable, recoverCorruptData, confirmDrafts, toggleTask, updateTaskStatus, updateProjectViews, updateItem, deleteItem,
     createProject, updateProjectName, archiveProject, replaceSchedule,
   }
 }

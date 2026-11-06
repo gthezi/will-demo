@@ -8,7 +8,7 @@ import { ScheduleList } from '../components/ScheduleList'
 import { dashboardView, deadlineView, defaultDashboardFilters, type DashboardFilters } from '../domain/dashboard'
 import type { UpcomingDays } from '../domain/dashboardPreferences'
 import { projectName } from '../domain/projects'
-import { itemStatus } from '../domain/itemStatus'
+import { deadlineUrgency } from '../domain/itemStatus'
 import { allScheduleItems, scheduleItems, type ScheduleData } from '../domain/schedule'
 import { useLocalNow } from '../hooks/useLocalNow'
 import type { PageKey } from '../components/WillShell'
@@ -45,10 +45,9 @@ export function HomePage({
   const pending = tasks.filter(item => !item.done)
   const done = tasks.length - pending.length
   const percent = tasks.length ? Math.round(done / tasks.length * 100) : 0
-  const today = dayjs(now).format('YYYY-MM-DD')
   const view = dashboardView(data, filters, now)
   const { overdue, upcoming } = deadlineView(data, now, upcomingDays)
-  const dueToday = upcoming.filter(item => itemStatus(item, now) === 'today')
+  const dueToday = upcoming.filter(item => deadlineUrgency(item, now) === 'today')
   const activeProjects = data.projects.filter(project => !project.archived)
   const listProps = { projects: data.projects, onToggleTask, onEdit }
   useEffect(() => {
@@ -113,16 +112,15 @@ export function HomePage({
               <Button type="link" size="small" onClick={() => onNavigate('calendar')}>查看日历<RightOutlined /></Button>
             </div>
             {upcoming.length ? (showAllDeadlines ? upcoming : upcoming.slice(0, 4)).map(item => {
-              const deadline = dayjs(`${item.date}T${item.time}`)
-              const days = deadline.startOf('day').diff(dayjs(today), 'day')
+              const days = dayjs(item.date).startOf('day').diff(dayjs(now).startOf('day'), 'day')
               const relative = days === 0 ? '今天截止' : days === 1 ? '明天截止' : `还有 ${days} 天`
               return (
-                <div className={`will-deadline-row${itemStatus(item, now) === 'today' ? ' is-due-today' : ''}`} key={item.id}>
+                <div className={`will-deadline-row${deadlineUrgency(item, now) === 'today' ? ' is-due-today' : ''}`} key={item.id}>
                   <button className="will-deadline-title" onClick={() => onEdit(item.id)}>
                     <strong>{item.title}</strong><span>{projectName(data.projects, item.projectId)}</span>
                   </button>
                   <span className="will-deadline-relative">{relative}</span>
-                  <time dateTime={`${item.date}T${item.time}`}>
+                  <time dateTime={item.time ? `${item.date}T${item.time}` : item.date}>
                     <span>{dayjs(item.date).format('M/D')}<span className="will-deadline-weekday">（{dayjs(item.date).format('ddd')}）</span></span>
                     <span>{item.time || '日期截止'}</span>
                   </time>
