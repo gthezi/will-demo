@@ -59,6 +59,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 124,
       "contrastMinimum": 4.597271546066424,
       "dataUntouched": true
     },
@@ -116,6 +117,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 124,
       "contrastMinimum": 4.597271546066424,
       "dataUntouched": true
     },
@@ -173,6 +175,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 124,
       "contrastMinimum": 4.597271546066424,
       "dataUntouched": true
     },
@@ -230,6 +233,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 62,
       "contrastMinimum": 4.597271546066424,
       "dataUntouched": true
     },
@@ -287,6 +291,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 124,
       "contrastMinimum": 5.924195399391474,
       "dataUntouched": true
     },
@@ -344,6 +349,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 124,
       "contrastMinimum": 5.924195399391474,
       "dataUntouched": true
     },
@@ -401,6 +407,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 124,
       "contrastMinimum": 5.924195399391474,
       "dataUntouched": true
     },
@@ -458,6 +465,7 @@
           "overflow": false
         }
       ],
+      "calendarDayHeight": 62,
       "contrastMinimum": 5.924195399391474,
       "dataUntouched": true
     }
