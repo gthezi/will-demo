@@ -8,7 +8,7 @@
 - 独立 worktree：`Will-visual-v1`；分支：`codex/will-visual-v1-20261107`。
 - `f0b2dc1`：V1-A 操作可达性、结果定位、反馈区域和页头操作优先级。
 - `f3c7fa5`：V1-B 主题 Token、首页/AI 样板、批次独立表单名、设计规则和视觉验收脚本。
-- 独立 Draft PR 的 base 为 `codex/will-workbench-w2-20261106`；截图与验收记录随本分支归档。
+- 独立 [Draft PR #12](https://github.com/gthezi/will-demo/pull/12) 的 base 为 `codex/will-workbench-w2-20261106`；截图与验收记录随本分支归档。
 
 ## 独立复现与修复
 
