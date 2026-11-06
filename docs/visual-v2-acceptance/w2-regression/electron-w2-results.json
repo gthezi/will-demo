@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "testedAt": "2026-11-06T18:48:58.363Z",
+  "executablePath": "D:\\Hezi\\WXJ\\vibe coding项目\\Will-visual-v2\\will-app\\node_modules\\electron\\dist\\electron.exe",
+  "profile": "C:\\Users\\Hezi\\AppData\\Local\\Temp\\will-w2-electron-ogMLmE",
+  "url": "will://app/#/calendar?date=2026-11-10",
+  "routeBeforeClose": "#/ai/0f218f09-b183-4b24-b76b-ccee341f862b",
+  "conversationId": "0f218f09-b183-4b24-b76b-ccee341f862b",
+  "batchId": "cde772f3-8789-4b27-97bc-738a642705e0",
+  "taskIds": [
+    "a93a4d3c-4e22-4ed4-9192-8ba5e97ab581",
+    "feb44d7b-312e-4711-a03e-0854eb6d94a0",
+    "ae636774-8d52-4a42-a6b3-e666291d1925"
+  ],
+  "checks": [
+    "create paper-template project",
+    "project Drawer context and workspace continuity",
+    "edit and stage 3 undated tasks",
+    "close/relaunch restores draft IDs and route",
+    "confirm once and close/relaunch keeps same task IDs",
+    "confirmed history has no repeat submit",
+    "notification confirm in Drawer and calendar linkage"
+  ],
+  "errors": []
+}

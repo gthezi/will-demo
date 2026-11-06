@@ -1,0 +1,459 @@
+{
+  "phase": "before",
+  "base": "http://127.0.0.1:4180/",
+  "checks": [
+    "8 size/theme combinations; 12 page/view routes each; dense calendar; date-only semantics; empty/completed projects; view toggles; editor and date picker Escape; popup bounds; destructive confirmation; task/event preservation"
+  ],
+  "windows": [
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "height": 768,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    },
+    {
+      "theme": "night",
+      "width": 1440,
+      "height": 900,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    },
+    {
+      "theme": "night",
+      "width": 1280,
+      "height": 800,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    },
+    {
+      "theme": "night",
+      "width": 1024,
+      "height": 768,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    },
+    {
+      "theme": "night",
+      "width": 390,
+      "height": 844,
+      "pages": [
+        {
+          "name": "home",
+          "overflow": false
+        },
+        {
+          "name": "calendar",
+          "overflow": false
+        },
+        {
+          "name": "projects",
+          "overflow": false
+        },
+        {
+          "name": "overview",
+          "overflow": false
+        },
+        {
+          "name": "board",
+          "overflow": false
+        },
+        {
+          "name": "list",
+          "overflow": false
+        },
+        {
+          "name": "materials",
+          "overflow": false
+        },
+        {
+          "name": "paper",
+          "overflow": false
+        },
+        {
+          "name": "workflow",
+          "overflow": false
+        },
+        {
+          "name": "collaboration",
+          "overflow": false
+        },
+        {
+          "name": "settings",
+          "overflow": false
+        },
+        {
+          "name": "ai",
+          "overflow": false
+        }
+      ],
+      "dataUntouched": true
+    }
+  ],
+  "errors": [],
+  "status": "PASS"
+}

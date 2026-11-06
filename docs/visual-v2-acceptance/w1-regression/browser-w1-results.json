@@ -1,0 +1,308 @@
+{
+  "result": "PASS",
+  "testedAt": "2026-11-06T18:45:59.449Z",
+  "base": "http://127.0.0.1:4181/",
+  "testNow": "2026-11-06T01:00:00.000Z",
+  "timezoneId": "Asia/Shanghai",
+  "dueDate": "2026-11-07",
+  "todayDate": "2026-11-06",
+  "browser": {
+    "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "version": "156.0.8078.80"
+  },
+  "checks": [
+    "undated progress across overview/list/archive",
+    "optional deadline calendar round-trip",
+    "view and route persistence",
+    "5 viewport sizes x 2 themes x 4 routes with AI drawer accessibility",
+    "AI mock draft confirmation and project context",
+    "today deadline independent of progress in home and calendar",
+    "v1/v2 localStorage migration",
+    "explicit backed-up recovery and persist",
+    "write failure stays in memory",
+    "read failure warning without recovery"
+  ],
+  "windows": [
+    {
+      "theme": "night",
+      "width": 1440,
+      "height": 900,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1440,
+      "height": 900,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1440,
+      "height": 900,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1440,
+      "height": 900,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1366,
+      "height": 768,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1366,
+      "height": 768,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1366,
+      "height": 768,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1366,
+      "height": 768,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1280,
+      "height": 720,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1280,
+      "height": 720,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1280,
+      "height": 720,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1280,
+      "height": 720,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1024,
+      "height": 768,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1024,
+      "height": 768,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1024,
+      "height": 768,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1024,
+      "height": 768,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 800,
+      "height": 600,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 800,
+      "height": 600,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 800,
+      "height": 600,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 800,
+      "height": 600,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1366,
+      "height": 768,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "height": 768,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "height": 768,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "height": 768,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "height": 768,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 800,
+      "height": 600,
+      "route": "#/home",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 800,
+      "height": 600,
+      "route": "#/calendar",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 800,
+      "height": 600,
+      "route": "#/projects",
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 800,
+      "height": 600,
+      "route": "#/projects/90df67ad-bcae-4ae9-8ea5-b2510f055d09/tasks",
+      "overflow": false
+    }
+  ],
+  "errors": []
+}
