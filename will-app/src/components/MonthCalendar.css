@@ -6,7 +6,7 @@
 .will-month-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
 .will-weekday { padding: 6px 0; text-align: center; font-size: 11px; color: var(--will-muted); }
 .will-calendar-day {
-  min-width: 0; min-height: 43px; border: 1px solid transparent; border-radius: 8px;
+  min-width: 0; min-height: 43px; border: 1px solid transparent; border-radius: var(--will-radius-control);
   padding: 5px; background: transparent; color: var(--will-text); cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
   font: inherit; font-size: 12px; position: relative;
@@ -17,23 +17,35 @@
   .will-month-toolbar .ant-btn-icon-only { width: 24px; }
 }
 .will-calendar-day:hover { background: var(--will-soft); }
-.will-calendar-day.is-other-month { color: var(--will-muted); opacity: .5; }
+.will-calendar-day.is-other-month { color: var(--will-muted); }
 .will-calendar-day.is-selected { border-color: var(--will-primary); background: var(--will-soft); opacity: 1; }
-.will-calendar-day.is-today .will-date-number { color: var(--will-primary); font-weight: 800; }
+.will-calendar-day.is-today .will-date-number { color: var(--will-primary); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 .will-calendar-dots { display: flex; height: 4px; gap: 3px; }
 .will-calendar-dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--will-primary); }
 .will-calendar-dots i.task { background: var(--will-muted); border-radius: 1px; }
-.will-month-calendar.is-expanded .will-month-grid { gap: 8px; }
-.will-month-calendar.is-expanded .will-calendar-day { min-height: 106px; justify-content: flex-start; align-items: stretch; border-color: var(--will-border); background: var(--will-soft-subtle); padding: 9px; }
+.will-month-calendar.is-expanded .will-month-toolbar { margin-bottom: 16px; }
+.will-month-calendar.is-expanded .will-month-toolbar strong { font-size: 18px; font-weight: 600; }
+.will-month-calendar.is-expanded .will-month-grid { gap: 0; border-bottom: 1px solid var(--will-divider); }
+.will-month-calendar.is-expanded .will-weekday { padding-block: 12px; font-size: 12px; }
+.will-month-calendar.is-expanded .will-calendar-day { height: 124px; min-height: 124px; justify-content: flex-start; align-items: stretch; border-radius: 0; border-top-color: var(--will-divider); padding: 8px 5px; overflow: hidden; }
+.will-month-calendar.is-expanded .will-calendar-day:hover { background: var(--will-soft-subtle); }
 .will-month-calendar.is-expanded .will-calendar-day.is-selected { background: var(--will-soft); border-color: var(--will-primary); }
+.will-month-calendar.is-expanded .will-calendar-day.is-other-month { background: var(--will-soft-subtle); }
+.will-month-calendar.is-expanded .will-calendar-day.is-other-month.is-selected { background: var(--will-soft); }
 .will-month-calendar.is-expanded .will-date-number { align-self: flex-start; }
+.will-month-calendar.is-expanded .will-calendar-day.is-today .will-date-number { background: var(--will-primary); color: var(--will-bg); border-radius: var(--will-radius-control); padding: 1px 5px; text-decoration: none; }
 .will-calendar-entries { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-.will-calendar-entry { padding: 4px 5px; font-size: 10px; line-height: 1.4; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.will-calendar-entry { display: flex; flex-direction: column; padding: 2px 4px; font-size: 11px; line-height: 1.5; border-radius: 0; border-left: 2px solid var(--will-status-color); overflow: hidden; text-align: left; }
+.will-calendar-entry-meta, .will-calendar-entry-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.will-calendar-entry-meta { font-size: 10px; }
 .will-calendar-entry.is-done { text-decoration: line-through; }
-.will-calendar-more { font-size: 10px; text-align: left; color: var(--will-muted); }
+.will-calendar-more { position: absolute; top: 8px; right: 5px; font-size: 12px; line-height: 18px; color: var(--will-muted); }
+.will-calendar-count { display: none; font-size: 11px; color: var(--will-muted); }
 @media (max-width: 600px) {
-  .will-month-calendar.is-expanded .will-month-grid { gap: 3px; }
-  .will-month-calendar.is-expanded .will-calendar-day { min-height: 80px; padding: 5px 2px; }
-  .will-calendar-entry { padding: 3px 2px; font-size: 9px; }
+  .will-month-calendar.is-expanded .will-calendar-day { height: 62px; min-height: 62px; padding: 6px 2px; align-items: center; gap: 7px; }
+  .will-month-calendar.is-expanded .will-date-number { align-self: center; }
+  .will-month-calendar.is-expanded .will-month-toolbar strong { font-size: 16px; }
+  .will-calendar-entries { display: none; }
+  .will-calendar-count { display: block; }
   .will-month-toolbar .ant-btn { padding-inline: 6px; }
 }

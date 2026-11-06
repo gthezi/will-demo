@@ -72,7 +72,8 @@ export function ShellPages({
         </div>
         <section className="will-agenda" aria-labelledby="agenda-heading">
           <div className="will-agenda-heading">
-            <h2 id="agenda-heading">{dayjs(selectedDate).format('YYYY年M月D日')}</h2>
+            <div><h2 id="agenda-heading">{dayjs(selectedDate).format('YYYY年M月D日')}</h2>
+              <span className="will-agenda-count">{items.filter(item => item.date === selectedDate).length} 项安排 · {dayjs(selectedDate).format('ddd')}</span></div>
             <Button type="text" icon={<PlusOutlined />} aria-label="在这一天添加" onClick={() => onManualAdd(selectedDate)} disabled={noActiveProjects} />
           </div>
           <ScheduleList items={items.filter(item => item.date === selectedDate)} projects={data.projects} onToggleTask={onToggleTask} onEdit={onEdit} onOpenProject={id => onOpenProject(id, 'tasks')} emptyText="这一天还没有安排" />

@@ -37,6 +37,7 @@ export function SettingsPage({
       </section>
       <section className="will-settings-section">
         <h2>显示主题</h2>
+        <p>选择日间、夜间或跟随系统。更改后立即生效。</p>
         <ThemeSwitcher value={themeMode} onChange={onThemeChange} />
       </section>
       <section className="will-settings-section">
@@ -52,9 +53,14 @@ export function SettingsPage({
       </section>
       <section className="will-settings-section">
         <h2>本地数据</h2>
-        <p>安排保存在{storageLocation}，不会同步到其他设备。示例数据会替换当前安排与项目。</p>
+        <p>安排与 AI 会话保存在{storageLocation}，不会同步到其他设备。</p>
+        <p>示例数据会替换当前安排与项目。</p>
         <div className="will-settings-actions">
           <Button icon={<ReloadOutlined />} aria-label="载入示例数据" onClick={onLoadDemo}>载入示例数据</Button>
+        </div>
+        <div className="will-settings-danger">
+          <h3>清空日程与待办</h3>
+          <p>仅删除安排；项目、AI 会话与草案、显示名称和主题设置会保留。</p>
           <Button danger icon={<DeleteOutlined />} aria-label="清空安排" onClick={onClear}>清空安排</Button>
         </div>
       </section>
