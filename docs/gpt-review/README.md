@@ -1,5 +1,7 @@
 # Will 页面与交互讨论入口
 
+> **历史资料入口（状态更新于 2026-11-06）**：本页最初用于 11 月 5 日视觉方案评审，下面的“当前 React 试用版”“待审阅”“44 项测试”等按**当时**理解。其后 P0 [PR #1](https://github.com/gthezi/will-demo/pull/1)、P1 [PR #2](https://github.com/gthezi/will-demo/pull/2) 已通过设计审阅，Windows Electron 展示版 [PR #3](https://github.com/gthezi/will-demo/pull/3) 已通过基于源码与提交证据的功能验收；均仍为 Draft、未覆盖 `main`。请先看 [项目记忆](../PROJECT_MEMORY.md) 与 [最新桌面展示验收](../demo-acceptance/2026-11-07/README.md)，再使用以下截图与旧设计说明做历史对照。
+
 这是一份供产品与设计讨论使用的版本快照，整理于 2026 年 11 月 5 日。
 请先看页面与交互，再根据问题查阅源码。当前阶段主要评估信息组织、视觉和操作体验。
 
