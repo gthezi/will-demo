@@ -85,6 +85,14 @@ async function main() {
             const dateOnly = agenda.locator('.will-schedule-row').filter({ hasText: '密集事项 1' })
             assert.equal(await dateOnly.locator('time').getAttribute('datetime'), '2026-11-07')
             if (phase === 'after') {
+              const dayHeights = await page.locator('.will-month-calendar.is-expanded .will-calendar-day').evaluateAll(days => days.map(day => day.getBoundingClientRect().height))
+              assert.equal(new Set(dayHeights).size, 1, 'dense days must not resize the calendar rows')
+              row.calendarDayHeight = dayHeights[0]
+              const clippedEntries = await page.locator('.will-month-calendar.is-expanded .will-calendar-entry').evaluateAll(entries => entries.filter(entry => {
+                const rect = entry.getBoundingClientRect()
+                return rect.height && rect.bottom > entry.closest('button').getBoundingClientRect().bottom - 2
+              }).length)
+              assert.equal(clippedEntries, 0, 'calendar previews must fit inside fixed cells')
               const contrasts = await page.evaluate(() => {
                 const canvas = document.createElement('canvas')
                 const ctx = canvas.getContext('2d')

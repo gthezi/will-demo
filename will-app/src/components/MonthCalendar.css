@@ -27,7 +27,7 @@
 .will-month-calendar.is-expanded .will-month-toolbar strong { font-size: 18px; font-weight: 600; }
 .will-month-calendar.is-expanded .will-month-grid { gap: 0; border-bottom: 1px solid var(--will-divider); }
 .will-month-calendar.is-expanded .will-weekday { padding-block: 12px; font-size: 12px; }
-.will-month-calendar.is-expanded .will-calendar-day { min-height: 116px; justify-content: flex-start; align-items: stretch; border-radius: 0; border-top-color: var(--will-divider); padding: 8px 5px; }
+.will-month-calendar.is-expanded .will-calendar-day { height: 124px; min-height: 124px; justify-content: flex-start; align-items: stretch; border-radius: 0; border-top-color: var(--will-divider); padding: 8px 5px; overflow: hidden; }
 .will-month-calendar.is-expanded .will-calendar-day:hover { background: var(--will-soft-subtle); }
 .will-month-calendar.is-expanded .will-calendar-day.is-selected { background: var(--will-soft); border-color: var(--will-primary); }
 .will-month-calendar.is-expanded .will-calendar-day.is-other-month { background: var(--will-soft-subtle); }
@@ -39,10 +39,10 @@
 .will-calendar-entry-meta, .will-calendar-entry-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .will-calendar-entry-meta { font-size: 10px; }
 .will-calendar-entry.is-done { text-decoration: line-through; }
-.will-calendar-more { font-size: 12px; text-align: left; color: var(--will-muted); }
+.will-calendar-more { position: absolute; top: 8px; right: 5px; font-size: 12px; line-height: 18px; color: var(--will-muted); }
 .will-calendar-count { display: none; font-size: 11px; color: var(--will-muted); }
 @media (max-width: 600px) {
-  .will-month-calendar.is-expanded .will-calendar-day { min-height: 62px; padding: 6px 2px; align-items: center; gap: 7px; }
+  .will-month-calendar.is-expanded .will-calendar-day { height: 62px; min-height: 62px; padding: 6px 2px; align-items: center; gap: 7px; }
   .will-month-calendar.is-expanded .will-date-number { align-self: center; }
   .will-month-calendar.is-expanded .will-month-toolbar strong { font-size: 16px; }
   .will-calendar-entries { display: none; }

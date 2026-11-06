@@ -6,7 +6,7 @@
 
 - V1：[Draft PR #12](https://github.com/gthezi/will-demo/pull/12)，分支 `codex/will-visual-v1-20261107`，启动时 fetch 确认 HEAD 为 `d8375dec03c4d5e91f565f8fb6a5dce80db3775c`。
 - V2：独立 worktree `Will-visual-v2`，分支 `codex/will-visual-v2-20261107`，从该 V1 HEAD 派生。V2 PR 的 base 为 V1 分支，依赖 V1 先合并或重定基线。
-- 实现提交为 `5065a85`；后续提交仅增加测试、设计规范与验收证据。
+- 主要实现提交为 `5065a85`；截图验收后补充了固定月历行高与对应断言，避免密集事项造成网格变化。
 - W2 业务基线仍为 `29f9e45`。未修改领域模型、业务 Hook、AI Schema、存储键、确认检查点或幂等写入机制；没有新增依赖。
 
 | 页面 | V2 变化 |
