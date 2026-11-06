@@ -11,6 +11,8 @@
     "test": "node --test tests/*.test.mjs",
     "test:w1:browser": "node tests/w1.browser.cjs",
     "test:w1:desktop": "node tests/w1.desktop.cjs",
+    "test:w2:browser": "node tests/w2.browser.cjs",
+    "test:w2:desktop": "node tests/w2.desktop.cjs",
     "preview": "vite preview",
     "desktop:dev": "node scripts/desktop-dev.mjs",
     "desktop:build": "tsc -b && vite build --mode desktop",

@@ -9,6 +9,7 @@ dayjs.extend(customParseFormat)
 export const SCHEDULE_STORAGE_KEY = 'will-react-schedule-v01'
 export const WORKBENCH_STORAGE_KEY = 'will-workbench-schedule-v03'
 export type ItemKind = 'event' | 'task'
+export type AISource = { conversationId: string; batchId: string; messageId: string; input: string }
 
 export type ArrangementDraft = {
   id: string
@@ -21,6 +22,7 @@ export type ArrangementDraft = {
   duration: number
   description?: string
   status?: TaskStatus
+  source?: AISource
 }
 
 type BaseItem = {
@@ -28,6 +30,7 @@ type BaseItem = {
   title: string
   time: string
   projectId: ProjectId
+  source?: AISource
 }
 export type TaskStatus = 'todo' | 'in_progress' | 'done'
 export type Task = Omit<BaseItem, 'time'> & {
@@ -51,6 +54,7 @@ export type DisplayItem = {
   taskStatus?: TaskStatus
   duration?: number
   remind?: number
+  source?: AISource
 }
 
 export function allScheduleItems(data: ScheduleData): DisplayItem[] {
@@ -81,12 +85,19 @@ export function validTime(value: unknown): value is string {
   return typeof value === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(value)
 }
 
+function validSource(source: unknown) {
+  if (source === undefined) return true
+  if (!source || typeof source !== 'object') return false
+  const value = source as Record<string, unknown>
+  return ['conversationId', 'batchId', 'messageId', 'input'].every(key => typeof value[key] === 'string' && !!value[key])
+}
+
 function validBase(item: unknown): item is BaseItem {
   if (!item || typeof item !== 'object') return false
   const value = item as Record<string, unknown>
   return typeof value.id === 'string' && !!value.id.trim()
     && typeof value.title === 'string' && !!value.title.trim() && value.title.length <= 80
-    && validTime(value.time) && validProjectId(value.projectId)
+    && validTime(value.time) && validProjectId(value.projectId) && validSource(value.source)
 }
 
 function validEvent(item: unknown): item is CalendarEvent {
@@ -111,6 +122,7 @@ function validTask(item: unknown): item is Task {
     && (value.done === undefined || typeof value.done === 'boolean')
     && (value.description === undefined || typeof value.description === 'string')
     && (value.archived === undefined || typeof value.archived === 'boolean')
+    && validSource(value.source)
 }
 
 export function decodeSchedule(text: string): ScheduleData {
@@ -145,6 +157,8 @@ export function validateDraft(draft: ArrangementDraft) {
       || (draft.time !== '' && !validTime(draft.time)) || (!draft.date && draft.time)))) {
     throw new Error('请检查草案的标题、日期、时间和时长')
   }
+  if (draft.status !== undefined && !['todo', 'in_progress', 'done'].includes(draft.status))
+    throw new Error('任务状态无效。')
 }
 
 export function getArrangementDraft(data: ScheduleData, id: string): ArrangementDraft {
@@ -156,6 +170,7 @@ export function getArrangementDraft(data: ScheduleData, id: string): Arrangement
       id: task.id, kind: 'task', title: task.title, date: task.due ?? '', time: task.time ?? '',
       projectId: task.projectId, duration: 60, remind: 0,
       description: task.description ?? '', status: taskStatus(task),
+      ...(task.source ? { source: task.source } : {}),
     }
   }
   throw new Error('事项已不存在，请关闭后重新选择。')
@@ -170,7 +185,7 @@ export function updateArrangement(data: ScheduleData, draft: ArrangementDraft): 
     events: data.events.filter(item => item.id !== draft.id),
     tasks: data.tasks.filter(item => item.id !== draft.id),
   }
-  const next = appendDrafts(remaining, [draft], previous.projectId)
+  const next = appendDrafts(remaining, [{ ...draft, ...(previous.source ? { source: previous.source } : {}) }], previous.projectId)
   if (draft.kind === 'task' && previousTask) {
     const task = next.tasks.find(item => item.id === draft.id)!
     task.status = draft.status ?? taskStatus(previousTask)
@@ -230,12 +245,14 @@ function appendDrafts(data: ScheduleData, drafts: ArrangementDraft[], retainedPr
     if (existingIds.has(draft.id)) continue
     const base = {
       id: draft.id, title: draft.title.trim(), time: draft.time, projectId: draft.projectId,
+      ...(draft.source ? { source: draft.source } : {}),
     }
     if (draft.kind === 'event') {
       next.events.push({ ...base, date: draft.date, duration: draft.duration, remind: draft.remind })
     } else {
       next.tasks.push({
         id: base.id, title: base.title, projectId: base.projectId,
+        ...(base.source ? { source: base.source } : {}),
         ...(draft.date ? { due: draft.date } : {}), ...(draft.time ? { time: draft.time } : {}),
         ...(draft.description ? { description: draft.description.trim() } : {}),
         status: draft.status ?? 'todo', done: draft.status === 'done',

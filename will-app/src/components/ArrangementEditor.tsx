@@ -15,9 +15,10 @@ type ArrangementEditorProps = {
   onSave: (draft: ArrangementDraft, mode: EditorMode) => boolean
   onDelete: (id: string) => boolean
   projects: Project[]
+  onViewSource?: (conversationId: string) => void
 }
 
-export function ArrangementEditor({ initial, mode, onClose, onSave, onDelete, projects }: ArrangementEditorProps) {
+export function ArrangementEditor({ initial, mode, onClose, onSave, onDelete, projects, onViewSource }: ArrangementEditorProps) {
   const [form] = Form.useForm<ArrangementFormValue>()
   const kind = Form.useWatch('kind', form) ?? initial.kind
   const [error, setError] = useState('')
@@ -83,6 +84,10 @@ export function ArrangementEditor({ initial, mode, onClose, onSave, onDelete, pr
       }
     >
       {error && <Alert className="arrangement-editor-error" type="error" showIcon title={error} role="alert" />}
+      {initial.source && <details className="ai-original"><summary>AI 输入来源</summary>
+        <blockquote className="assistant-source">{initial.source.input}</blockquote>
+        <Button type="link" onClick={() => onViewSource?.(initial.source!.conversationId)}>查看来源会话</Button>
+      </details>}
       <Form
         form={form} name="arrangement-editor" layout="vertical"
         initialValues={toArrangementForm(initial)} onFinish={save}

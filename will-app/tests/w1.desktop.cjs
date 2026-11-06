@@ -5,7 +5,7 @@ const path = require('node:path')
 const { _electron } = require(process.env.WILL_PLAYWRIGHT_MODULE || 'playwright')
 
 const root = path.resolve(__dirname, '..')
-const output = path.resolve(root, '../docs/w1-acceptance')
+const output = path.resolve(process.env.WILL_EVIDENCE_DIR || path.resolve(root, '../docs/w1-acceptance'))
 const executablePath = process.env.WILL_DESKTOP_EXE || require('electron')
 const errors = []
 let profile

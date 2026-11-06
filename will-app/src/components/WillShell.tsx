@@ -9,7 +9,7 @@ import type { ReactNode } from 'react'
 import { themeLabels, type ThemeMode } from '../theme'
 
 const pageTitles = {
-  home: '我的工作台', calendar: '日历安排', projects: '项目与待办', settings: '个人设置',
+  home: '我的工作台', calendar: '日历安排', projects: '项目与待办', settings: '个人设置', ai: 'AI 工作区',
 }
 export type PageKey = keyof typeof pageTitles
 
@@ -31,6 +31,7 @@ const navigation = [
   { key: 'home', icon: <HomeOutlined />, label: '今天' },
   { key: 'calendar', icon: <CalendarOutlined />, label: '日历' },
   { key: 'projects', icon: <CheckSquareOutlined />, label: '项目' },
+  { key: 'ai', icon: <ThunderboltOutlined />, label: 'AI 工作区' },
   { key: 'settings', icon: <SettingOutlined />, label: '设置' },
 ] as const
 const themeIcons = { light: <SunOutlined />, night: <MoonOutlined />, system: <DesktopOutlined /> }

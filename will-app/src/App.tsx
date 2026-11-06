@@ -1,7 +1,7 @@
 import { Alert, App as AntApp, Button, ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AssistantDrawer } from './components/AssistantDrawer'
 import { ArrangementEditor, type EditorMode } from './components/ArrangementEditor'
 import { WillShell } from './components/WillShell'
@@ -16,6 +16,8 @@ import { defaultProjectId } from './domain/projects'
 import { createDemoSchedule } from './domain/demo'
 import { useWorkbenchRoute } from './hooks/useWorkbenchRoute'
 import { validDate } from './domain/schedule'
+import { useAIWorkspace } from './hooks/useAIWorkspace'
+import { AIWorkspacePage } from './pages/AIWorkspacePage'
 import './App.css'
 
 const PROFILE_KEY = 'will-prototype-name-v01'
@@ -31,18 +33,33 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
   const [username, setUsername] = useState(loadName)
   const { route, navigate, recentProjectId } = useWorkbenchRoute()
   const activePage = route.page
-  const setActivePage = (page: PageKey) => navigate({ page })
+  const setActivePage = (page: PageKey) => { ai.cancel(); navigate({ page, ...(page === 'ai' && ai.active ? { conversationId: ai.active.id } : {}) }) }
   const openProject = (projectId: string, tab = 'overview') => navigate({ page: 'projects', projectId, tab })
   const [assistantOpen, setAssistantOpen] = useState(false)
-  const [assistantProjectId, setAssistantProjectId] = useState<string | undefined>()
   const [selectedDate, setSelectedDate] = useState(() => dayjs().format('YYYY-MM-DD'))
   const [editor, setEditor] = useState<{ mode: EditorMode; draft: ArrangementDraft } | null>(null)
   const { upcomingDays, setUpcomingDays, rangeStorageWarning } = useUpcomingDays()
   const {
-    data, storageWarning, recoveryAvailable, recoverCorruptData, confirmDrafts, toggleTask, updateItem, deleteItem,
+    data, getSchedule, storageWarning, recoveryAvailable, recoverCorruptData, confirmDrafts, toggleTask, updateItem, deleteItem,
     createProject, updateProjectName, archiveProject, replaceSchedule, updateTaskStatus, updateProjectViews,
   } = useSchedule()
-  const openAssistant = () => { setAssistantProjectId(route.projectId); setAssistantOpen(true) }
+  const ai = useAIWorkspace(getSchedule, confirmDrafts)
+  const appliedAIRoute = useRef('')
+  useEffect(() => {
+    const key = `${route.page}/${route.conversationId ?? ''}`
+    if (appliedAIRoute.current === key) return
+    appliedAIRoute.current = key
+    if (route.page === 'ai' && route.conversationId) {
+      if (!ai.select(route.conversationId)) void message.warning('未找到此会话，原始安排保持不变。')
+    }
+  }, [route.page, route.conversationId, ai, message])
+  const openAssistant = () => {
+    if (route.page !== 'ai' || !ai.active) ai.openForProject(route.projectId)
+    setAssistantOpen(true)
+  }
+  const selectConversation = (id: string) => { ai.select(id); navigate({ page: 'ai', conversationId: id }) }
+  const aiProject = (id: string) => { ai.cancel(); setAssistantOpen(false); openProject(id, 'tasks') }
+  const aiCalendar = (date: string) => { ai.cancel(); setAssistantOpen(false); showCalendar(date) }
   const showCalendar = (date: string) => { setSelectedDate(date); navigate({ page: 'calendar', date }) }
 
   const saveName = (name: string) => {
@@ -119,7 +136,8 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
               },
             })}>从旧数据恢复</Button> : undefined} />}
           {rangeStorageWarning && <Alert className="will-storage-warning" type="warning" showIcon title={rangeStorageWarning} role="alert" />}
-          <ShellPages
+          {activePage === 'ai' ? !assistantOpen && <AIWorkspacePage ai={ai} data={data} onSelect={selectConversation}
+            onViewProject={aiProject} onViewCalendar={aiCalendar} /> : <ShellPages
             page={activePage} themeMode={themeMode} onThemeChange={setThemeMode}
             upcomingDays={upcomingDays} onUpcomingDaysChange={setUpcomingDays}
             data={data} selectedDate={validDate(route.date) ? route.date : selectedDate} onDateChange={showCalendar}
@@ -134,26 +152,24 @@ function WillExperience({ themeMode, setThemeMode }: ReturnType<typeof useThemeM
             onCreateProject={(id, name, template, description) => createProject(id, name, template, description)} onRenameProject={updateProjectName} onArchiveProject={archiveProject}
             onNavigate={setActivePage} onLoadDemo={loadDemo} onClear={clearSchedule}
             username={username} onSaveName={saveName}
-          />
+          />}
         </WillShell>
         <AssistantDrawer
-          open={assistantOpen} onClose={() => setAssistantOpen(false)} onConfirm={confirmDrafts}
-          projects={data.projects} contextProjectId={assistantProjectId}
-          onViewCalendar={date => {
-            setSelectedDate(date)
-            setActivePage('calendar')
+          open={assistantOpen} onClose={() => setAssistantOpen(false)} ai={ai} data={data}
+          onViewCalendar={aiCalendar} onViewProject={aiProject}
+          onExpand={() => {
             setAssistantOpen(false)
-          }}
-          onViewProjects={() => {
-            if (assistantProjectId) openProject(assistantProjectId, 'tasks')
-            else setActivePage('projects')
-            setAssistantOpen(false)
+            if (ai.active) navigate({ page: 'ai', conversationId: ai.active.id })
           }}
         />
         {editor && (
           <ArrangementEditor
             key={editor.draft.id} initial={editor.draft} mode={editor.mode}
             projects={data.projects}
+            onViewSource={conversationId => {
+              if (ai.select(conversationId)) { setEditor(null); navigate({ page: 'ai', conversationId }) }
+              else void message.warning('原会话不可用；此安排仍保留原始输入。')
+            }}
             onClose={() => setEditor(null)} onSave={saveItem}
             onDelete={id => {
               const persisted = deleteItem(id)
