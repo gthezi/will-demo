@@ -23,17 +23,17 @@
 .will-calendar-dots { display: flex; height: 4px; gap: 3px; }
 .will-calendar-dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--will-primary); }
 .will-calendar-dots i.task { background: var(--will-muted); border-radius: 1px; }
-.is-expanded .will-month-grid { gap: 8px; }
-.is-expanded .will-calendar-day { min-height: 106px; justify-content: flex-start; align-items: stretch; border-color: var(--will-border); background: var(--will-soft-subtle); padding: 9px; }
-.is-expanded .will-calendar-day.is-selected { background: var(--will-soft); border-color: var(--will-primary); }
-.is-expanded .will-date-number { align-self: flex-start; }
+.will-month-calendar.is-expanded .will-month-grid { gap: 8px; }
+.will-month-calendar.is-expanded .will-calendar-day { min-height: 106px; justify-content: flex-start; align-items: stretch; border-color: var(--will-border); background: var(--will-soft-subtle); padding: 9px; }
+.will-month-calendar.is-expanded .will-calendar-day.is-selected { background: var(--will-soft); border-color: var(--will-primary); }
+.will-month-calendar.is-expanded .will-date-number { align-self: flex-start; }
 .will-calendar-entries { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .will-calendar-entry { padding: 4px 5px; font-size: 10px; line-height: 1.4; border-radius: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
 .will-calendar-entry.is-done { text-decoration: line-through; }
 .will-calendar-more { font-size: 10px; text-align: left; color: var(--will-muted); }
 @media (max-width: 600px) {
-  .is-expanded .will-month-grid { gap: 3px; }
-  .is-expanded .will-calendar-day { min-height: 80px; padding: 5px 2px; }
+  .will-month-calendar.is-expanded .will-month-grid { gap: 3px; }
+  .will-month-calendar.is-expanded .will-calendar-day { min-height: 80px; padding: 5px 2px; }
   .will-calendar-entry { padding: 3px 2px; font-size: 9px; }
   .will-month-toolbar .ant-btn { padding-inline: 6px; }
 }

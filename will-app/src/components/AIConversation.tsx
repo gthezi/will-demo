@@ -1,5 +1,6 @@
-import { CalendarOutlined, CheckSquareOutlined, FileTextOutlined, PartitionOutlined, SendOutlined, StopOutlined, SaveOutlined } from '@ant-design/icons'
-import { Alert, Button, Empty, Input, Select, Spin, Tag } from 'antd'
+import { CalendarOutlined, CheckSquareOutlined, FileTextOutlined, PartitionOutlined, SendOutlined, StopOutlined, SaveOutlined, ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons'
+import { Alert, Button, Input, Select, Spin } from 'antd'
+import { useEffect, useRef } from 'react'
 import type { AIWorkspace } from '../hooks/useAIWorkspace'
 import type { ScheduleData } from '../domain/schedule'
 import { shortcutPrompts } from '../services/aiService'
@@ -12,10 +13,27 @@ export function AIConversation({ ai, data, compact = false, onViewProject, onVie
   const pending = c?.batches.filter(b => ['pending', 'staged', 'confirming'].includes(b.status)) ?? []
   const processing = !!ai.processingId
   const project = data.projects.find(p => p.id === c?.contextProjectId)
+  const review = useRef<HTMLElement>(null)
+  const composer = useRef<HTMLDivElement>(null)
+  const newestId = pending.at(-1)?.id
+  const previousId = useRef(newestId)
+  const revealReview = (focus = false) => {
+    const target = review.current?.querySelector<HTMLElement>('.ai-review-batch:last-child .ai-section-heading')
+    target?.scrollIntoView({ block: 'start' })
+    if (focus) target?.focus({ preventScroll: true })
+  }
+  useEffect(() => {
+    if (newestId && newestId !== previousId.current) {
+      const frame = requestAnimationFrame(() => revealReview())
+      previousId.current = newestId
+      return () => cancelAnimationFrame(frame)
+    }
+    previousId.current = newestId
+  }, [newestId])
   return <div className={`ai-conversation${compact ? ' is-compact' : ''}${pending.length ? ' has-review' : ''}`}>
     <div className="ai-conversation-main">
       <div className="ai-context">
-        <Tag color="gold">本地规则模拟</Tag>
+        <span className="ai-mock-label">本地规则模拟</span>
         <Select aria-label="会话参考范围" value={c?.contextProjectId ?? ''} disabled={processing}
           options={[{ value: '', label: '全局 · 未关联项目' }, ...data.projects.map(p => ({ value: p.id, label: `参考：${p.name}${p.archived ? '（已归档）' : ''}`, disabled: p.archived }))]}
           onChange={id => {
@@ -36,13 +54,12 @@ export function AIConversation({ ai, data, compact = false, onViewProject, onVie
         {!c?.messages.length && <div className="ai-empty">
           <h2>从一条通知，或一个目标开始</h2>
           <p>本地规则整理与固定步骤建议，确认后才会写入项目。</p>
-          {!compact && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={false} />}
         </div>}
         {c?.messages.map(m => <article className={`ai-message is-${m.role}`} key={m.id}>
           <div className="ai-message-role">{m.role === 'user' ? '你' : 'Will · 本地模拟'}</div><p>{m.text}</p>
         </article>)}
         {c?.batches.filter(b => b.status === 'confirmed').map(b => <section className="ai-confirmed" key={b.id} data-batch-id={b.id}>
-          <h3>已添加 {b.proposals.length} 项安排</h3><Tag color="green">已确认</Tag><p>同一批次不会重复添加。原始输入保留在会话中。</p>
+          <h3>已添加 {b.proposals.length} 项安排</h3><p>已确认 · 原始输入保留在会话中</p>
           <div className="ai-confirmed-links">
             {[...new Set(b.proposals.map(p => p.projectId))].map(id => <Button key={id} icon={<CheckSquareOutlined />} aria-label={`查看项目：${data.projects.find(p => p.id === id)?.name || id}`} onClick={() => onViewProject(id)}>查看项目：{data.projects.find(p => p.id === id)?.name || id}</Button>)}
             {b.proposals.find(p => p.date) && <Button icon={<CalendarOutlined />} aria-label="查看日历" onClick={() => onViewCalendar(b.proposals.find(p => p.date)!.date)}>查看日历</Button>}
@@ -50,7 +67,10 @@ export function AIConversation({ ai, data, compact = false, onViewProject, onVie
         </section>)}
         {c?.batches.some(b => b.status === 'discarded') && <p className="ai-muted">已取消的草案保留原始对话，未写入安排。</p>}
       </div>
-      <div className="ai-composer">
+      {pending.length > 0 && <Button className="ai-review-jump" icon={<ArrowDownOutlined />} onClick={() => revealReview(true)}>
+        审阅 {pending.reduce((total, b) => total + b.proposals.length, 0)} 项草案 · {pending.length} 个批次
+      </Button>}
+      <div className="ai-composer" ref={composer}>
         <div className="ai-shortcuts">
           <Button icon={<FileTextOutlined />} aria-label="整理通知" disabled={processing} onClick={() => ai.setInput(shortcutPrompts.notice)}>整理通知</Button>
           <Button icon={<PartitionOutlined />} aria-label="拆解任务" disabled={processing} onClick={() => ai.setInput(shortcutPrompts.breakdown)}>拆解任务</Button>
@@ -69,7 +89,13 @@ export function AIConversation({ ai, data, compact = false, onViewProject, onVie
         {processing && <div role="status" className="assistant-loading"><Spin size="small" />正在整理…</div>}
       </div>
     </div>
-    {pending.length > 0 && <aside className="ai-review" aria-label="结果审阅">
+    {pending.length > 0 && <aside className="ai-review" aria-label="结果审阅" ref={review}>
+      <div className="ai-review-toolbar"><span>草案审阅 · {pending.length} 个批次</span>
+        <Button type="text" size="small" icon={<ArrowUpOutlined />} onClick={() => {
+          composer.current?.scrollIntoView({ block: 'center' })
+          composer.current?.querySelector('textarea')?.focus({ preventScroll: true })
+        }}>返回输入</Button>
+      </div>
       {pending.map(b => <AIDraftReview key={b.id} batch={b} projects={data.projects} ai={ai} />)}
     </aside>}
   </div>

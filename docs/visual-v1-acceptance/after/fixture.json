@@ -1,0 +1,395 @@
+{
+  "ai": {
+    "version": 1,
+    "conversations": [
+      {
+        "id": "f4c4dc56-253c-4293-ae76-700f095d8244",
+        "title": "拆解任务：完成课程论文并与导师核对研究方法和所有参考文献",
+        "contextProjectId": "course",
+        "input": "",
+        "messages": [
+          {
+            "id": "4426a088-c4c2-45b6-90d8-74b7d729e14c",
+            "role": "user",
+            "text": "拆解任务：完成课程论文并与导师核对研究方法和所有参考文献",
+            "createdAt": "2026-11-07T01:00:02.059Z"
+          },
+          {
+            "id": "0e22c0cd-82c4-4a78-bb29-63d118cb44c9",
+            "role": "assistant",
+            "text": "参考「课程与学习」现有 0 项任务、0 项日程。按本地固定步骤给出 3 项起草建议，尚未写入项目。未推断截止日期，请按实际情况核对。",
+            "createdAt": "2026-11-07T01:00:02.367Z"
+          }
+        ],
+        "batches": [
+          {
+            "id": "visual-batch-0",
+            "messageId": "4426a088-c4c2-45b6-90d8-74b7d729e14c",
+            "source": "拆解任务：完成课程论文并与导师核对研究方法和所有参考文献",
+            "createdAt": "2026-11-07T01:00:02.059Z",
+            "status": "staged",
+            "proposals": [
+              {
+                "id": "visual-proposal-0-0",
+                "kind": "task",
+                "title": "1. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-1",
+                "kind": "task",
+                "title": "2. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-2",
+                "kind": "task",
+                "title": "3. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-3",
+                "kind": "task",
+                "title": "4. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-4",
+                "kind": "task",
+                "title": "5. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-5",
+                "kind": "task",
+                "title": "6. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-6",
+                "kind": "task",
+                "title": "7. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-7",
+                "kind": "task",
+                "title": "8. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-8",
+                "kind": "task",
+                "title": "9. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-9",
+                "kind": "task",
+                "title": "10. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-10",
+                "kind": "task",
+                "title": "11. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-0-11",
+                "kind": "task",
+                "title": "12. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              }
+            ],
+            "notes": [
+              "此为固定步骤模板，不是模型推理。可修改、移除并自行设置截止日期。"
+            ]
+          },
+          {
+            "id": "visual-batch-1",
+            "messageId": "4426a088-c4c2-45b6-90d8-74b7d729e14c",
+            "source": "拆解任务：完成课程论文并与导师核对研究方法和所有参考文献",
+            "createdAt": "2026-11-07T01:00:02.059Z",
+            "status": "staged",
+            "proposals": [
+              {
+                "id": "visual-proposal-1-0",
+                "kind": "task",
+                "title": "1. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-1-1",
+                "kind": "task",
+                "title": "2. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              },
+              {
+                "id": "visual-proposal-1-2",
+                "kind": "task",
+                "title": "3. 完成课程论文：核对研究方法、访谈记录与参考文献，整理导师反馈并形成可复核的修订清单",
+                "date": "",
+                "time": "",
+                "projectId": "course",
+                "status": "todo",
+                "duration": 60,
+                "remind": 0,
+                "description": "原目标：完成课程论文并与导师核对研究方法和所有参考文献"
+              }
+            ],
+            "notes": [
+              "此为固定步骤模板，不是模型推理。可修改、移除并自行设置截止日期。"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-07T01:00:02.367Z"
+      }
+    ],
+    "activeId": "f4c4dc56-253c-4293-ae76-700f095d8244"
+  },
+  "schedule": {
+    "version": 3,
+    "projects": [
+      {
+        "id": "will",
+        "name": "Will 开发",
+        "archived": false
+      },
+      {
+        "id": "course",
+        "name": "课程与学习",
+        "archived": false
+      },
+      {
+        "id": "personal",
+        "name": "个人事务",
+        "archived": false
+      }
+    ],
+    "tasks": [
+      {
+        "id": "visual-task-0",
+        "title": "整理导师反馈与参考文献，完成研究问题和实验方案的首轮修订",
+        "projectId": "course",
+        "status": "todo",
+        "done": false
+      },
+      {
+        "id": "visual-task-1",
+        "title": "课程论文 · 第 2 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false,
+        "due": "2026-11-08"
+      },
+      {
+        "id": "visual-task-2",
+        "title": "课程论文 · 第 3 项工作",
+        "projectId": "course",
+        "status": "in_progress",
+        "done": false,
+        "due": "2026-11-09",
+        "time": "17:00"
+      },
+      {
+        "id": "visual-task-3",
+        "title": "课程论文 · 第 4 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false
+      },
+      {
+        "id": "visual-task-4",
+        "title": "课程论文 · 第 5 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false,
+        "due": "2026-11-11"
+      },
+      {
+        "id": "visual-task-5",
+        "title": "课程论文 · 第 6 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false,
+        "due": "2026-11-07",
+        "time": "17:00"
+      },
+      {
+        "id": "visual-task-6",
+        "title": "课程论文 · 第 7 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false
+      },
+      {
+        "id": "visual-task-7",
+        "title": "课程论文 · 第 8 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false,
+        "due": "2026-11-09"
+      },
+      {
+        "id": "visual-task-8",
+        "title": "课程论文 · 第 9 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false,
+        "due": "2026-11-10",
+        "time": "17:00"
+      },
+      {
+        "id": "visual-task-9",
+        "title": "课程论文 · 第 10 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false
+      },
+      {
+        "id": "visual-task-10",
+        "title": "课程论文 · 第 11 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false,
+        "due": "2026-11-07"
+      },
+      {
+        "id": "visual-task-11",
+        "title": "课程论文 · 第 12 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false,
+        "due": "2026-11-08",
+        "time": "17:00"
+      },
+      {
+        "id": "visual-task-12",
+        "title": "课程论文 · 第 13 项工作",
+        "projectId": "course",
+        "status": "todo",
+        "done": false
+      },
+      {
+        "id": "visual-task-13",
+        "title": "课程论文 · 第 14 项工作",
+        "projectId": "course",
+        "status": "done",
+        "done": true,
+        "due": "2026-11-10"
+      },
+      {
+        "id": "visual-task-14",
+        "title": "课程论文 · 第 15 项工作",
+        "projectId": "course",
+        "status": "done",
+        "done": true,
+        "due": "2026-11-11",
+        "time": "17:00"
+      },
+      {
+        "id": "visual-task-15",
+        "title": "课程论文 · 第 16 项工作",
+        "projectId": "course",
+        "status": "done",
+        "done": true
+      }
+    ],
+    "events": [
+      {
+        "id": "visual-event",
+        "title": "课程论文进度讨论",
+        "projectId": "course",
+        "date": "2026-11-07",
+        "time": "15:00",
+        "duration": 60,
+        "remind": 0
+      }
+    ]
+  }
+}

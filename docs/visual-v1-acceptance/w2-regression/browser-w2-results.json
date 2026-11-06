@@ -1,0 +1,118 @@
+{
+  "result": "PASS",
+  "testedAt": "2026-11-06T18:09:01.656Z",
+  "base": "http://127.0.0.1:4180/",
+  "browser": "156.0.8078.80",
+  "notice": {
+    "conversationId": "dbd018c4-20d1-44cd-abd7-14a77f9a00a6",
+    "taskId": "be180254-df43-47eb-951c-dec9dc490aef",
+    "eventId": "57000675-78d1-496b-a6d0-278f4d40b16a"
+  },
+  "staged": {
+    "conversationId": "ff52d0dd-91a4-4b53-ad28-f2f89935861c",
+    "batchId": "16ad0bc4-e9bf-412c-8e73-cc714cd6282b",
+    "proposals": [
+      {
+        "id": "ef916414-1cf9-4e8c-b883-4f1726ee073d",
+        "kind": "task",
+        "title": "先确定论文问题",
+        "date": "",
+        "time": "",
+        "projectId": "course",
+        "status": "todo",
+        "duration": 60,
+        "remind": 0,
+        "description": "原目标：完成课程论文"
+      },
+      {
+        "id": "4da56b0a-ae1d-4d1c-8645-2dc1fe1c6206",
+        "kind": "task",
+        "title": "完成第一版：完成课程论文",
+        "date": "",
+        "time": "",
+        "projectId": "course",
+        "status": "todo",
+        "duration": 60,
+        "remind": 0,
+        "description": "原目标：完成课程论文"
+      },
+      {
+        "id": "42a01ce9-6c10-4241-9632-35ec39a4fade",
+        "kind": "task",
+        "title": "检查并提交：完成课程论文",
+        "date": "",
+        "time": "",
+        "projectId": "course",
+        "status": "todo",
+        "duration": 60,
+        "remind": 0,
+        "description": "原目标：完成课程论文"
+      }
+    ]
+  },
+  "windows": [
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 720,
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "height": 768,
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 800,
+      "height": 600,
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1440,
+      "height": 900,
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1280,
+      "height": 720,
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1024,
+      "height": 768,
+      "overflow": false
+    },
+    {
+      "theme": "night",
+      "width": 800,
+      "height": 600,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "project notice edit/remove/confirm/calendar/source link",
+    "Drawer/workspace shared IDs",
+    "history switch and reload of staged undated drafts",
+    "context changes leave pending ownership intact",
+    "global target requested only at confirmation",
+    "live cancel and invalid-date retry",
+    "schedule write failure and retry with same IDs",
+    "receipt write failure and reload reconciliation",
+    "8 theme/size layouts and accessible Drawer",
+    "AI pre-write checkpoint failure leaves schedule unchanged",
+    "incomplete events blocked; date-only tasks remain date-only",
+    "archived target blocked without silent retarget"
+  ]
+}

@@ -1,0 +1,447 @@
+{
+  "phase": "after",
+  "base": "http://127.0.0.1:4180/",
+  "checks": [
+    "system theme updates without reload",
+    "reduced motion disables transitions",
+    "keyboard Enter stages edited last proposal",
+    "multi-batch form IDs are unique",
+    "5 successive global sessions select target and confirm successfully"
+  ],
+  "windows": [
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 5.191040474881723,
+        "primary": 7.493455934210334
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 797.71875,
+        "bottom": 833.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "reachable": {
+        "top": 797.71875,
+        "bottom": 833.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 797.71875,
+        "bottom": 833.71875,
+        "width": 139.484375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 852,
+        "bottom": 888,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 5.191040474881723,
+        "primary": 7.493455934210334
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 697.71875,
+        "bottom": 733.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "reachable": {
+        "top": 697.71875,
+        "bottom": 733.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 697.71875,
+        "bottom": 733.71875,
+        "width": 139.484375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 752,
+        "bottom": 788,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1024,
+      "height": 768,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 5.191040474881723,
+        "primary": 7.493455934210334
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 919.5625,
+        "bottom": 955.5625,
+        "width": 145.109375,
+        "inViewport": false,
+        "inScrollport": false,
+        "hit": false
+      },
+      "reachable": {
+        "top": 720,
+        "bottom": 756,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 720,
+        "bottom": 756,
+        "width": 139.484375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 720,
+        "bottom": 756,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 5.191040474881723,
+        "primary": 7.493455934210334
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 1084.078125,
+        "bottom": 1120.078125,
+        "width": 302,
+        "inViewport": false,
+        "inScrollport": false,
+        "hit": false
+      },
+      "reachable": {
+        "top": 796,
+        "bottom": 832,
+        "width": 302,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 796,
+        "bottom": 832,
+        "width": 302,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 796,
+        "bottom": 832,
+        "width": 358,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1440,
+      "height": 900,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 8.364924530226158,
+        "primary": 7.589328657795924
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 797.71875,
+        "bottom": 833.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "reachable": {
+        "top": 797.71875,
+        "bottom": 833.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 797.71875,
+        "bottom": 833.71875,
+        "width": 139.484375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 852,
+        "bottom": 888,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1280,
+      "height": 800,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 8.364924530226158,
+        "primary": 7.589328657795924
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 697.71875,
+        "bottom": 733.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "reachable": {
+        "top": 697.71875,
+        "bottom": 733.71875,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 697.71875,
+        "bottom": 733.71875,
+        "width": 139.484375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 752,
+        "bottom": 788,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    },
+    {
+      "theme": "night",
+      "width": 1024,
+      "height": 768,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 8.364924530226158,
+        "primary": 7.589328657795924
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 919.5625,
+        "bottom": 955.5625,
+        "width": 145.109375,
+        "inViewport": false,
+        "inScrollport": false,
+        "hit": false
+      },
+      "reachable": {
+        "top": 720,
+        "bottom": 756,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 720,
+        "bottom": 756,
+        "width": 139.484375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 720,
+        "bottom": 756,
+        "width": 145.109375,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    },
+    {
+      "theme": "night",
+      "width": 390,
+      "height": 844,
+      "homeOverflow": false,
+      "workspaceOverflow": false,
+      "calendarOverflow": false,
+      "expandedNavOverflow": false,
+      "compactHeight": 43,
+      "expandedNavDayHeight": 43,
+      "colorContrast": {
+        "muted": 8.364924530226158,
+        "primary": 7.589328657795924
+      },
+      "duplicateFieldIds": [],
+      "toastOverHeader": false,
+      "initial": {
+        "top": 1084.078125,
+        "bottom": 1120.078125,
+        "width": 302,
+        "inViewport": false,
+        "inScrollport": false,
+        "hit": false
+      },
+      "reachable": {
+        "top": 796,
+        "bottom": 832,
+        "width": 302,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "lastReachable": {
+        "top": 796,
+        "bottom": 832,
+        "width": 302,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "keyboardFocus": true,
+      "drawerReachable": {
+        "top": 796,
+        "bottom": 832,
+        "width": 358,
+        "inViewport": true,
+        "inScrollport": true,
+        "hit": true
+      },
+      "drawerOverflow": false
+    }
+  ],
+  "errors": [],
+  "drawerGenerated": {
+    "top": 852,
+    "bottom": 888,
+    "width": 139.484375,
+    "inViewport": true,
+    "inScrollport": true,
+    "hit": true
+  },
+  "workspaceNormal": {
+    "top": 797.71875,
+    "bottom": 833.71875,
+    "width": 139.484375,
+    "inViewport": true,
+    "inScrollport": true,
+    "hit": true
+  },
+  "workspaceNormalReachable": {
+    "top": 797.578125,
+    "bottom": 833.578125,
+    "width": 139.484375,
+    "inViewport": true,
+    "inScrollport": true,
+    "hit": true
+  },
+  "result": "PASS"
+}

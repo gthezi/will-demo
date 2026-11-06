@@ -186,7 +186,14 @@ function App() {
   const theme = useThemeMode()
   return (
     <ConfigProvider locale={zhCN} theme={getThemeConfig(theme.resolvedTheme)} button={{ autoInsertSpace: false }}>
-      <AntApp message={{ maxCount: 1 }}><WillExperience {...theme} /></AntApp>
+      <AntApp message={{
+        maxCount: 1, top: 0,
+        getContainer: () => document.getElementById('will-feedback') ?? document.body,
+        styles: {
+          list: { position: 'relative', inset: 'auto', transform: 'none', height: 'auto', padding: 0, maxWidth: '100%', width: '100%' },
+          root: { maxWidth: '100%', width: '100%', boxShadow: 'none' },
+        },
+      }}><WillExperience {...theme} /></AntApp>
     </ConfigProvider>
   )
 }

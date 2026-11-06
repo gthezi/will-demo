@@ -23,7 +23,7 @@ export function AIDraftReview({ batch, projects, ai }: { batch: DraftBatch; proj
   const sync = () => ai.editBatch(batch.id, serializable(form.getFieldValue('drafts') ?? []))
   const uniqueProjects = [...new Set(values.map(v => v.projectId))]
   return <section className="ai-review-batch" aria-label="待确认草案" data-batch-id={batch.id}>
-    <div className="ai-section-heading"><h3>待确认 {values.length} 项</h3><Tag>{batch.status === 'staged' ? '已暂存' : locked ? '等待重试保存' : '待确认'}</Tag></div>
+    <div className="ai-section-heading" tabIndex={-1}><h3>待确认 {values.length} 项</h3><Tag>{batch.status === 'staged' ? '已暂存' : locked ? '等待重试保存' : '待确认'}</Tag></div>
     <details className="ai-original"><summary>原始输入</summary><blockquote className="assistant-source">{batch.source}</blockquote></details>
     {batch.notes.length > 0 && <p className="ai-review-notes">{batch.notes.join(' ')}</p>}
     <label className="ai-target">批次目标项目
@@ -36,7 +36,7 @@ export function AIDraftReview({ batch, projects, ai }: { batch: DraftBatch; proj
         }} />
     </label>
     {locked && <p className="ai-review-notes">草案编号已保存，重试将核对同一批安排。请先完成保存再继续编辑。</p>}
-    <Form form={form} layout="vertical" initialValues={{ drafts: batch.proposals.map(toArrangementForm) }} autoComplete="off"
+    <Form form={form} name={`ai-batch-${batch.id}`} layout="vertical" initialValues={{ drafts: batch.proposals.map(toArrangementForm) }} autoComplete="off"
       disabled={locked} onValuesChange={sync} onFinish={() => { sync(); ai.confirm(batch.id) }}
       onFinishFailed={({ errorFields }) => {
         setExpanded(values.map(v => v.id))
@@ -50,8 +50,9 @@ export function AIDraftReview({ batch, projects, ai }: { batch: DraftBatch; proj
           const show = expanded.includes(value.id)
           return <article className="assistant-draft" key={field.key} role="group" aria-label={`安排 ${field.name + 1}`}>
             <div className="assistant-draft-heading">
-              <Tag>{value.kind === 'event' ? '日程' : '待办'}</Tag>
-              {value.kind === 'task' && <Tag>{value.status === 'in_progress' ? '进行中' : value.status === 'done' ? '已完成' : '待处理'}</Tag>}
+              <span className="assistant-draft-number">{String(field.name + 1).padStart(2, '0')}</span>
+              <span className="assistant-draft-kind">{value.kind === 'event' ? '日程' : '待办'}</span>
+              {value.kind === 'task' && value.status && value.status !== 'todo' && <Tag>{value.status === 'in_progress' ? '进行中' : '已完成'}</Tag>}
               <div className="assistant-draft-tools">
                 <Button type="text" disabled={locked} icon={show ? <UpOutlined /> : <EditOutlined />}
                   aria-label={`${show ? '收起' : '编辑'}安排 ${field.name + 1}`} aria-expanded={show}
@@ -62,7 +63,8 @@ export function AIDraftReview({ batch, projects, ai }: { batch: DraftBatch; proj
             </div>
             <div className="assistant-draft-summary"><h3>{value.title || '未填写标题'}</h3>
               <p>{value.date?.format('YYYY-MM-DD') || (value.kind === 'event' ? '日期待补全' : '无截止日期')} {value.time?.format('HH:mm') || (value.date && value.kind === 'task' ? '日期截止' : '')}</p>
-              <p>{project?.name || '项目待选择'}{project?.archived && '（已归档）'}{value.kind === 'event' && ` · ${value.duration} 分钟`}</p>
+              {(uniqueProjects.length > 1 || !project || project.archived) && <p>{project?.name || '项目待选择'}{project?.archived && '（已归档）'}</p>}
+              {value.kind === 'event' && <p>{value.duration} 分钟</p>}
             </div>
             <div className="assistant-draft-editor" hidden={!show}>
               <ArrangementFields prefix={[field.name]} kind={value.kind} projects={projects} />
