@@ -1,7 +1,7 @@
 # Will 下一版 Windows PC 前端：产品与实施规划 V0.2（讨论稿）
 
 > 日期：2026-11-06  
-> 状态（2026-11-06 最新）：**用户已授权启动 W0+W1 前端实施**，详见 [Codex 启动与 W1 工单 #5](https://github.com/gthezi/will-demo/issues/5)。本文件保留全阶段规划性质：任务无强制截止、项目基础视图、项目模板自由调整、AI 对话加快捷入口、低操作成本上下文已获得用户认可；**W2–W4 仍未授权开发**。一级导航具体名称、其余交互和团队最终方案仍可在后续验收中调整。  
+> 状态（2026-11-06 最新）：用户已实际体验 W1，其 [PR #6](https://github.com/gthezi/will-demo/pull/6) 的提交 `68fe267` 已通过网页 GPT 代码复审，仍为 Draft；用户**已授权启动 W2 AI 工作区**，具体执行范围与交付以 [Issue #7](https://github.com/gthezi/will-demo/issues/7) 为准。W0/W1 历史启动任务见 [Issue #5](https://github.com/gthezi/will-demo/issues/5)。本文件保留全阶段规划性质，**W3–W4 仍未授权开发**。已认可的任务/项目/AI 交互原则继续适用，一级导航细节与团队最终方案可在验收中调整。  
 > 读者：产品组、技术组、后续网页 GPT、本地 Codex。  
 > 边界：保留原 Windows 展示候选 PR #3；仅规划下一版 React/Electron PC 前端，Mock 可以承担交互演示，但不能声称真正 AI、文件解析、协作、通知或后端同步已接入。现有 Draft PR 不自动合并。
 
@@ -188,7 +188,7 @@ Will 从当前偏重日历的个人安排助手，扩展为围绕校园真实事
 
 ## 8. Codex 工作方式与验收边界
 
-- **本轮最新授权**：用户已批准 [Issue #5](https://github.com/gthezi/will-demo/issues/5) 所述 W0+W1 首轮实施；Codex 应从已验收的 `codex/windows-demo-2026-11-07` 源码基线另开实现分支 / worktree，参考 PR #4 文档。W2–W4 和真实后端未获本轮授权，不将文档 PR 混同代码基线。
+- **本轮最新授权**：用户已批准 [Issue #5](https://github.com/gthezi/will-demo/issues/5) 所述 W0+W1 首轮实施；Codex 应从已验收的 `codex/windows-demo-2026-11-07` 源码基线另开实现分支 / worktree，参考 PR #4 文档。W2 已在 Issue #7 单独获得后续授权；W3–W4 和真实后端仍未授权，不将文档 PR 混同代码基线。
 - **保持完整**：原 Windows 免安装 ZIP、PR #3、现有展示脚本和旧数据不可被新代码覆盖；不触碰 GitHub Pages 的 `main` 发布。
 - **逐包提交 Draft PR**：每包尽量范围集中；跨包依赖写清楚，未被审阅的阶段不抢先实施后续功能。
 - **验证优先**：已有 57 项 Node 测试及 PR #3 的桌面 / 网页回归基线不能无故消失；新场景补充领域、持久化、跨页面和浏览器验证。重点看 1440×900、1366×768、1280×720、1024×768；800×600 至少保证内容可访问，不能无提示溢出。
