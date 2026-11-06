@@ -8,8 +8,8 @@ import { ScheduleList } from '../components/ScheduleList'
 import { dashboardView, deadlineView, defaultDashboardFilters, type DashboardFilters } from '../domain/dashboard'
 import type { UpcomingDays } from '../domain/dashboardPreferences'
 import { projectName } from '../domain/projects'
-import { itemStatus } from '../domain/itemStatus'
-import { scheduleItems, type ScheduleData } from '../domain/schedule'
+import { deadlineUrgency } from '../domain/itemStatus'
+import { allScheduleItems, scheduleItems, type ScheduleData } from '../domain/schedule'
 import { useLocalNow } from '../hooks/useLocalNow'
 import type { PageKey } from '../components/WillShell'
 import './HomePage.css'
@@ -23,10 +23,12 @@ type HomePageProps = {
   onEdit: (id: string) => void
   onToggleTask: (id: string, done: boolean) => void
   upcomingDays: UpcomingDays
+  onOpenProject: (id: string, tab?: string) => void
+  recentProjectId?: string
 }
 
 export function HomePage({
-  data, selectedDate, onDateChange, onNavigate, onLoadDemo, onEdit, onToggleTask, upcomingDays,
+  data, selectedDate, onDateChange, onNavigate, onLoadDemo, onEdit, onToggleTask, upcomingDays, onOpenProject, recentProjectId,
 }: HomePageProps) {
   const now = useLocalNow()
   const [searchOpen, setSearchOpen] = useState(false)
@@ -37,15 +39,15 @@ export function HomePage({
   const searchInput = useRef<InputRef>(null)
   const searchToggle = useRef<HTMLButtonElement>(null)
   const [filters, setFilters] = useState<DashboardFilters>(defaultDashboardFilters)
-  const items = scheduleItems(data)
+  const calendarItems = scheduleItems(data)
+  const items = allScheduleItems(data)
   const tasks = items.filter(item => item.kind === 'task')
   const pending = tasks.filter(item => !item.done)
   const done = tasks.length - pending.length
   const percent = tasks.length ? Math.round(done / tasks.length * 100) : 0
-  const today = dayjs(now).format('YYYY-MM-DD')
   const view = dashboardView(data, filters, now)
   const { overdue, upcoming } = deadlineView(data, now, upcomingDays)
-  const dueToday = upcoming.filter(item => itemStatus(item, now) === 'today')
+  const dueToday = upcoming.filter(item => deadlineUrgency(item, now) === 'today')
   const activeProjects = data.projects.filter(project => !project.archived)
   const listProps = { projects: data.projects, onToggleTask, onEdit }
   useEffect(() => {
@@ -68,9 +70,9 @@ export function HomePage({
     <div className="will-dashboard">
       <div className="will-home-grid">
         <div className="will-home-column">
-          <section className="will-summary" aria-label="任务概览">
+          <section className="will-summary" aria-label="今日工作进度">
             <div className="will-summary-copy">
-              <h2>今天待处理</h2>
+              <h2>今天值得处理</h2>
               {dueToday.length ? (
                 <Button type="text" className="will-today-focus" aria-label={`${dueToday.length} 项今天截止`}
                   onClick={() => {
@@ -110,18 +112,17 @@ export function HomePage({
               <Button type="link" size="small" onClick={() => onNavigate('calendar')}>查看日历<RightOutlined /></Button>
             </div>
             {upcoming.length ? (showAllDeadlines ? upcoming : upcoming.slice(0, 4)).map(item => {
-              const deadline = dayjs(`${item.date}T${item.time}`)
-              const days = deadline.startOf('day').diff(dayjs(today), 'day')
+              const days = dayjs(item.date).startOf('day').diff(dayjs(now).startOf('day'), 'day')
               const relative = days === 0 ? '今天截止' : days === 1 ? '明天截止' : `还有 ${days} 天`
               return (
-                <div className={`will-deadline-row${itemStatus(item, now) === 'today' ? ' is-due-today' : ''}`} key={item.id}>
+                <div className={`will-deadline-row${deadlineUrgency(item, now) === 'today' ? ' is-due-today' : ''}`} key={item.id}>
                   <button className="will-deadline-title" onClick={() => onEdit(item.id)}>
                     <strong>{item.title}</strong><span>{projectName(data.projects, item.projectId)}</span>
                   </button>
                   <span className="will-deadline-relative">{relative}</span>
-                  <time dateTime={`${item.date}T${item.time}`}>
+                  <time dateTime={item.time ? `${item.date}T${item.time}` : item.date}>
                     <span>{dayjs(item.date).format('M/D')}<span className="will-deadline-weekday">（{dayjs(item.date).format('ddd')}）</span></span>
-                    <span>{item.time}</span>
+                    <span>{item.time || '日期截止'}</span>
                   </time>
                 </div>
               )
@@ -190,7 +191,7 @@ export function HomePage({
               <h2 id="month-heading">本月日历</h2>
               <Button type="link" size="small" onClick={() => onNavigate('calendar')}>展开<RightOutlined /></Button>
             </div>
-            <MonthCalendar selectedDate={selectedDate} onSelect={onDateChange} items={items} />
+            <MonthCalendar selectedDate={selectedDate} onSelect={onDateChange} items={calendarItems} />
             <div className="will-home-agenda">
               <div className="will-panel-heading"><h3>{dayjs(selectedDate).format('M/D（ddd）')} 的安排</h3></div>
               <ScheduleList items={items.filter(item => item.date === selectedDate)} {...listProps} emptyText="这一天还没有安排" />
@@ -198,15 +199,15 @@ export function HomePage({
           </section>
           <section className="will-panel" aria-labelledby="projects-heading">
             <div className="will-panel-heading">
-              <h2 id="projects-heading">项目概览</h2>
+              <h2 id="projects-heading">继续最近的项目</h2>
               <Button type="link" size="small" onClick={() => onNavigate('projects')}>全部项目<RightOutlined /></Button>
             </div>
             <div className="will-project-overview">
-              {activeProjects.map(project => {
+              {[...activeProjects].sort((a, b) => Number(b.id === recentProjectId) - Number(a.id === recentProjectId)).map(project => {
                 const projectTasks = data.tasks.filter(task => task.projectId === project.id)
                 const completed = projectTasks.filter(task => task.done).length
                 return (
-                  <button key={project.id} className="will-project-summary" onClick={() => onNavigate('projects')}>
+              <button key={project.id} className="will-project-summary" onClick={() => onOpenProject(project.id)}>
                     <span><strong>{project.name}</strong><small>{completed}/{projectTasks.length} 完成</small></span>
                     <Progress percent={projectTasks.length ? Math.round(completed / projectTasks.length * 100) : 0} showInfo={false} size="small" />
                   </button>

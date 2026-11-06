@@ -15,6 +15,8 @@ export function ArrangementFields({
   prefix = [], kind, autoFocusTitle = false, projects, retainedProjectId,
 }: ArrangementFieldsProps) {
   const isEvent = kind === 'event'
+  const form = Form.useFormInstance()
+  const date = Form.useWatch([...prefix, 'date'], form)
   const name = (field: string) => [...prefix, field]
   return (
     <div className="arrangement-fields">
@@ -31,13 +33,17 @@ export function ArrangementFields({
         <Input maxLength={80} autoFocus={autoFocusTitle} />
       </Form.Item>
       <div className="arrangement-field-grid">
-        <Form.Item name={name('date')} label={isEvent ? '开始日期' : '截止日期'} rules={[{ required: true, message: '请选择日期' }]}>
-          <DatePicker format="YYYY-MM-DD" inputReadOnly />
+        <Form.Item name={name('date')} label={isEvent ? '开始日期' : '截止日期（可选）'} rules={[{ required: isEvent, message: '请选择日期' }]}>
+          <DatePicker format="YYYY-MM-DD" inputReadOnly onChange={value => { if (!value) form.setFieldValue(name('time'), null) }} />
         </Form.Item>
-        <Form.Item name={name('time')} label={isEvent ? '开始时间' : '截止时间'} rules={[{ required: true, message: '请选择时间' }]}>
-          <TimePicker format="HH:mm" needConfirm={false} inputReadOnly />
+        <Form.Item name={name('time')} label={isEvent ? '开始时间' : '截止时间（可选）'} rules={[{ required: isEvent, message: '请选择时间' }]}>
+          <TimePicker format="HH:mm" needConfirm={false} inputReadOnly disabled={!isEvent && !date} />
         </Form.Item>
       </div>
+      {!isEvent && <>
+        <Form.Item name={name('description')} label="任务说明"><Input.TextArea maxLength={2000} autoSize={{ minRows: 2, maxRows: 5 }} /></Form.Item>
+        <Form.Item name={name('status')} label="任务状态"><Select options={[{ value: 'todo', label: '待处理' }, { value: 'in_progress', label: '进行中' }, { value: 'done', label: '已完成' }]} /></Form.Item>
+      </>}
       <Form.Item
         name={name('projectId')} label="关联项目"
         extra={!retainedProjectId && !projects.some(project => !project.archived) ? '请先在项目页新建或恢复项目。' : undefined}

@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import dayjs, { type Dayjs } from 'dayjs'
 import { useState } from 'react'
 import type { DisplayItem } from '../domain/schedule'
-import { itemStatus, itemStatusLabels } from '../domain/itemStatus'
+import { itemStatus, itemStatusLabels, itemStatusTags } from '../domain/itemStatus'
 import { useLocalNow } from '../hooks/useLocalNow'
 import './MonthCalendar.css'
 
@@ -42,7 +42,7 @@ export function MonthCalendar({ selectedDate, onSelect, items, expanded = false 
           const key = date.format('YYYY-MM-DD')
           const dayItems = items.filter(item => item.date === key)
           const statusSummary = Object.entries(itemStatusLabels).map(([status, label]) => {
-            const count = dayItems.filter(item => itemStatus(item, now) === status).length
+            const count = dayItems.filter(item => itemStatusTags(item, now).some(value => value === status)).length
             return count ? `${count} 项${label}` : ''
           }).filter(Boolean).join('，')
           return (
@@ -55,9 +55,10 @@ export function MonthCalendar({ selectedDate, onSelect, items, expanded = false 
                 <span className="will-calendar-entries">
                   {dayItems.slice(0, 2).map(item => {
                     const status = itemStatus(item, now)
-                    return <span key={item.id} title={`${itemStatusLabels[status]} · ${item.time} · ${item.title}`}
+                    const labels = itemStatusTags(item, now).map(value => itemStatusLabels[value]).join(' · ')
+                    return <span key={item.id} title={`${labels} · ${item.time || '日期截止'} · ${item.title}`}
                       data-status={status} className={`will-calendar-entry will-item-status is-${status}`}>
-                      {itemStatusLabels[status]} · {item.title}
+                      {labels} · {item.title}
                     </span>
                   })}
                   {dayItems.length > 2 && <span className="will-calendar-more">+{dayItems.length - 2}</span>}

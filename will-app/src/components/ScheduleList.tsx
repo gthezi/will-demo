@@ -2,7 +2,7 @@ import { CalendarOutlined } from '@ant-design/icons'
 import { Checkbox, Empty, Tag, Tooltip } from 'antd'
 import type { DisplayItem } from '../domain/schedule'
 import { projectName, type Project } from '../domain/projects'
-import { itemStatus, itemStatusLabels } from '../domain/itemStatus'
+import { itemStatusTags, itemStatusLabels } from '../domain/itemStatus'
 import { useLocalNow } from '../hooks/useLocalNow'
 
 type ScheduleListProps = {
@@ -11,9 +11,10 @@ type ScheduleListProps = {
   onEdit: (id: string) => void
   emptyText?: string
   projects: Project[]
+  onOpenProject?: (id: string) => void
 }
 
-export function ScheduleList({ items, onToggleTask, onEdit, projects, emptyText = '还没有安排' }: ScheduleListProps) {
+export function ScheduleList({ items, onToggleTask, onEdit, projects, onOpenProject, emptyText = '还没有安排' }: ScheduleListProps) {
   const now = useLocalNow()
   if (!items.length) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={emptyText} />
   return (
@@ -30,13 +31,13 @@ export function ScheduleList({ items, onToggleTask, onEdit, projects, emptyText 
                 <span>{item.title}</span>
               </button>
             </Tooltip>
-            <Tag className="will-item-status" data-status={itemStatus(item, now)}>
-              {itemStatusLabels[itemStatus(item, now)]}
-            </Tag>
+            {itemStatusTags(item, now).map(status => <Tag key={status} className="will-item-status" data-status={status}>
+              {itemStatusLabels[status]}
+            </Tag>)}
           </div>
           <div className="will-schedule-meta">
-            <time dateTime={`${item.date}T${item.time}`}>{item.date} {item.time}</time>
-            <span>{projectName(projects, item.projectId)}</span>
+            <time dateTime={item.time ? `${item.date}T${item.time}` : item.date || undefined}>{item.date ? `${item.date} ${item.time || '日期截止'}` : '无截止日期'}</time>
+            {onOpenProject ? <button className="will-inline-link" onClick={() => onOpenProject(item.projectId)}>{projectName(projects, item.projectId)}</button> : <span>{projectName(projects, item.projectId)}</span>}
             {item.kind === 'event' && <span>{item.duration} 分钟</span>}
             {!!item.remind && <span>提前 {item.remind} 分钟提醒（仅偏好）</span>}
           </div>

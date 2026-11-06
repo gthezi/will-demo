@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "testedAt": "2026-11-06T09:19:59.061Z",
+  "executablePath": "D:\\Hezi\\WXJ\\vibe coding项目\\Will-w1\\will-app\\node_modules\\electron\\dist\\electron.exe",
+  "routeBeforeClose": "#/projects/course/tasks",
+  "routeAfterRestart": "#/projects/course/tasks",
+  "urlAfterRestart": "will://app/",
+  "taskId": "fd79a3cc-8cd5-4d0e-8b5f-b462fa40568a",
+  "profile": "C:\\Users\\Hezi\\AppData\\Local\\Temp\\will-w1-electron-fNdKff",
+  "errors": [],
+  "window": {
+    "x": 0,
+    "y": 0,
+    "width": 1221,
+    "height": 729
+  },
+  "viewport": {
+    "width": 1210,
+    "height": 679,
+    "devicePixelRatio": 2.0999999046325684
+  },
+  "screenshot": "electron-restart.png"
+}

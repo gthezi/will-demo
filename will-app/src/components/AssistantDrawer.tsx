@@ -23,6 +23,7 @@ type AssistantDrawerProps = {
   onViewCalendar: (date: string) => void
   onViewProjects: () => void
   projects: Project[]
+  contextProjectId?: string
 }
 
 function DraftFields({ index, value, expanded, onToggle, onRemove, projects }: {
@@ -39,7 +40,7 @@ function DraftFields({ index, value, expanded, onToggle, onRemove, projects }: {
   const time = value?.time?.format('HH:mm')
   const end = isEvent && value?.time && value.duration ? value.time.add(value.duration, 'minute') : null
   const nextDay = end && value?.time ? end.startOf('day').diff(value.time.startOf('day'), 'day') : 0
-  const missing = !value?.title?.trim() || !value.date || !value.time || !project || project.archived
+  const missing = !value?.title?.trim() || (isEvent && (!value.date || !value.time)) || !project || project.archived
   const panelId = `assistant-draft-editor-${value?.id ?? index}`
   return (
     <section className="assistant-draft" role="group" aria-label={`安排 ${index + 1}`}>
@@ -62,7 +63,7 @@ function DraftFields({ index, value, expanded, onToggle, onRemove, projects }: {
       <div className="assistant-draft-summary">
         <h3>{value?.title?.trim() || '未填写标题'}</h3>
         <p><ClockCircleOutlined /><span>
-          {date || '日期待补全'} · {time || '时间待补全'}
+          {date || (isEvent ? '日期待补全' : '无截止日期')} {time || (date && !isEvent ? '日期截止' : '')}
           {end && `–${nextDay ? `次${nextDay > 1 ? nextDay : ''}日 ` : ''}${end.format('HH:mm')}`}
           {!isEvent && time && ' 截止'}
         </span></p>
@@ -77,12 +78,13 @@ function DraftFields({ index, value, expanded, onToggle, onRemove, projects }: {
 }
 
 export function AssistantDrawer({
-  open, onClose, onConfirm, onViewCalendar, onViewProjects, projects,
+  open, onClose, onConfirm, onViewCalendar, onViewProjects, projects, contextProjectId,
 }: AssistantDrawerProps) {
   const [form] = Form.useForm<DraftFormValue>()
   const [phase, setPhase] = useState<'input' | 'draft' | 'saved'>('input')
   const [text, setText] = useState('')
   const [source, setSource] = useState('')
+  const [draftContextId, setDraftContextId] = useState<string | undefined>()
   const [result, setResult] = useState<DraftResult | null>(null)
   const [error, setError] = useState('')
   const [processing, setProcessing] = useState(false)
@@ -115,11 +117,12 @@ export function AssistantDrawer({
       form.setFieldsValue({
         drafts: next.drafts.map(draft => toArrangementForm({
           ...draft,
-          projectId: projects.some(project => project.id === draft.projectId && !project.archived)
+          projectId: contextProjectId && projects.some(project => project.id === contextProjectId && !project.archived) ? contextProjectId : projects.some(project => project.id === draft.projectId && !project.archived)
             ? draft.projectId : defaultProjectId(projects),
         })),
       })
       setSource(text.trim())
+      setDraftContextId(contextProjectId)
       setExpandedIds([])
       setResult(next)
       setPhase('draft')
@@ -189,6 +192,7 @@ export function AssistantDrawer({
       ) : undefined}
     >
       {error && <Alert type="error" showIcon title={error} role="alert" />}
+      {(phase === 'input' ? contextProjectId : draftContextId) && <p className="assistant-context">关联项目：{projects.find(project => project.id === (phase === 'input' ? contextProjectId : draftContextId))?.name} · 仅本地模拟</p>}
       {phase === 'input' && (
         <>
           <Alert type="info" showIcon title="当前为模拟识别，请核对草案。" />
@@ -254,7 +258,7 @@ export function AssistantDrawer({
           subTitle={saved.persisted ? '已保存到本机。' : '仅在本次页面中保留，请勿刷新。'}
           extra={
             <Space wrap>
-              <Button type="primary" aria-label="查看日历" icon={<CalendarOutlined />} onClick={() => onViewCalendar(saved.date)}>查看日历</Button>
+              {saved.date && <Button type="primary" aria-label="查看日历" icon={<CalendarOutlined />} onClick={() => onViewCalendar(saved.date)}>查看日历</Button>}
               <Button aria-label="查看项目" icon={<CheckSquareOutlined />} onClick={onViewProjects}>查看项目</Button>
               <Button aria-label="再整理一条" icon={<ReloadOutlined />} onClick={() => reset(true)}>再整理一条</Button>
             </Space>

@@ -7,6 +7,7 @@ export type { ProjectId } from './projects.ts'
 dayjs.extend(customParseFormat)
 
 export const SCHEDULE_STORAGE_KEY = 'will-react-schedule-v01'
+export const WORKBENCH_STORAGE_KEY = 'will-workbench-schedule-v03'
 export type ItemKind = 'event' | 'task'
 
 export type ArrangementDraft = {
@@ -18,6 +19,8 @@ export type ArrangementDraft = {
   projectId: ProjectId
   remind: number
   duration: number
+  description?: string
+  status?: TaskStatus
 }
 
 type BaseItem = {
@@ -26,9 +29,17 @@ type BaseItem = {
   time: string
   projectId: ProjectId
 }
-export type Task = BaseItem & { due: string; done: boolean }
+export type TaskStatus = 'todo' | 'in_progress' | 'done'
+export type Task = Omit<BaseItem, 'time'> & {
+  due?: string
+  time?: string
+  done?: boolean
+  status?: TaskStatus
+  description?: string
+  archived?: boolean
+}
 export type CalendarEvent = BaseItem & { date: string; duration: number; remind: number }
-export type ScheduleData = { version: 2; projects: Project[]; tasks: Task[]; events: CalendarEvent[] }
+export type ScheduleData = { version: 3; projects: Project[]; tasks: Task[]; events: CalendarEvent[] }
 export type DisplayItem = {
   id: string
   kind: ItemKind
@@ -37,21 +48,28 @@ export type DisplayItem = {
   time: string
   projectId: ProjectId
   done?: boolean
+  taskStatus?: TaskStatus
   duration?: number
   remind?: number
 }
 
-export function scheduleItems(data: ScheduleData): DisplayItem[] {
+export function allScheduleItems(data: ScheduleData): DisplayItem[] {
   const items: DisplayItem[] = [
     ...data.events.map(event => ({ ...event, kind: 'event' as const })),
-    ...data.tasks.map(task => ({ ...task, date: task.due, kind: 'task' as const })),
+    ...data.tasks.map(task => ({
+      ...task, date: task.due ?? '', time: task.time ?? '', done: taskStatus(task) === 'done', taskStatus: taskStatus(task), kind: 'task' as const,
+    })),
   ]
   return items.sort((a, b) => Number(!!a.done) - Number(!!b.done)
     || `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`))
 }
 
+export function scheduleItems(data: ScheduleData): DisplayItem[] {
+  return allScheduleItems(data).filter(item => !!item.date)
+}
+
 export function emptySchedule(): ScheduleData {
-  return { version: 2, projects: defaultProjects(), tasks: [], events: [] }
+  return { version: 3, projects: defaultProjects(), tasks: [], events: [] }
 }
 
 export function validDate(value: unknown): value is string {
@@ -79,16 +97,27 @@ function validEvent(item: unknown): item is CalendarEvent {
 }
 
 function validTask(item: unknown): item is Task {
-  if (!validBase(item)) return false
-  const value = item as Task
-  return validDate(value.due) && typeof value.done === 'boolean'
+  if (!item || typeof item !== 'object') return false
+  const value = item as Record<string, unknown>
+  const date = value.due
+  const status = value.status ?? (value.done ? 'done' : 'todo')
+  return typeof value.id === 'string' && !!value.id.trim()
+    && typeof value.title === 'string' && !!value.title.trim() && value.title.length <= 80
+    && validProjectId(value.projectId)
+    && (date === undefined || date === '' || validDate(date))
+    && (value.time === undefined || value.time === '' || validTime(value.time))
+    && (!value.time || !!date)
+    && ['todo', 'in_progress', 'done'].includes(String(status))
+    && (value.done === undefined || typeof value.done === 'boolean')
+    && (value.description === undefined || typeof value.description === 'string')
+    && (value.archived === undefined || typeof value.archived === 'boolean')
 }
 
 export function decodeSchedule(text: string): ScheduleData {
   const value: unknown = JSON.parse(text)
   if (!value || typeof value !== 'object') throw new Error('本地安排格式无效')
   const data = value as Record<string, unknown>
-  if (![1, 2].includes(data.version as number) || !Array.isArray(data.tasks) || !Array.isArray(data.events)
+  if (![1, 2, 3].includes(data.version as number) || !Array.isArray(data.tasks) || !Array.isArray(data.events)
     || !data.tasks.every(validTask) || !data.events.every(validEvent)) {
     throw new Error('本地安排格式无效')
   }
@@ -100,13 +129,20 @@ export function decodeSchedule(text: string): ScheduleData {
     || [...data.tasks, ...data.events].some(item => !projects.some(project => project.id === item.projectId))) {
     throw new Error('本地项目格式或事项归属无效')
   }
-  return { version: 2, projects, tasks: data.tasks, events: data.events }
+  const tasks = data.tasks.map(raw => {
+    const task = raw as Task
+    const status = task.status ?? (task.done ? 'done' : 'todo')
+    return data.version === 3 ? task : { ...task, status, done: status === 'done' }
+  })
+  return { version: 3, projects, tasks, events: data.events }
 }
 
 export function validateDraft(draft: ArrangementDraft) {
-  if (!validBase(draft) || !validDate(draft.date)
+  if (!validBase({ ...draft, time: draft.time || '00:00' })
     || !['event', 'task'].includes(draft.kind)
-    || (draft.kind === 'event' && !validEvent(draft))) {
+    || (draft.kind === 'event' && (!validDate(draft.date) || !validTime(draft.time) || !validEvent(draft)))
+    || (draft.kind === 'task' && ((draft.date !== '' && !validDate(draft.date))
+      || (draft.time !== '' && !validTime(draft.time)) || (!draft.date && draft.time)))) {
     throw new Error('请检查草案的标题、日期、时间和时长')
   }
 }
@@ -117,8 +153,9 @@ export function getArrangementDraft(data: ScheduleData, id: string): Arrangement
   const task = data.tasks.find(item => item.id === id)
   if (task) {
     return {
-      id: task.id, kind: 'task', title: task.title, date: task.due, time: task.time,
+      id: task.id, kind: 'task', title: task.title, date: task.due ?? '', time: task.time ?? '',
       projectId: task.projectId, duration: 60, remind: 0,
+      description: task.description ?? '', status: taskStatus(task),
     }
   }
   throw new Error('事项已不存在，请关闭后重新选择。')
@@ -135,7 +172,10 @@ export function updateArrangement(data: ScheduleData, draft: ArrangementDraft): 
   }
   const next = appendDrafts(remaining, [draft], previous.projectId)
   if (draft.kind === 'task' && previousTask) {
-    next.tasks.find(item => item.id === draft.id)!.done = previousTask.done
+    const task = next.tasks.find(item => item.id === draft.id)!
+    task.status = draft.status ?? taskStatus(previousTask)
+    task.done = task.status === 'done'
+    if (previousTask.archived !== undefined) task.archived = previousTask.archived
   }
   return next
 }
@@ -152,6 +192,22 @@ export function deleteArrangement(data: ScheduleData, id: string): ScheduleData 
 // Validate the whole batch before adding anything; draft IDs also make retries idempotent.
 export function addDrafts(data: ScheduleData, drafts: ArrangementDraft[]): ScheduleData {
   return appendDrafts(data, drafts)
+}
+
+export function setTaskStatus(data: ScheduleData, id: string, status: TaskStatus): ScheduleData {
+  if (!['todo', 'in_progress', 'done'].includes(status)) throw new Error('任务状态无效。')
+  let found = false
+  const tasks = data.tasks.map(task => {
+    if (task.id !== id) return task
+    found = true
+    return { ...task, status, done: status === 'done' }
+  })
+  if (!found) throw new Error('任务已不存在。')
+  return { ...data, tasks }
+}
+
+export function taskStatus(task: Task): TaskStatus {
+  return task.done || task.status === 'done' ? 'done' : task.status === 'in_progress' ? 'in_progress' : 'todo'
 }
 
 function appendDrafts(data: ScheduleData, drafts: ArrangementDraft[], retainedProjectId?: ProjectId): ScheduleData {
@@ -178,7 +234,12 @@ function appendDrafts(data: ScheduleData, drafts: ArrangementDraft[], retainedPr
     if (draft.kind === 'event') {
       next.events.push({ ...base, date: draft.date, duration: draft.duration, remind: draft.remind })
     } else {
-      next.tasks.push({ ...base, due: draft.date, done: false })
+      next.tasks.push({
+        id: base.id, title: base.title, projectId: base.projectId,
+        ...(draft.date ? { due: draft.date } : {}), ...(draft.time ? { time: draft.time } : {}),
+        ...(draft.description ? { description: draft.description.trim() } : {}),
+        status: draft.status ?? 'todo', done: draft.status === 'done',
+      })
     }
   }
   return next

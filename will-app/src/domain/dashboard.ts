@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { scheduleItems, type ItemKind, type ScheduleData } from './schedule.ts'
+import { allScheduleItems, type ItemKind, type ScheduleData } from './schedule.ts'
 import type { ProjectId } from './projects.ts'
 import { DEFAULT_UPCOMING_DAYS, isUpcomingDays } from './dashboardPreferences.ts'
 import { isOverdue } from './itemStatus.ts'
@@ -25,7 +25,7 @@ export function deadlineView(data: ScheduleData, now: Date, days = DEFAULT_UPCOM
   const range = isUpcomingDays(days) ? days : DEFAULT_UPCOMING_DAYS
   const today = dayjs(now).format('YYYY-MM-DD')
   const lastDay = dayjs(now).add(range - 1, 'day').format('YYYY-MM-DD')
-  const pending = scheduleItems(data).filter(item => item.kind === 'task' && !item.done)
+  const pending = allScheduleItems(data).filter(item => item.kind === 'task' && !item.done && !!item.date)
   // Cutoffs use local wall time; the window uses inclusive local calendar dates.
   const overdue = pending.filter(item => isOverdue(item, now))
   const overdueIds = new Set(overdue.map(item => item.id))
@@ -36,7 +36,7 @@ export function deadlineView(data: ScheduleData, now: Date, days = DEFAULT_UPCOM
 }
 
 export function dashboardView(data: ScheduleData, filters: DashboardFilters, now: Date) {
-  const items = scheduleItems(data)
+  const items = allScheduleItems(data)
   const today = dayjs(now).format('YYYY-MM-DD')
   const lastDay = dayjs(now).add(7, 'day').format('YYYY-MM-DD')
   const query = filters.query.trim().toLocaleLowerCase()

@@ -49,3 +49,27 @@
 .will-project-section .will-schedule-row:last-child { border-bottom: 0; }
 @media (max-width: 850px) { .will-projects { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 600px) { .will-project-section { padding: 16px; } .ant-tabs-extra-content .ant-btn { padding-inline: 8px; font-size: 12px; } }
+.will-project-detail { min-width: 0; }
+.will-detail-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin: 18px 0 24px; }
+.will-detail-heading h2 { margin: 0 0 6px; font-size: 22px; overflow-wrap: anywhere; }
+.will-detail-heading p { margin: 0; color: var(--will-muted); line-height: 1.7; }
+.will-detail-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.will-project-overview-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 20px; }
+.will-project-overview-grid > section { min-width: 0; padding: 18px; border: 1px solid var(--will-border); background: var(--will-surface); border-radius: 8px; }
+.will-project-overview-grid h3, .will-task-column h3 { margin: 0 0 14px; font-size: 14px; }
+.will-task-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 12px 0 16px; color: var(--will-muted); }
+.will-task-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 14px; }
+.will-task-column { min-width: 0; padding: 14px; background: var(--will-soft); border: 1px solid var(--will-border); border-radius: 8px; }
+.will-task-column h3 { display: flex; justify-content: space-between; align-items: center; }
+.will-task-column > div { display: grid; gap: 10px; }
+.will-task-card { min-width: 0; display: grid; gap: 8px; padding: 12px; background: var(--will-surface); border: 1px solid var(--will-border); border-radius: 6px; }
+.will-task-title { border: 0; padding: 0; text-align: left; color: var(--will-text); background: none; font: inherit; font-weight: 600; overflow-wrap: anywhere; cursor: pointer; }
+.will-task-title:hover { color: var(--will-primary); }
+.will-task-card p { margin: 0; color: var(--will-muted); font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.will-task-date { color: var(--will-muted); font-size: 12px; }
+.will-task-card .ant-select { width: 126px; max-width: 100%; }
+.will-board-empty { margin: 0; padding: 14px 6px; color: var(--will-muted); font-size: 12px; text-align: center; }
+.will-task-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.will-project-detail .ant-empty p { margin: 8px 0 0; }
+@media (max-width: 900px) { .will-task-board { grid-template-columns: 1fr; } .will-task-column > div { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .will-detail-heading { flex-direction: column; } .will-project-overview-grid, .will-task-list, .will-task-column > div { grid-template-columns: 1fr; } .will-detail-actions { width: 100%; } }
