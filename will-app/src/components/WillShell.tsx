@@ -96,10 +96,11 @@ export function WillShell({
                 <span>{themeLabels[themeMode]}</span>
               </Button>
             </Tooltip>
-            <Button className="will-assistant-button" type="primary" icon={<ThunderboltOutlined />}
+            <Button className="will-assistant-button" icon={<ThunderboltOutlined />}
               aria-label="AI 助手" onClick={onOpenAssistant}><span>AI 助手</span></Button>
           </div>
         </header>
+        <div id="will-feedback" className="will-feedback" aria-label="操作反馈" />
         <main className="will-content" id="main-content" key={activePage}>{children}</main>
         <footer className="will-statusbar"><span>Will · 个人安排助手</span><span>本地模拟 · 数据仅保存在{storageLocation}</span></footer>
       </div>

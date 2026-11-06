@@ -23,7 +23,7 @@ export function AIDraftReview({ batch, projects, ai }: { batch: DraftBatch; proj
   const sync = () => ai.editBatch(batch.id, serializable(form.getFieldValue('drafts') ?? []))
   const uniqueProjects = [...new Set(values.map(v => v.projectId))]
   return <section className="ai-review-batch" aria-label="待确认草案" data-batch-id={batch.id}>
-    <div className="ai-section-heading"><h3>待确认 {values.length} 项</h3><Tag>{batch.status === 'staged' ? '已暂存' : locked ? '等待重试保存' : '待确认'}</Tag></div>
+    <div className="ai-section-heading" tabIndex={-1}><h3>待确认 {values.length} 项</h3><Tag>{batch.status === 'staged' ? '已暂存' : locked ? '等待重试保存' : '待确认'}</Tag></div>
     <details className="ai-original"><summary>原始输入</summary><blockquote className="assistant-source">{batch.source}</blockquote></details>
     {batch.notes.length > 0 && <p className="ai-review-notes">{batch.notes.join(' ')}</p>}
     <label className="ai-target">批次目标项目

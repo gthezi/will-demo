@@ -25,7 +25,11 @@
 .ai-composer-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .ai-composer-actions > span { color: var(--will-muted); font-size: 11px; }
 .ai-composer-actions > .ant-btn { flex-shrink: 0; }
-.ai-review { border-left: 1px solid var(--will-border); padding-left: 24px; }
+.ai-review { border-left: 1px solid var(--will-border); padding-left: 24px; overflow-y: auto; scrollbar-gutter: stable; overscroll-behavior: contain; scroll-padding-block: 16px 96px; }
+.ai-review-batch { position: relative; min-width: 0; }
+.ai-review-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--will-muted); font-size: 12px; margin-bottom: 16px; }
+.ai-review-jump { align-self: flex-start; margin-block: 0 16px; max-width: 100%; white-space: normal; height: auto; min-height: 38px; }
+.ai-section-heading { scroll-margin-top: 16px; }
 .ai-review-batch + .ai-review-batch { border-top: 1px solid var(--will-border); padding-top: 24px; margin-top: 24px; }
 .ai-section-heading { justify-content: space-between; }
 .ai-section-heading h3, .ai-confirmed h3 { font-size: 15px; margin: 0; }
@@ -33,7 +37,7 @@
 .ai-original blockquote { margin-top: 12px; }
 .ai-target { display: flex; flex-direction: column; gap: 8px; font-size: 12px; margin-bottom: 16px; }
 .ai-target .ant-select { width: 100%; }
-.ai-review-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-top: 16px; }
+.ai-review-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding-block: 12px; position: sticky; bottom: 0; z-index: 2; background: var(--will-surface); border-top: 1px solid var(--will-border); margin-top: 16px; }
 .ai-review .assistant-draft { border-radius: 6px; padding: 14px; box-shadow: none; }
 .ai-review .assistant-draft-summary h3 { font-size: 14px; }
 .ai-review .assistant-draft-tools .ant-btn { padding-inline: 6px; }
@@ -48,15 +52,30 @@
 .ai-history span { font-size: 11px; color: var(--will-muted); }
 .ai-history-title { display: flex; flex-direction: column; gap: 8px; }
 .ai-conversation.is-compact { display: flex; flex-direction: column; }
-.is-compact .ai-review { border-left: 0; border-top: 1px solid var(--will-border); padding: 20px 0 0; }
+.is-compact .ai-review { border-left: 0; border-top: 1px solid var(--will-border); padding: 20px 0 0; position: static; max-height: none; overflow: visible; }
 .is-compact .ai-empty h2 { font-size: 18px; }
 .assistant-drawer .ant-drawer-body { display: block; }
 .assistant-drawer .assistant-draft { border-radius: 6px; }
+@media (min-width: 1151px) {
+  .will-shell:has(.ai-workspace) .will-workspace { height: 100dvh; display: flex; flex-direction: column; padding-bottom: 0; }
+  .will-shell:has(.ai-workspace) .will-header { flex-shrink: 0; margin-bottom: 20px; }
+  .will-shell:has(.ai-workspace) .will-content { flex: 1; min-height: 0; }
+  .will-shell:has(.ai-workspace) .will-statusbar { flex-shrink: 0; margin-top: 12px; padding-block: 12px; }
+  .ai-workspace { height: 100%; display: flex; flex-direction: column; min-height: 0; }
+  .ai-workspace-heading { flex-shrink: 0; }
+  .ai-workspace > .ai-conversation { flex: 1; min-height: 0; overflow: hidden; }
+  .ai-workspace .ai-conversation-main { height: 100%; overflow-y: auto; padding-right: 12px; scroll-padding-block: 16px; }
+  .ai-workspace .ai-review { height: 100%; }
+}
 @media (max-width: 1150px) {
   .ai-conversation.has-review { grid-template-columns: minmax(0, 1fr); }
-  .ai-review { border-left: 0; border-top: 1px solid var(--will-border); padding: 20px 0 0; }
+  .ai-review { border-left: 0; border-top: 1px solid var(--will-border); padding: 20px 0 0; position: static; max-height: none; overflow: visible; }
 }
 @media (max-width: 730px) {
   .ai-workspace-heading { align-items: flex-start; }
   .ai-empty h2 { font-size: 18px; }
+  .ai-workspace-tools { gap: 8px; }
+  .ai-workspace-heading > .ant-btn { flex-shrink: 0; }
+  .ai-context .ant-select { width: 100%; }
+  .ai-review-actions .ant-btn-primary { flex: 1; }
 }
