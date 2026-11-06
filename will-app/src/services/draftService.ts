@@ -119,7 +119,8 @@ export function extractDrafts(text: string, now = dayjs()): DraftResult {
     }
   }
   if (!drafts.length) throw new Error('没有可整理的内容，请补充具体事项。')
-  if (drafts.some(draft => !draft.date || !draft.time)) notes.add('部分日期或时间未明确，请补全后确认。')
+  if (drafts.some(draft => draft.kind === 'event' && (!draft.date || !draft.time))) notes.add('部分日程缺少日期或开始时间，请补全后确认。')
+  if (drafts.some(draft => draft.kind === 'task' && !draft.date)) notes.add('未明确截止日期的待办将保留为无截止日期任务。')
   return { drafts, notes: [...notes] }
 }
 

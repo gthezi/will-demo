@@ -77,6 +77,7 @@ export function useSchedule() {
   }
 
   return {
+    getSchedule: () => dataRef.current,
     data, storageWarning, recoveryAvailable, recoverCorruptData, confirmDrafts, toggleTask, updateTaskStatus, updateProjectViews, updateItem, deleteItem,
     createProject, updateProjectName, archiveProject, replaceSchedule,
   }

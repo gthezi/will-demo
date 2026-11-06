@@ -18,6 +18,14 @@
 
 W1 浏览器验收与截图见 [`docs/w1-acceptance/README.md`](../docs/w1-acceptance/README.md)。
 
+## W2 AI 工作区
+
+W2 在 W1 `68fe267` 上新增独立 AI 页面、历史会话与持久化草案。完整页和 Drawer 共用 App 的 `useAIWorkspace`；「整理通知」复用本地规则识别，「拆解任务」使用可编辑的固定步骤模板，没有接入真实模型、资料读取或后端。
+
+会话使用 `will-ai-workspace-v01`，原 W1 数据 key 与迁移/恢复行为保留。会话和编辑自动暂存，也可显式暂存；正式任务/日程只有人工确认后通过原 `confirmDrafts` 写入。确认前先保存稳定建议 ID，确认标记保存失败时按同一 ID 与来源在重启后核对，避免跨 key 重试重复写入。来源可在安排编辑窗口回查。
+
+独立交互测试：`npm run test:w2:browser`、`npm run test:w2:desktop`；本轮截图、真实执行结果、复现及剩余限制见 [W2 验收](../docs/w2-acceptance/README.md)。W3/W4、Windows ZIP 与 Pages 不在本次变更范围。
+
 ### PR #6 复审修订
 
 项目概览、列表摘要和归档数量使用完整任务 / 日程投影，日历仍只使用带日期的投影。无日期的进行中任务可从概览继续编辑，列表保留状态。首页今天截止数量按截止紧迫度计算；列表和日历能同时显示“进行中”与“今天截止”。
