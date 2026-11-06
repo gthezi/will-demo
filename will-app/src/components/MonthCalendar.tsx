@@ -48,21 +48,26 @@ export function MonthCalendar({ selectedDate, onSelect, items, expanded = false 
           return (
             <button key={key} type="button" aria-label={`${key}，${dayItems.length} 项安排${statusSummary ? `，${statusSummary}` : ''}`}
               aria-pressed={key === selectedDate}
+              aria-current={key === today ? 'date' : undefined}
               className={`will-calendar-day${date.month() !== month.month() ? ' is-other-month' : ''}${key === selectedDate ? ' is-selected' : ''}${key === today ? ' is-today' : ''}`}
               onClick={() => { setMonth(date.startOf('month')); onSelect(key) }}>
               <span className="will-date-number">{date.date()}</span>
               {expanded ? (
-                <span className="will-calendar-entries">
-                  {dayItems.slice(0, 2).map(item => {
-                    const status = itemStatus(item, now)
-                    const labels = itemStatusTags(item, now).map(value => itemStatusLabels[value]).join(' · ')
-                    return <span key={item.id} title={`${labels} · ${item.time || '日期截止'} · ${item.title}`}
-                      data-status={status} className={`will-calendar-entry will-item-status is-${status}`}>
-                      {labels} · {item.title}
-                    </span>
-                  })}
-                  {dayItems.length > 2 && <span className="will-calendar-more">+{dayItems.length - 2}</span>}
-                </span>
+                <>
+                  <span className="will-calendar-entries" aria-hidden="true">
+                    {dayItems.slice(0, 2).map(item => {
+                      const status = itemStatus(item, now)
+                      const labels = itemStatusTags(item, now).map(value => itemStatusLabels[value]).join(' · ')
+                      return <span key={item.id} title={`${labels} · ${item.time || '日期截止'} · ${item.title}`}
+                        data-status={status} className={`will-calendar-entry will-item-status is-${status}`}>
+                        <span className="will-calendar-entry-meta">{itemStatusLabels[status]} · {item.time || '日期截止'}</span>
+                        <span className="will-calendar-entry-title">{item.title}</span>
+                      </span>
+                    })}
+                    {dayItems.length > 2 && <span className="will-calendar-more">+{dayItems.length - 2}</span>}
+                  </span>
+                  {!!dayItems.length && <span className="will-calendar-count" aria-hidden="true">{dayItems.length} 项</span>}
+                </>
               ) : (
                 <span className="will-calendar-dots" title={statusSummary} aria-hidden="true">
                   {dayItems.some(item => item.kind === 'event') && <i />}

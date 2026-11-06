@@ -121,7 +121,7 @@ export function ProjectsPage({
   const renderProjects = (projects: Project[], isArchived: boolean) => (
     <div className="will-projects">
       {!projects.length && (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={isArchived ? '还没有归档项目' : '还没有进行中的项目'}>
+        <Empty className="will-empty" image={false} description={isArchived ? '还没有归档项目' : '还没有进行中的项目'}>
           {!isArchived && <Button icon={<PlusOutlined />} onClick={create}>新建项目</Button>}
         </Empty>
       )}
@@ -129,8 +129,12 @@ export function ProjectsPage({
         const projectItems = items.filter(item => item.projectId === project.id)
         const tasks = data.tasks.filter(task => task.projectId === project.id)
         const done = tasks.filter(task => taskStatus(task) === 'done').length
+        const preview = [...projectItems].sort((a, b) => Number(a.done) - Number(b.done)
+          || Number(b.taskStatus === 'in_progress') - Number(a.taskStatus === 'in_progress')
+          || (a.date || '9999-12-31').localeCompare(b.date || '9999-12-31')
+          || a.time.localeCompare(b.time)).slice(0, 3)
         return (
-          <section className="will-project-section" key={project.id} aria-label={project.name}>
+          <section className={`will-project-section${isArchived ? ' is-archived' : ''}`} key={project.id} aria-label={project.name}>
             <div className="will-project-heading">
               <h2><FolderOutlined /><button className="will-inline-link" onClick={() => onOpenProject(project.id)}>{project.name}</button></h2>
               <span>{projectItems.length} 项安排</span>
@@ -157,16 +161,19 @@ export function ProjectsPage({
                 </Dropdown>
               </div>
             </div>
-              <div className="will-project-progress">
-                <Progress percent={tasks.length ? Math.round(done / tasks.length * 100) : 0} size="small" />
-                <span>{done} / {tasks.length} 项待办已完成</span>
-              </div>
             {project.description && <p className="will-project-goal">{project.description}</p>}
-            <ScheduleList items={projectItems.slice(0, 3)} projects={data.projects} onToggleTask={onToggleTask} onEdit={onEdit} />
-            <Button type="link" onClick={() => onOpenProject(project.id)}>打开项目 · {tasks.length} 项任务</Button>
+            <div className="will-project-progress">
+              {tasks.length ? <>
+                <div><span>{done === tasks.length ? '任务已全部完成' : `${done} / ${tasks.length} 项待办已完成`}</span><span>{Math.round(done / tasks.length * 100)}%</span></div>
+                <Progress percent={Math.round(done / tasks.length * 100)} showInfo={false} size="small" />
+              </> : <span>尚未添加任务</span>}
+            </div>
+            {!!projectItems.length && <ScheduleList items={preview} projects={data.projects} onToggleTask={onToggleTask} onEdit={onEdit} hideProject />}
+            <div className="will-project-footer"><Button type="link" onClick={() => onOpenProject(project.id)}>打开项目 · {tasks.length} 项任务</Button>
             {!isArchived && <Button className="will-project-add" icon={<PlusOutlined />}
               aria-label={`向${project.name}添加待办`}
               onClick={() => onManualAdd('', project.id)}>添加待办</Button>}
+            </div>
           </section>
         )
       })}

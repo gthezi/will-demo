@@ -46,7 +46,8 @@
 .will-item-edit > span { min-width: 0; overflow-wrap: anywhere; }
 .will-item-edit .anticon { margin-top: 4px; color: var(--will-primary); }
 .will-item-edit:hover { color: var(--will-primary); }
-.will-schedule-title > .ant-tag { flex-shrink: 0; margin-left: auto; margin-right: 0; font-size: 11px; }
+.will-schedule-states { display: flex; flex-wrap: wrap; justify-content: flex-end; flex: 0 0 auto; max-width: 118px; gap: 4px; margin-left: auto; padding-top: 2px; }
+.will-schedule-states .ant-tag { margin: 0; font-size: 11px; line-height: 18px; padding-inline: 5px; border: 0; }
 .will-item-status { --will-status-color: var(--will-muted); color: var(--will-status-color); background: color-mix(in srgb, var(--will-status-color) 10%, var(--will-surface)); border-color: color-mix(in srgb, var(--will-status-color) 25%, var(--will-surface)); }
 .will-item-status[data-status="event"] { --will-status-color: var(--will-primary); }
 .will-item-status[data-status="today"] { --will-status-color: var(--will-warning); }
@@ -56,13 +57,14 @@
 .is-done .will-item-edit { text-decoration: line-through; color: var(--will-muted); }
 .will-schedule-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; color: var(--will-muted); font-size: 12px; line-height: 1.7; }
 .will-schedule-meta > span { min-width: 0; overflow-wrap: anywhere; }
-.will-calendar-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, .65fr); gap: 20px; align-items: start; }
+.will-calendar-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(300px, .85fr); gap: 32px; align-items: start; }
 .will-calendar-picker, .will-agenda {
-  min-width: 0; border: 1px solid var(--will-border); padding: 22px; background: var(--will-surface);
-  border-radius: var(--will-panel-radius); box-shadow: var(--will-panel-shadow);
+  min-width: 0;
 }
+.will-agenda { padding-left: 24px; border-left: 1px solid var(--will-border); }
 .will-agenda-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.will-agenda-heading h2 { font-size: 15px; margin: 0; }
+.will-agenda-heading h2 { font-size: 17px; margin: 0 0 4px; }
+.will-agenda-count { color: var(--will-muted); font-size: 12px; }
 .will-calendar-legend { display: flex; gap: 16px; font-size: 11px; color: var(--will-muted); margin-top: 16px; }
 .will-calendar-legend > span { display: flex; align-items: center; gap: 6px; }
 .will-calendar-legend i { width: 6px; height: 6px; border-radius: 50%; background: var(--will-primary); }
@@ -71,25 +73,26 @@
 .will-calendar-legend .today { background: var(--will-warning); }
 .will-calendar-legend .overdue { background: var(--will-error); }
 .will-calendar-legend .done { background: var(--will-success); }
-.will-project-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
-.will-project-heading h2 { margin: 0; font-size: 15px; }
-.will-project-heading > span { color: var(--will-muted); font-size: 11px; }
-.will-project-progress { margin-bottom: 8px; }
-.will-project-progress > span { color: var(--will-muted); font-size: 11px; }
-.will-settings { max-width: 620px; padding: 24px; background: var(--will-surface); border: 1px solid var(--will-border); border-radius: var(--will-panel-radius); box-shadow: var(--will-panel-shadow); }
-.will-settings-section { padding: 22px 0; border-bottom: 1px solid var(--will-border); }
-.will-settings-section:first-child { padding-top: 0; }
-.will-settings-section:last-child { border-bottom: 0; padding-bottom: 0; }
-.will-settings-section h2 { font-size: 15px; margin: 0 0 18px; }
+.will-settings { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 48px; }
+.will-settings-section { min-width: 0; padding-top: 20px; border-top: 1px solid var(--will-border); }
+.will-settings-section h2 { font-size: 17px; margin: 0 0 20px; }
 .will-settings-section .ant-form { max-width: 400px; }
-.will-settings-section p { margin: 0 0 16px; font-size: 12px; color: var(--will-muted); line-height: 1.8; }
+.will-settings-section p { margin: 0 0 16px; font-size: 13px; color: var(--will-muted); line-height: 1.8; max-width: 52ch; }
+.will-settings-section .ant-segmented { max-width: 400px; }
 .will-settings-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.will-settings-danger { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--will-divider); }
+.will-settings-danger h3 { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
+.will-empty.ant-empty { margin: 0; padding-block: 24px; text-align: left; color: var(--will-muted); font-size: 13px; }
+.will-empty .ant-empty-image { display: none; }
+.will-empty .ant-empty-description { color: var(--will-muted); }
 .will-inline-link { border: 0; padding: 0; color: var(--will-primary); background: none; font: inherit; text-align: left; cursor: pointer; }
 .will-inline-link:hover { text-decoration: underline; }
-.will-project-goal { color: var(--will-muted); line-height: 1.7; }
 .theme-option { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; }
 @media (max-width: 1250px) { .will-workspace { padding-inline: 24px; } }
-@media (max-width: 1050px) { .will-calendar-layout { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1050px) {
+  .will-calendar-layout { grid-template-columns: minmax(0, 1fr); }
+  .will-agenda { padding: 20px 0 0; border-left: 0; border-top: 1px solid var(--will-border); }
+}
 @media (max-width: 900px) { .will-profile-button { max-width: 100px; } }
 @media (max-width: 730px) {
   .will-shell, .will-shell.is-expanded { grid-template-columns: 60px minmax(0, 1fr); }
@@ -113,7 +116,8 @@
   .will-quick-add > span:not(.ant-btn-icon):not(.anticon) { display: none; }
   .will-statusbar { padding-bottom: 64px; }
   .will-calendar-layout { gap: 20px; }
-  .will-calendar-picker, .will-agenda, .will-settings { padding: 18px 16px; }
+  .will-settings { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .will-schedule-states { max-width: 70px; }
 }
 @media (max-width: 400px) {
   .will-settings .ant-segmented { width: 100%; }
