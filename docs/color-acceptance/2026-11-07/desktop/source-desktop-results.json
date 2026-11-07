@@ -1,0 +1,633 @@
+{
+  "testedAt": "2026-11-07T00:38:48.252Z",
+  "frozenLocalTime": "2026-11-07T06:00:00.000Z",
+  "packaged": false,
+  "executablePath": "D:\\Hezi\\WXJ\\vibe coding项目\\Will-p1-codex-colors\\will-app\\node_modules\\electron\\dist\\electron.exe",
+  "metadata": {
+    "isPackaged": false,
+    "version": "0.1.0",
+    "versions": {
+      "node": "24.22.2",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.9",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.2",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "150",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "0.0.0",
+      "simdjson": "4.6.11",
+      "simdutf": "7.7.0",
+      "sqlite": "3.53.4",
+      "tz": "2026e",
+      "undici": "7.30.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "15.6.75.27-electron.0",
+      "zlib": "1.3.2.1-motley",
+      "zstd": "1.6.0",
+      "electron": "45.2.3",
+      "chrome": "156.0.8078.80"
+    },
+    "userData": "D:\\Hezi\\WXJ\\vibe coding项目\\Will-p1-codex-colors\\release\\desktop-acceptance\\2026-11-07T00-37-35-533Z\\legacy",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1221,
+      "height": 729
+    },
+    "preferences": {
+      "allowRunningInsecureContent": false,
+      "contextIsolation": true,
+      "disableDialogs": false,
+      "disablePopups": false,
+      "disableWakeLocks": false,
+      "enableBlinkFeatures": "",
+      "experimentalFeatures": false,
+      "javascript": true,
+      "nodeIntegration": false,
+      "nodeIntegrationInSubFrames": false,
+      "nodeIntegrationInWorker": false,
+      "safeDialogs": false,
+      "safeDialogsMessage": "",
+      "sandbox": true,
+      "webSecurity": true,
+      "webviewTag": false
+    }
+  },
+  "checks": [
+    "首次启动：独立空目录、无历史安排、无 renderer Node 权限、稳定安全 origin；断网运行",
+    "示例载入：取消不写入，确认有 5 待办/2 日程；清空取消保留，确认只清安排",
+    "校园流程：输入讲座/课程报告→模拟识别→改标题/项目/时长/提醒→确认→日历→完成→项目页恢复",
+    "异常与取消：空白禁用；不存在日期报错；缺日期/时间阻止确认；取消草案/生成中关闭不写入",
+    "手工新增取消、编辑取消、删除二次确认取消均不改变安排",
+    "真实退出与重启：安排/自建项目/完成恢复状态/称呼/7天范围/日间主题一致；关闭后完整备份 profile",
+    "Windows 窗口 1440×900 / 1366×768 / 1280×720 / 1024×768 / 800×600 × 日夜 × 首页/日历/项目/AI，共40条件",
+    "损坏数据：重启显示警告、原坏值不覆盖、内存演示仍可用；从关闭时 profile 备份恢复到独立目录后重启一致",
+    "旧版本本地键：兼容读取并迁移到现用键，安排不丢失"
+  ],
+  "windows": [
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851,
+        "scroll": 1415
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851,
+        "scroll": 1415
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851,
+        "scroll": 1415
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719,
+        "scroll": 1341
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719,
+        "scroll": 1341
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719,
+        "scroll": 1341
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671,
+        "scroll": 1255
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671,
+        "scroll": 1255
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671,
+        "scroll": 1255
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719,
+        "scroll": 999
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719,
+        "scroll": 999
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719,
+        "scroll": 999
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552,
+        "scroll": 790
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552,
+        "scroll": 775
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552,
+        "scroll": 775
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "night",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851,
+        "scroll": 1415
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851,
+        "scroll": 1415
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851,
+        "scroll": 1415
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1440,
+        "height": 900
+      },
+      "inner": {
+        "width": 1430,
+        "height": 851
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719,
+        "scroll": 1356
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719,
+        "scroll": 1341
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719,
+        "scroll": 1341
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1366,
+        "height": 768
+      },
+      "inner": {
+        "width": 1356,
+        "height": 719
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671,
+        "scroll": 1255
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671,
+        "scroll": 1255
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671,
+        "scroll": 1255
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1280,
+        "height": 720
+      },
+      "inner": {
+        "width": 1270,
+        "height": 671
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719,
+        "scroll": 999
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719,
+        "scroll": 999
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719,
+        "scroll": 999
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 1024,
+        "height": 768
+      },
+      "inner": {
+        "width": 1014,
+        "height": 719
+      },
+      "page": "AI"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552,
+        "scroll": 790
+      },
+      "page": "首页"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552,
+        "scroll": 775
+      },
+      "page": "日历"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552,
+        "scroll": 775
+      },
+      "page": "项目"
+    },
+    {
+      "theme": "light",
+      "outer": {
+        "width": 800,
+        "height": 600
+      },
+      "inner": {
+        "width": 790,
+        "height": 552
+      },
+      "page": "AI"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "isolatedProfiles": "D:\\Hezi\\WXJ\\vibe coding项目\\Will-p1-codex-colors\\release\\desktop-acceptance\\2026-11-07T00-37-35-533Z",
+  "screenshots": [
+    "first-run-empty.png",
+    "campus-edited-drafts.png",
+    "campus-calendar-completed.png",
+    "restarted-persistent-home.png",
+    "首页-1440x900-night.png",
+    "日历-1440x900-night.png",
+    "项目-1440x900-night.png",
+    "AI-1440x900-night.png",
+    "首页-1366x768-night.png",
+    "日历-1366x768-night.png",
+    "项目-1366x768-night.png",
+    "AI-1366x768-night.png",
+    "首页-1024x768-night.png",
+    "日历-1024x768-night.png",
+    "项目-1024x768-night.png",
+    "AI-1024x768-night.png",
+    "首页-800x600-night.png",
+    "日历-800x600-night.png",
+    "项目-800x600-night.png",
+    "AI-800x600-night.png",
+    "首页-1440x900-light.png",
+    "日历-1440x900-light.png",
+    "项目-1440x900-light.png",
+    "AI-1440x900-light.png",
+    "首页-1366x768-light.png",
+    "日历-1366x768-light.png",
+    "项目-1366x768-light.png",
+    "AI-1366x768-light.png",
+    "首页-1024x768-light.png",
+    "日历-1024x768-light.png",
+    "项目-1024x768-light.png",
+    "AI-1024x768-light.png",
+    "首页-800x600-light.png",
+    "日历-800x600-light.png",
+    "项目-800x600-light.png",
+    "AI-800x600-light.png",
+    "damaged-data-warning.png"
+  ]
+}

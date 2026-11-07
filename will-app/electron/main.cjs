@@ -70,7 +70,7 @@ if (!app.requestSingleInstanceLock()) {
     window = new BrowserWindow({
       width: Math.min(1440, area.width), height: Math.min(960, area.height),
       minWidth: Math.min(760, area.width), minHeight: Math.min(600, area.height),
-      title: 'Will PC', backgroundColor: '#10151b', show: false,
+      title: 'Will PC', backgroundColor: '#181818', show: false,
       webPreferences: { nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true },
     })
     window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
