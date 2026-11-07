@@ -1,0 +1,539 @@
+{
+  "testedAt": "2026-11-07T00:37:20.175Z",
+  "sourceCommit": "2497c0290e460e357da173cea714739ea59eaa82",
+  "frozenNow": "2026-11-07T01:00:00.000Z",
+  "urls": {
+    "before": "http://127.0.0.1:4183/",
+    "after": "http://127.0.0.1:4182/"
+  },
+  "fixture": {
+    "version": 2,
+    "projects": [
+      {
+        "id": "will",
+        "name": "Will 客户端",
+        "archived": false
+      },
+      {
+        "id": "course",
+        "name": "课程与学习",
+        "archived": false
+      },
+      {
+        "id": "personal",
+        "name": "个人事务",
+        "archived": false
+      }
+    ],
+    "tasks": [
+      {
+        "id": "overdue",
+        "title": "核对昨天的讨论反馈",
+        "due": "2026-11-06",
+        "time": "18:00",
+        "projectId": "will",
+        "done": false
+      },
+      {
+        "id": "today",
+        "title": "准备 Windows 客户端展示",
+        "due": "2026-11-07",
+        "time": "17:00",
+        "projectId": "will",
+        "done": false
+      },
+      {
+        "id": "tomorrow",
+        "title": "整理配色参考与会议记录",
+        "due": "2026-11-08",
+        "time": "10:00",
+        "projectId": "will",
+        "done": false
+      },
+      {
+        "id": "later",
+        "title": "提交课程报告",
+        "due": "2026-11-09",
+        "time": "17:00",
+        "projectId": "course",
+        "done": false
+      },
+      {
+        "id": "done",
+        "title": "确认演示流程",
+        "due": "2026-11-06",
+        "time": "18:00",
+        "projectId": "will",
+        "done": true
+      }
+    ],
+    "events": [
+      {
+        "id": "event",
+        "title": "项目组讨论",
+        "date": "2026-11-07",
+        "time": "15:00",
+        "duration": 60,
+        "projectId": "will",
+        "remind": 30
+      }
+    ]
+  },
+  "checks": [
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "light",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(255, 255, 255)",
+        "sidebar": "rgb(248, 252, 253)",
+        "selected": "rgb(235, 240, 241)",
+        "panel": "rgb(255, 255, 255)"
+      },
+      "inputColor": "rgb(255, 255, 255)",
+      "drafts": 2
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "night",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "night",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "night",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "night",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "theme": "night",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(24, 24, 24)",
+        "sidebar": "rgb(25, 28, 29)",
+        "selected": "rgb(44, 46, 47)",
+        "panel": "rgb(42, 42, 42)"
+      },
+      "inputColor": "rgb(54, 54, 54)",
+      "drafts": 2
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(255, 255, 255)",
+        "sidebar": "rgb(248, 252, 253)",
+        "selected": "rgb(235, 240, 241)",
+        "panel": "rgb(255, 255, 255)"
+      },
+      "inputColor": "rgb(255, 255, 255)",
+      "drafts": 2
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "night",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "night",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "night",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "night",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "theme": "night",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(24, 24, 24)",
+        "sidebar": "rgb(25, 28, 29)",
+        "selected": "rgb(44, 46, 47)",
+        "panel": "rgb(42, 42, 42)"
+      },
+      "inputColor": "rgb(54, 54, 54)",
+      "drafts": 2
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "light",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "light",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "light",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "light",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "light",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(255, 255, 255)",
+        "sidebar": "rgb(248, 252, 253)",
+        "selected": "rgb(235, 240, 241)",
+        "panel": "rgb(255, 255, 255)"
+      },
+      "inputColor": "rgb(255, 255, 255)",
+      "drafts": 2
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "night",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "night",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "night",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "night",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "night",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(24, 24, 24)",
+        "sidebar": "rgb(25, 28, 29)",
+        "selected": "rgb(44, 46, 47)",
+        "panel": "rgb(42, 42, 42)"
+      },
+      "inputColor": "rgb(54, 54, 54)",
+      "drafts": 2
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(255, 255, 255)",
+        "sidebar": "rgb(248, 252, 253)",
+        "selected": "rgb(235, 240, 241)",
+        "panel": "rgb(255, 255, 255)"
+      },
+      "inputColor": "rgb(255, 255, 255)",
+      "drafts": 2
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "night",
+      "page": "首页",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "night",
+      "page": "日历",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "night",
+      "page": "项目",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "night",
+      "page": "设置",
+      "sameContent": true,
+      "sameGeometry": true,
+      "sameStoredData": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "night",
+      "page": "AI Drawer",
+      "sameGeometry": true,
+      "colors": {
+        "bg": "rgb(24, 24, 24)",
+        "sidebar": "rgb(25, 28, 29)",
+        "selected": "rgb(44, 46, 47)",
+        "panel": "rgb(42, 42, 42)"
+      },
+      "inputColor": "rgb(54, 54, 54)",
+      "drafts": 2
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "before-home-light-1440x900.png",
+    "after-home-light-1440x900.png",
+    "before-assistant-input-light-1440x900.png",
+    "before-assistant-drafts-light-1440x900.png",
+    "after-assistant-input-light-1440x900.png",
+    "after-assistant-drafts-light-1440x900.png",
+    "before-home-night-1440x900.png",
+    "after-home-night-1440x900.png",
+    "before-assistant-input-night-1440x900.png",
+    "before-assistant-drafts-night-1440x900.png",
+    "after-assistant-input-night-1440x900.png",
+    "after-assistant-drafts-night-1440x900.png"
+  ]
+}

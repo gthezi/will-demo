@@ -9,7 +9,7 @@
 .will-rail nav { display: flex; flex-direction: column; gap: 12px; }
 .will-nav-button { width: 66px; min-height: 61px; border: 0; padding: 8px 4px; border-radius: 13px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; background: transparent; color: var(--will-muted); font: inherit; font-size: 11px; cursor: pointer; }
 .will-nav-button > .anticon { font-size: 21px; }
-.will-nav-button:hover, .will-nav-button.is-active { color: var(--will-primary); background: var(--will-soft); }
+.will-nav-button:hover, .will-nav-button.is-active { color: var(--will-primary); background: var(--will-selected); }
 .will-rail-bottom { margin-top: auto; }
 .will-workspace { min-width: 0; max-width: 1800px; width: 100%; margin-inline: auto; padding: 0 clamp(22px, 3vw, 52px) 20px; }
 .will-header { height: 91px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--will-border); margin-bottom: 28px; }
